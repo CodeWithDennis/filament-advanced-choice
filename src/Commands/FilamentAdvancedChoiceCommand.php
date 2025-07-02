@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace CodeWithDennis\FilamentAdvancedChoice\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentAdvancedChoiceCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-advanced-choice';
 
     public $description = 'My command';
 
