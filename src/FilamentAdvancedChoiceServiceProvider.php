@@ -2,6 +2,8 @@
 
 namespace CodeWithDennis\FilamentAdvancedChoice;
 
+use CodeWithDennis\FilamentAdvancedChoice\Commands\FilamentAdvancedChoiceCommand;
+use CodeWithDennis\FilamentAdvancedChoice\Testing\TestsFilamentAdvancedChoice;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -13,8 +15,6 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use CodeWithDennis\FilamentAdvancedChoice\Commands\FilamentAdvancedChoiceCommand;
-use CodeWithDennis\FilamentAdvancedChoice\Testing\TestsFilamentAdvancedChoice;
 
 class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
 {
