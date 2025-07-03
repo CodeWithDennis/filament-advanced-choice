@@ -14,7 +14,7 @@
 
             <label
                     for="{{ $id }}"
-                    class="group flex {{ $isDisabled() ? 'cursor-default' : 'cursor-pointer' }} border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500 has-checked:bg-primary-50 dark:has-checked:bg-primary-950"
+                    class="group flex {{ $isDisabled() ? 'cursor-default' : 'cursor-pointer' }} border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500 has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10"
             >
                 <input
                         id="{{ $id }}"
