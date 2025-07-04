@@ -6,7 +6,7 @@ use Closure;
 
 trait HasExtras
 {
-    public Closure | array $extras;
+    public Closure | array $extras = [];
 
     public function extras(Closure | array $extras): static
     {
