@@ -1,78 +1,51 @@
-# A beautifully styled, fully customizable set of radio group components for FilamentPHP
+# Filament Advanced Choice
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/codewithdennis/filament-advanced-choice/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/codewithdennis/filament-advanced-choice/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/codewithdennis/filament-advanced-choice/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/codewithdennis/filament-advanced-choice/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
-
-
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Beautifully styled radio group components for FilamentPHP with descriptions and modern design.
 
 ## Installation
-
-You can install the package via composer:
 
 ```bash
 composer require codewithdennis/filament-advanced-choice
 ```
 
-You can publish and run the migrations with:
+## Components
 
-```bash
-php artisan vendor:publish --tag="filament-advanced-choice-migrations"
-php artisan migrate
-```
+### RadioList
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-advanced-choice-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-advanced-choice-views"
-```
-
-This is the contents of the published config file:
+Vertical list layout with descriptions.
 
 ```php
-return [
-];
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
+
+RadioList::make('plan')
+    ->options([
+        'basic' => 'Basic Plan',
+        'pro' => 'Pro Plan',
+    ])
+    ->descriptions([
+        'basic' => 'Perfect for small teams',
+        'pro' => 'Ideal for growing businesses',
+    ])
 ```
 
-## Usage
+### RadioTable
+
+Responsive table layout with descriptions.
 
 ```php
-$filamentAdvancedChoice = new CodeWithDennis\FilamentAdvancedChoice();
-echo $filamentAdvancedChoice->echoPhrase('Hello, CodeWithDennis!');
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
+
+RadioTable::make('hosting')
+    ->options([
+        'shared' => 'Shared Hosting',
+        'vps' => 'VPS Hosting',
+    ])
+    ->descriptions([
+        'shared' => 'Perfect for small websites',
+        'vps' => 'Scalable virtual server',
+    ])
 ```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [CodeWithDennis](https://github.com/CodeWithDennis)
-- [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+MIT License 
