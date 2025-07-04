@@ -14,7 +14,7 @@
 
             <label
                     for="{{ $id }}"
-                    class="group flex {{ $isDisabled() ? 'cursor-default' : 'cursor-pointer' }} border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500 has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10"
+                    class="group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500 has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10"
             >
                 <input
                         id="{{ $id }}"
@@ -27,11 +27,11 @@
                 />
 
                 <span class="ml-3 flex flex-col">
-                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-100 group-has-checked:text-primary-800 dark:group-has-checked:text-primary-300">
+                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ $label }}
                     </span>
                     @if (!empty($descriptions[$value]))
-                        <span class="block text-sm text-gray-500 dark:text-gray-400 group-has-checked:text-primary-600 dark:group-has-checked:text-primary-400">
+                        <span class="block text-sm text-gray-500 dark:text-gray-400">
                             {{ $descriptions[$value] }}
                         </span>
                     @endif

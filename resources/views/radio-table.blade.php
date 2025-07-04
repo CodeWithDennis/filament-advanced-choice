@@ -21,7 +21,7 @@
                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
                        has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500
                        has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10
-                       md:grid md:grid-cols-2 md:pr-6 md:pl-4 {{ $isDisabled() ? 'cursor-default' : 'cursor-pointer' }}"
+                       md:grid md:grid-cols-2 md:pr-6 md:pl-4"
             >
                 <span class="flex items-center gap-3 text-sm">
                     <input
@@ -39,12 +39,12 @@
                                dark:disabled:border-gray-700 dark:disabled:bg-gray-800 dark:disabled:before:bg-gray-600
                                forced-colors:appearance-auto forced-colors:before:hidden"
                     />
-                    <span class="font-medium text-gray-900 dark:text-gray-100 group-has-checked:text-primary-800 dark:group-has-checked:text-primary-300">
+                    <span class="font-medium text-gray-900 dark:text-gray-100">
                         {{ $label }}
                     </span>
                 </span>
 
-                <span class="ml-6 pl-1 text-sm text-gray-500 dark:text-gray-400 group-has-checked:text-primary-600 dark:group-has-checked:text-primary-400 md:ml-0 md:pl-0 md:text-right">
+                <span class="ml-6 pl-1 text-sm text-gray-500 dark:text-gray-400 md:ml-0 md:pl-0 md:text-right">
                     {{ $descriptions[$value] ?? '' }}
                 </span>
             </label>
