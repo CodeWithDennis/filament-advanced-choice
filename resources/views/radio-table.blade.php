@@ -10,12 +10,13 @@
         @foreach($getOptions() as $value => $label)
             @php
                 $id = $getId() . '-' . str($value)->slug();
+                $description = $descriptions[$value] ?? '';
             @endphp
 
             <label
                 for="{{ $id }}"
                 aria-label="{{ $label }}"
-                aria-description="{{ $descriptions[$value] ?? '' }}"
+                aria-description="{{ $description }}"
                 class="group flex flex-col border border-gray-200 dark:border-gray-700 p-4
                        first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
@@ -45,7 +46,7 @@
                 </span>
 
                 <span class="ml-6 pl-1 text-sm text-gray-500 dark:text-gray-400 md:ml-0 md:pl-0 md:text-right">
-                    {{ $descriptions[$value] ?? '' }}
+                    {{ $description }}
                 </span>
             </label>
         @endforeach
