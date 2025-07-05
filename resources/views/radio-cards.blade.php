@@ -7,13 +7,25 @@
         get_color_css_variables($getColor(), shades: [50, 100, 400, 500, 600, 700, 800]),
     ]);
     $hiddenInputs = $getHiddenInputs();
+    $columns = $getColumns();
+    $gridDirection = $getGridDirection();
+    $isInline = false;
 @endphp
 
 <x-dynamic-component
     :component="$getFieldWrapperView()"
     :field="$field"
 >
-    <fieldset class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+    <fieldset
+        {{
+            $getExtraAttributeBag()
+                ->when(! $isInline, fn ($attributes) => $attributes->grid($columns, $gridDirection))
+                ->class([
+                    'fi-fo-radio',
+                    'gap-4',
+                ])
+        }}
+    >
         @foreach($getOptions() as $value => $label)
             @php
                 $id = $getId() . '-' . $value;

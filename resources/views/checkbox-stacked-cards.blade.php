@@ -7,13 +7,25 @@
         get_color_css_variables($getColor(), shades: [50, 100, 400, 500, 600, 700, 800]),
     ]);
     $hiddenInputs = $getHiddenInputs();
+    $columns = $getColumns();
+    $gridDirection = $getGridDirection();
+    $isInline = false;
 @endphp
 
 <x-dynamic-component
     :component="$getFieldWrapperView()"
     :field="$field"
 >
-    <fieldset class="space-y-4">
+    <fieldset
+        {{
+            $getExtraAttributeBag()
+                ->when(! $isInline, fn ($attributes) => $attributes->grid($columns, $gridDirection))
+                ->class([
+                    'fi-fo-checkbox-list',
+                    'gap-4',
+                ])
+        }}
+    >
         @foreach($getOptions() as $value => $label)
             @php
                 $id = $getId() . '-' . $value;

@@ -23,6 +23,7 @@
                 ->when(! $isInline, fn ($attributes) => $attributes->grid($columns, $gridDirection))
                 ->class([
                     'fi-fo-radio',
+                    'gap-4',
                 ])
         }}
     >
