@@ -22,6 +22,7 @@
                        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
                        has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500
                        has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10
+                       has-disabled:opacity-60
                        md:grid md:grid-cols-2 md:pr-6 md:pl-4"
             >
                 <span class="flex items-center gap-3 text-sm">
