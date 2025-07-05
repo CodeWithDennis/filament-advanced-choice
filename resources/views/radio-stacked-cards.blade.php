@@ -19,7 +19,7 @@
                 for="{{ $id }}"
                 aria-label="{{ $label }}" 
                 aria-description="{{ $description }}"
-                class="group relative block rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-primary-600 dark:has-checked:outline-primary-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60 sm:flex sm:justify-between"
+                class="group relative block rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-primary-600 dark:has-checked:outline-primary-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60 sm:flex sm:justify-between"
             >
                 <input 
                     id="{{ $id }}"
