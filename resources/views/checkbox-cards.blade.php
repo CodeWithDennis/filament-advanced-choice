@@ -13,7 +13,7 @@
     :component="$getFieldWrapperView()"
     :field="$field"
 >
-    <fieldset aria-label="{{ $getLabel() }}" class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
+    <fieldset class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
         @foreach($getOptions() as $value => $label)
             @php
                 $id = $getId() . '-' . $value;
@@ -21,22 +21,20 @@
                 $extra = $extras[$value] ?? null;
             @endphp
 
-            <label 
+            <label
                 for="{{ $id }}"
-                aria-label="{{ $label }}" 
-                aria-description="{{ $description }}"
                 class="group relative flex rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60"
                 style="{{ $colors }}"
             >
                 @if($hiddenInputs)
-                    <input 
+                    <input
                         id="{{ $id }}"
                         name="{{ $getName() }}"
-                        type="checkbox" 
+                        type="checkbox"
                         value="{{ $value }}"
                         wire:model="{{ $getStatePath() }}"
                         {{ $isDisabled() ? 'disabled' : '' }}
-                        class="absolute inset-0 appearance-none focus:outline-none" 
+                        class="absolute inset-0 appearance-none focus:outline-none"
                     />
                 @endif
                 <div class="fi-fo-checkbox-list-option-text flex-1">
@@ -49,14 +47,14 @@
                     @endif
                 </div>
                 @if(!$hiddenInputs)
-                    <input 
+                    <input
                         id="{{ $id }}"
                         name="{{ $getName() }}"
-                        type="checkbox" 
+                        type="checkbox"
                         value="{{ $value }}"
                         wire:model="{{ $getStatePath() }}"
                         {{ $isDisabled() ? 'disabled' : '' }}
-                        class="fi-checkbox-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500" 
+                        class="fi-checkbox-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500"
                         style="{{ $colors }}"
                     />
                 @endif
@@ -68,4 +66,4 @@
             </label>
         @endforeach
     </fieldset>
-</x-dynamic-component> 
+</x-dynamic-component>

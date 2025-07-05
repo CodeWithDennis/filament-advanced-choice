@@ -13,7 +13,7 @@
         :component="$getFieldWrapperView()"
         :field="$field"
 >
-    <fieldset aria-label="{{ $getLabel() }}" class="-space-y-px rounded-md bg-white dark:bg-gray-900">
+    <fieldset class="-space-y-px rounded-md bg-white dark:bg-gray-900">
         @foreach($getOptions() as $value => $label)
             @php
                 $id = $getId() . '-' . $value;
@@ -64,7 +64,7 @@
                             value="{{ $value }}"
                             wire:model="{{ $getStatePath() }}"
                             {{ $isDisabled() ? 'disabled' : '' }}
-                            class="absolute inset-0 appearance-none focus:outline-none" 
+                            class="absolute inset-0 appearance-none focus:outline-none"
                     />
                 @endif
             </label>
