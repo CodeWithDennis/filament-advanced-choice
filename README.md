@@ -10,13 +10,23 @@ composer require codewithdennis/filament-advanced-choice
 
 ## Components
 
+```php
+use Filament\Support\Colors\Color;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxList;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCards;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxTable;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
+```
+
 ### CheckboxList
 
 Vertical list layout with descriptions for multiple selections.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxList;
-
 CheckboxList::make('features')
     ->options([
         'email' => 'Email Support',
@@ -36,6 +46,7 @@ CheckboxList::make('features')
         'chat' => '+$5/mo',
         'priority' => '+$25/mo',
     ])
+    ->color(Color::Success)
 ```
 
 ### CheckboxCards
@@ -43,8 +54,6 @@ CheckboxList::make('features')
 Card-based layout with descriptions and extras support for multiple selections.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
-
 CheckboxCards::make('mailing_list')
     ->options([
         'newsletter' => 'Newsletter',
@@ -61,6 +70,7 @@ CheckboxCards::make('mailing_list')
         'existing_customers' => '1200 users',
         'trial_users' => '2740 users',
     ])
+    ->color(Color::Blue)
 ```
 
 ### CheckboxStackedCards
@@ -68,8 +78,6 @@ CheckboxCards::make('mailing_list')
 Stacked card layout with descriptions and extras support for multiple selections.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCards;
-
 CheckboxStackedCards::make('server_plan')
     ->options([
         'hobby' => 'Hobby',
@@ -89,6 +97,7 @@ CheckboxStackedCards::make('server_plan')
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
     ])
+    ->color(Color::Emerald)
 ```
 
 ### CheckboxTable
@@ -96,8 +105,6 @@ CheckboxStackedCards::make('server_plan')
 Responsive table layout with descriptions for multiple selections.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxTable;
-
 CheckboxTable::make('hosting')
     ->options([
         'shared' => 'Shared Hosting',
@@ -107,6 +114,7 @@ CheckboxTable::make('hosting')
         'shared' => 'Perfect for small websites',
         'vps' => 'Scalable virtual server',
     ])
+    ->color(Color::Purple)
 ```
 
 ### RadioList
@@ -114,8 +122,6 @@ CheckboxTable::make('hosting')
 Vertical list layout with descriptions.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
-
 RadioList::make('plan')
     ->options([
         'basic' => 'Basic Plan',
@@ -125,6 +131,7 @@ RadioList::make('plan')
         'basic' => 'Perfect for small teams',
         'pro' => 'Ideal for growing businesses',
     ])
+    ->color(Color::Indigo)
 ```
 
 ### RadioTable
@@ -132,8 +139,6 @@ RadioList::make('plan')
 Responsive table layout with descriptions.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
-
 RadioTable::make('hosting')
     ->options([
         'shared' => 'Shared Hosting',
@@ -143,6 +148,7 @@ RadioTable::make('hosting')
         'shared' => 'Perfect for small websites',
         'vps' => 'Scalable virtual server',
     ])
+    ->color(Color::Teal)
 ```
 
 ### RadioCards
@@ -150,8 +156,6 @@ RadioTable::make('hosting')
 Card-based layout with descriptions and extras support.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
-
 RadioCards::make('mailing_list')
     ->options([
         'newsletter' => 'Newsletter',
@@ -168,6 +172,7 @@ RadioCards::make('mailing_list')
         'existing_customers' => '1200 users',
         'trial_users' => '2740 users',
     ])
+    ->color(Color::Cyan)
 ```
 
 ### RadioStackedCards
@@ -175,8 +180,6 @@ RadioCards::make('mailing_list')
 Stacked card layout with descriptions and extras support.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
-
 RadioStackedCards::make('server_plan')
     ->options([
         'hobby' => 'Hobby',
@@ -196,6 +199,7 @@ RadioStackedCards::make('server_plan')
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
     ])
+    ->color(Color::Violet)
 ```
 
 ## Customization
@@ -203,6 +207,47 @@ RadioStackedCards::make('server_plan')
 ### Colors
 
 All components support custom colors using Filament's color system. The default color is `primary`, but you can customize it to any of Filament's supported colors.
+
+#### Using Color Enums (Recommended)
+
+```php
+use Filament\Support\Colors\Color;
+
+CheckboxCards::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+    ])
+    ->color(Color::Amber)    // Use amber color
+    ->color(Color::Blue)     // Use blue color
+    ->color(Color::Cyan)     // Use cyan color
+    ->color(Color::Danger)   // Use danger color
+    ->color(Color::Emerald)  // Use emerald color
+    ->color(Color::Fuchsia)  // Use fuchsia color
+    ->color(Color::Gray)     // Use gray color
+    ->color(Color::Green)    // Use green color
+    ->color(Color::Indigo)   // Use indigo color
+    ->color(Color::Info)     // Use info color
+    ->color(Color::Lime)     // Use lime color
+    ->color(Color::Neutral)  // Use neutral color
+    ->color(Color::Orange)   // Use orange color
+    ->color(Color::Pink)     // Use pink color
+    ->color(Color::Primary)  // Use primary color
+    ->color(Color::Purple)   // Use purple color
+    ->color(Color::Red)      // Use red color
+    ->color(Color::Rose)     // Use rose color
+    ->color(Color::Sky)      // Use sky color
+    ->color(Color::Slate)    // Use slate color
+    ->color(Color::Stone)    // Use stone color
+    ->color(Color::Success)  // Use success color
+    ->color(Color::Teal)     // Use teal color
+    ->color(Color::Violet)   // Use violet color
+    ->color(Color::Warning)  // Use warning color
+    ->color(Color::Yellow)   // Use yellow color
+    ->color(Color::Zinc)     // Use zinc color
+```
+
+#### Using String Values
 
 ```php
 CheckboxCards::make('features')
