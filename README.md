@@ -46,14 +46,14 @@ RadioTable::make('hosting')
     ])
 ```
 
-### RadioCard
+### RadioCards
 
 Card-based layout with descriptions and extras support.
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCard;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
 
-RadioCard::make('mailing_list')
+RadioCards::make('mailing_list')
     ->options([
         'newsletter' => 'Newsletter',
         'existing_customers' => 'Existing customers',
@@ -68,6 +68,34 @@ RadioCard::make('mailing_list')
         'newsletter' => '621 users',
         'existing_customers' => '1200 users',
         'trial_users' => '2740 users',
+    ])
+```
+
+### RadioStackedCards
+
+Stacked card layout with descriptions and extras support.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
+
+RadioStackedCards::make('server_plan')
+    ->options([
+        'hobby' => 'Hobby',
+        'startup' => 'Startup',
+        'business' => 'Business',
+        'enterprise' => 'Enterprise',
+    ])
+    ->descriptions([
+        'hobby' => '8GB / 4 CPUs • 160 GB SSD disk',
+        'startup' => '12GB / 6 CPUs • 256 GB SSD disk',
+        'business' => '16GB / 8 CPUs • 512 GB SSD disk',
+        'enterprise' => '32GB / 12 CPUs • 1024 GB SSD disk',
+    ])
+    ->extras([
+        'hobby' => '$40/mo',
+        'startup' => '$80/mo',
+        'business' => '$160/mo',
+        'enterprise' => '$240/mo',
     ])
 ```
 
