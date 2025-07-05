@@ -12,4 +12,4 @@ final class RadioStackedCards extends Radio
     use HasExtras;
 
     protected string $view = 'filament-advanced-choice::radio-stacked-cards';
-} 
+}

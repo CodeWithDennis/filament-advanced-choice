@@ -1,6 +1,6 @@
 # Filament Advanced Choice
 
-Beautifully styled radio group components for FilamentPHP with descriptions and modern design.
+Beautifully styled radio and checkbox group components for FilamentPHP with descriptions and modern design.
 
 ## Installation
 
@@ -9,6 +9,34 @@ composer require codewithdennis/filament-advanced-choice
 ```
 
 ## Components
+
+### CheckboxList
+
+Vertical list layout with descriptions for multiple selections.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxList;
+
+CheckboxList::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+        'chat' => 'Live Chat',
+        'priority' => 'Priority Support',
+    ])
+    ->descriptions([
+        'email' => 'Response within 24 hours',
+        'phone' => 'Available during business hours',
+        'chat' => 'Instant support via chat',
+        'priority' => 'Response within 2 hours',
+    ])
+    ->extras([
+        'email' => 'Free',
+        'phone' => '+$10/mo',
+        'chat' => '+$5/mo',
+        'priority' => '+$25/mo',
+    ])
+```
 
 ### RadioList
 
