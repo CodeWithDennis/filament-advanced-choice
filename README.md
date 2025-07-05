@@ -38,6 +38,77 @@ CheckboxList::make('features')
     ])
 ```
 
+### CheckboxCards
+
+Card-based layout with descriptions and extras support for multiple selections.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
+
+CheckboxCards::make('mailing_list')
+    ->options([
+        'newsletter' => 'Newsletter',
+        'existing_customers' => 'Existing customers',
+        'trial_users' => 'Trial users',
+    ])
+    ->descriptions([
+        'newsletter' => 'Last message sent an hour ago',
+        'existing_customers' => 'Last message sent 2 weeks ago',
+        'trial_users' => 'Last message sent 4 days ago',
+    ])
+    ->extras([
+        'newsletter' => '621 users',
+        'existing_customers' => '1200 users',
+        'trial_users' => '2740 users',
+    ])
+```
+
+### CheckboxStackedCards
+
+Stacked card layout with descriptions and extras support for multiple selections.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCards;
+
+CheckboxStackedCards::make('server_plan')
+    ->options([
+        'hobby' => 'Hobby',
+        'startup' => 'Startup',
+        'business' => 'Business',
+        'enterprise' => 'Enterprise',
+    ])
+    ->descriptions([
+        'hobby' => '8GB / 4 CPUs • 160 GB SSD disk',
+        'startup' => '12GB / 6 CPUs • 256 GB SSD disk',
+        'business' => '16GB / 8 CPUs • 512 GB SSD disk',
+        'enterprise' => '32GB / 12 CPUs • 1024 GB SSD disk',
+    ])
+    ->extras([
+        'hobby' => '$40/mo',
+        'startup' => '$80/mo',
+        'business' => '$160/mo',
+        'enterprise' => '$240/mo',
+    ])
+```
+
+### CheckboxTable
+
+Responsive table layout with descriptions for multiple selections.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxTable;
+
+CheckboxTable::make('hosting')
+    ->options([
+        'shared' => 'Shared Hosting',
+        'vps' => 'VPS Hosting',
+    ])
+    ->descriptions([
+        'shared' => 'Perfect for small websites',
+        'vps' => 'Scalable virtual server',
+    ])
+```
+
 ### RadioList
 
 Vertical list layout with descriptions.
