@@ -1,6 +1,11 @@
 @php
+    use function Filament\Support\get_color_css_variables;
+
     $descriptions = $getDescriptions();
     $extras = $getExtras();
+    $colors = \Illuminate\Support\Arr::toCssStyles([
+        get_color_css_variables($getColor(), shades: [50, 100, 200, 400, 500, 600, 700, 800]),
+    ]);
 @endphp
 
 <x-dynamic-component
@@ -17,7 +22,8 @@
 
             <label
                     for="{{ $id }}"
-                    class="fi-fo-checkbox-list-option group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500 has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10 has-disabled:opacity-60"
+                    class="fi-fo-checkbox-list-option group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500 has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10 has-disabled:opacity-60"
+                    style="{{ $colors }}"
             >
                 <input
                         id="{{ $id }}"

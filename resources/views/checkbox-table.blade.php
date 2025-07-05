@@ -1,5 +1,10 @@
 @php
+    use function Filament\Support\get_color_css_variables;
+
     $descriptions = $getDescriptions();
+    $colors = \Illuminate\Support\Arr::toCssStyles([
+        get_color_css_variables($getColor(), shades: [50, 100, 200, 400, 500, 600, 700, 800]),
+    ]);
 @endphp
 
 <x-dynamic-component
@@ -19,11 +24,12 @@
                 aria-description="{{ $description }}"
                 class="fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
                        first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
-                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600
-                       has-checked:relative has-checked:border-primary-200 dark:has-checked:border-primary-500
-                       has-checked:bg-primary-50 dark:has-checked:bg-primary-800/10
+                       focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-600
+                       has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
+                       has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
                        has-disabled:opacity-60
                        md:grid md:grid-cols-2 md:pr-6 md:pl-4"
+                style="{{ $colors }}"
             >
                 <span class="fi-fo-checkbox-list-option-text flex items-center gap-3 text-sm">
                     <input

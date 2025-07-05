@@ -198,6 +198,52 @@ RadioStackedCards::make('server_plan')
     ])
 ```
 
+## Customization
+
+### Colors
+
+All components support custom colors using Filament's color system. The default color is `primary`, but you can customize it to any of Filament's supported colors.
+
+```php
+CheckboxCards::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+    ])
+    ->color('success') // Use success color
+    ->color('warning') // Use warning color
+    ->color('danger')  // Use danger color
+    ->color('info')    // Use info color
+    ->color('gray')    // Use gray color
+    ->color('slate')   // Use slate color
+    ->color('zinc')    // Use zinc color
+    ->color('neutral') // Use neutral color
+    ->color('stone')   // Use stone color
+    ->color('red')     // Use red color
+    ->color('orange')  // Use orange color
+    ->color('amber')   // Use amber color
+    ->color('yellow')  // Use yellow color
+    ->color('lime')    // Use lime color
+    ->color('green')   // Use green color
+    ->color('emerald') // Use emerald color
+    ->color('teal')    // Use teal color
+    ->color('cyan')    // Use cyan color
+    ->color('sky')     // Use sky color
+    ->color('blue')    // Use blue color
+    ->color('indigo')  // Use indigo color
+    ->color('violet')  // Use violet color
+    ->color('purple')  // Use purple color
+    ->color('fuchsia') // Use fuchsia color
+    ->color('pink')    // Use pink color
+    ->color('rose')    // Use rose color
+```
+
+The color will be applied to:
+- Selected state borders and backgrounds
+- Focus outlines
+- Check/radio button indicators
+- Icons and visual elements
+
 ## License
 
 MIT License 
