@@ -47,6 +47,7 @@ CheckboxList::make('features')
         'priority' => '+$25/mo',
     ])
     ->color(Color::Success)
+    ->hiddenInputs()
 ```
 
 ### CheckboxCards
@@ -71,6 +72,7 @@ CheckboxCards::make('mailing_list')
         'trial_users' => '2740 users',
     ])
     ->color(Color::Blue)
+    ->visibleInputs()
 ```
 
 ### CheckboxStackedCards
@@ -98,6 +100,7 @@ CheckboxStackedCards::make('server_plan')
         'enterprise' => '$240/mo',
     ])
     ->color(Color::Emerald)
+    ->hiddenInputs()
 ```
 
 ### CheckboxTable
@@ -115,6 +118,7 @@ CheckboxTable::make('hosting')
         'vps' => 'Scalable virtual server',
     ])
     ->color(Color::Purple)
+    ->visibleInputs()
 ```
 
 ### RadioList
@@ -132,6 +136,7 @@ RadioList::make('plan')
         'pro' => 'Ideal for growing businesses',
     ])
     ->color(Color::Indigo)
+    ->hiddenInputs()
 ```
 
 ### RadioTable
@@ -149,6 +154,7 @@ RadioTable::make('hosting')
         'vps' => 'Scalable virtual server',
     ])
     ->color(Color::Teal)
+    ->visibleInputs()
 ```
 
 ### RadioCards
@@ -173,6 +179,7 @@ RadioCards::make('mailing_list')
         'trial_users' => '2740 users',
     ])
     ->color(Color::Cyan)
+    ->hiddenInputs()
 ```
 
 ### RadioStackedCards
@@ -200,7 +207,113 @@ RadioStackedCards::make('server_plan')
         'enterprise' => '$240/mo',
     ])
     ->color(Color::Violet)
+    ->hiddenInputs()
 ```
+
+## Customization
+
+### Input Visibility
+
+Control whether the checkbox/radio inputs are visible or hidden. When hidden, the entire card/row becomes clickable and shows a checkmark icon when selected.
+
+```php
+// Hide inputs (entire card/row becomes clickable)
+CheckboxCards::make('features')
+    ->hiddenInputs()
+
+// Show traditional inputs (default)
+CheckboxCards::make('features')
+    ->visibleInputs()
+
+// Conditional hiding
+CheckboxCards::make('features')
+    ->hiddenInputs(fn() => auth()->user()->prefersHiddenInputs())
+```
+
+### Colors
+
+All components support custom colors using Filament's color system. The default color is `primary`, but you can customize it to any of Filament's supported colors.
+
+#### Using Color Enums (Recommended)
+
+```php
+use Filament\Support\Colors\Color;
+
+CheckboxCards::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+    ])
+    ->color(Color::Amber)    // Use amber color
+    ->color(Color::Blue)     // Use blue color
+    ->color(Color::Cyan)     // Use cyan color
+    ->color(Color::Danger)   // Use danger color
+    ->color(Color::Emerald)  // Use emerald color
+    ->color(Color::Fuchsia)  // Use fuchsia color
+    ->color(Color::Gray)     // Use gray color
+    ->color(Color::Green)    // Use green color
+    ->color(Color::Indigo)   // Use indigo color
+    ->color(Color::Info)     // Use info color
+    ->color(Color::Lime)     // Use lime color
+    ->color(Color::Neutral)  // Use neutral color
+    ->color(Color::Orange)   // Use orange color
+    ->color(Color::Pink)     // Use pink color
+    ->color(Color::Primary)  // Use primary color
+    ->color(Color::Purple)   // Use purple color
+    ->color(Color::Red)      // Use red color
+    ->color(Color::Rose)     // Use rose color
+    ->color(Color::Sky)      // Use sky color
+    ->color(Color::Slate)    // Use slate color
+    ->color(Color::Stone)    // Use stone color
+    ->color(Color::Success)  // Use success color
+    ->color(Color::Teal)     // Use teal color
+    ->color(Color::Violet)   // Use violet color
+    ->color(Color::Warning)  // Use warning color
+    ->color(Color::Yellow)   // Use yellow color
+    ->color(Color::Zinc)     // Use zinc color
+```
+
+#### Using String Values
+
+```php
+CheckboxCards::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+    ])
+    ->color('success') // Use success color
+    ->color('warning') // Use warning color
+    ->color('danger')  // Use danger color
+    ->color('info')    // Use info color
+    ->color('gray')    // Use gray color
+    ->color('slate')   // Use slate color
+    ->color('zinc')    // Use zinc color
+    ->color('neutral') // Use neutral color
+    ->color('stone')   // Use stone color
+    ->color('red')     // Use red color
+    ->color('orange')  // Use orange color
+    ->color('amber')   // Use amber color
+    ->color('yellow')  // Use yellow color
+    ->color('lime')    // Use lime color
+    ->color('green')   // Use green color
+    ->color('emerald') // Use emerald color
+    ->color('teal')    // Use teal color
+    ->color('cyan')    // Use cyan color
+    ->color('sky')     // Use sky color
+    ->color('blue')    // Use blue color
+    ->color('indigo')  // Use indigo color
+    ->color('violet')  // Use violet color
+    ->color('purple')  // Use purple color
+    ->color('fuchsia') // Use fuchsia color
+    ->color('pink')    // Use pink color
+    ->color('rose')    // Use rose color
+```
+
+The color will be applied to:
+- Selected state borders and backgrounds
+- Focus outlines
+- Check/radio button indicators
+- Icons and visual elements
 
 ## License
 
