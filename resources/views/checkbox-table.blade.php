@@ -39,7 +39,8 @@
                         value="{{ $value }}"
                         wire:model="{{ $getStatePath() }}"
                         {{ $isDisabled() ? 'disabled' : '' }}
-                        class="fi-checkbox-input mt-0.5 shrink-0"
+                        class="fi-checkbox-input mt-0.5 shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500"
+                        style="{{ $colors }}"
                     />
                     <span class="fi-fo-checkbox-list-option-label font-medium text-gray-900 dark:text-gray-100">
                         {{ $label }}
@@ -52,4 +53,4 @@
             </label>
         @endforeach
     </fieldset>
-</x-dynamic-component> 
+</x-dynamic-component>

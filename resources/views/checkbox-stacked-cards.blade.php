@@ -49,7 +49,8 @@
                                 value="{{ $value }}"
                                 wire:model="{{ $getStatePath() }}"
                                 {{ $isDisabled() ? 'disabled' : '' }}
-                                class="fi-checkbox-input shrink-0" 
+                                class="fi-checkbox-input shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500" 
+                                style="{{ $colors }}"
                             />
                         @endif
                         <span class="fi-fo-checkbox-list-option-text flex items-center">
