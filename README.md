@@ -36,6 +36,7 @@ CheckboxList::make('features')
     ])
     ->color(Color::Success)
     ->hiddenInputs()
+    ->bulkToggleable()
 ```
 
 ### CheckboxCards
@@ -61,6 +62,7 @@ CheckboxCards::make('mailing_list')
     ])
     ->color(Color::Blue)
     ->visibleInputs()
+    ->bulkToggleable()
 ```
 
 ### CheckboxStackedCards
@@ -86,7 +88,8 @@ CheckboxStackedCards::make('server_plan')
         'startup' => '$80/mo',
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
-    ]),
+    ])
+    ->bulkToggleable(),
 ```
 
 ### CheckboxTable
@@ -102,7 +105,8 @@ CheckboxTable::make('hosting')
     ->descriptions([
         'shared' => 'Perfect for small websites',
         'vps' => 'Scalable virtual server',
-    ]),
+    ])
+    ->bulkToggleable(),
 ```
 
 ### RadioList
@@ -184,6 +188,74 @@ RadioStackedCards::make('server_plan')
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
     ]),
+
+## Additional Features
+
+### Searchable Options
+
+All components support searchable functionality to help users find options quickly in large lists.
+
+```php
+CheckboxList::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+        'chat' => 'Live Chat',
+        'priority' => 'Priority Support',
+        'ticket' => 'Ticket System',
+        'knowledge_base' => 'Knowledge Base',
+        'video_tutorials' => 'Video Tutorials',
+        'webinar' => 'Webinar Access',
+    ])
+    ->descriptions([
+        'email' => 'Response within 24 hours',
+        'phone' => 'Available during business hours',
+        'chat' => 'Instant support via chat',
+        'priority' => 'Response within 2 hours',
+        'ticket' => 'Track support requests',
+        'knowledge_base' => 'Self-service documentation',
+        'video_tutorials' => 'Step-by-step guides',
+        'webinar' => 'Monthly training sessions',
+    ])
+    ->searchable()
+    ->searchPrompt('Search support features...')
+    ->noSearchResultsMessage('No support features found.')
+```
+
+### Disabling Specific Options
+
+You can disable specific options based on conditions using the `disableOptionWhen()` method.
+
+```php
+CheckboxList::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+        'chat' => 'Live Chat',
+        'priority' => 'Priority Support',
+    ])
+    ->descriptions([
+        'email' => 'Response within 24 hours',
+        'phone' => 'Available during business hours',
+        'chat' => 'Instant support via chat',
+        'priority' => 'Response within 2 hours',
+    ])
+    ->disableOptionWhen(fn (string $value): bool => $value === 'priority')
+```
+
+### Bulk toggling checkboxes
+
+Checkbox components support bulk select/deselect actions for better user experience.
+
+```php
+CheckboxList::make('features')
+    ->options([
+        'email' => 'Email Support',
+        'phone' => 'Phone Support',
+        'chat' => 'Live Chat',
+        'priority' => 'Priority Support',
+    ])
+    ->bulkToggleable()
 ```
 
 ## Enum Support
