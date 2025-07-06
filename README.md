@@ -210,6 +210,85 @@ RadioStackedCards::make('server_plan')
     ->hiddenInputs()
 ```
 
+## Enum Support
+
+You can use PHP enums with all components. When using enums, you need to implement Filament's `HasLabel` and `HasDescription` interfaces, plus the `HasExtra` interface from this package to provide labels, descriptions, and extras.
+
+First, create your enum implementing the required interfaces:
+
+<details>
+<summary><strong>📋 Enum Implementation Code</strong></summary>
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Enums;
+
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Enums\Concerns\HasExtra;
+use Filament\Support\Contracts\HasDescription;
+use Filament\Support\Contracts\HasLabel;
+
+enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
+{
+    case Standard = 'standard';
+    case Express = 'express';
+    case Overnight = 'overnight';
+
+    public function getLabel(): ?string
+    {
+        return match ($this) {
+            self::Standard => __('Standard Delivery'),
+            self::Express => __('Express Delivery'),
+            self::Overnight => __('Overnight Delivery'),
+        };
+    }
+
+    public function getDescription(): ?string
+    {
+        return match ($this) {
+            self::Standard => __('Delivery within 5-7 business days'),
+            self::Express => __('Delivery within 2-3 business days'),
+            self::Overnight => __('Next day delivery available'),
+        };
+    }
+
+    public function getExtra(): ?string
+    {
+        return match ($this) {
+            self::Standard => __('Free for orders over €50'),
+            self::Express => __('€5.99 for all orders'),
+            self::Overnight => __('€9.99 for all orders'),
+        };
+    }
+}
+```
+
+</details>
+
+Then use it in your form:
+
+<details>
+<summary><strong>📋 Form Usage Code</strong></summary>
+
+```php
+use App\Enums\DeliveryTypeEnum;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
+
+public static function configure(Schema $schema): Schema
+{
+    return $schema
+        ->columns(1)
+        ->components([
+            RadioStackedCards::make('delivery_type')
+                ->options(DeliveryTypeEnum::class),
+        ]);
+}
+```
+
+</details>
+
 ## Customization
 
 ### Input Visibility
