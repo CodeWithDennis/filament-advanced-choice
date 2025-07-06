@@ -10,18 +10,6 @@ composer require codewithdennis/filament-advanced-choice
 
 ## Components
 
-```php
-use Filament\Support\Colors\Color;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxList;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxTable;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
-```
-
 ### CheckboxList
 
 Vertical list layout with descriptions for multiple selections.
@@ -98,9 +86,7 @@ CheckboxStackedCards::make('server_plan')
         'startup' => '$80/mo',
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
-    ])
-    ->color(Color::Emerald)
-    ->hiddenInputs()
+    ]),
 ```
 
 ### CheckboxTable
@@ -116,9 +102,7 @@ CheckboxTable::make('hosting')
     ->descriptions([
         'shared' => 'Perfect for small websites',
         'vps' => 'Scalable virtual server',
-    ])
-    ->color(Color::Purple)
-    ->visibleInputs()
+    ]),
 ```
 
 ### RadioList
@@ -134,9 +118,7 @@ RadioList::make('plan')
     ->descriptions([
         'basic' => 'Perfect for small teams',
         'pro' => 'Ideal for growing businesses',
-    ])
-    ->color(Color::Indigo)
-    ->hiddenInputs()
+    ]),
 ```
 
 ### RadioTable
@@ -152,9 +134,7 @@ RadioTable::make('hosting')
     ->descriptions([
         'shared' => 'Perfect for small websites',
         'vps' => 'Scalable virtual server',
-    ])
-    ->color(Color::Teal)
-    ->visibleInputs()
+    ]),
 ```
 
 ### RadioCards
@@ -177,9 +157,7 @@ RadioCards::make('mailing_list')
         'newsletter' => '621 users',
         'existing_customers' => '1200 users',
         'trial_users' => '2740 users',
-    ])
-    ->color(Color::Cyan)
-    ->hiddenInputs()
+    ]),
 ```
 
 ### RadioStackedCards
@@ -205,9 +183,7 @@ RadioStackedCards::make('server_plan')
         'startup' => '$80/mo',
         'business' => '$160/mo',
         'enterprise' => '$240/mo',
-    ])
-    ->color(Color::Violet)
-    ->hiddenInputs()
+    ]),
 ```
 
 ## Enum Support
@@ -293,20 +269,16 @@ public static function configure(Schema $schema): Schema
 
 ### Input Visibility
 
-Control whether the checkbox/radio inputs are visible or hidden. When hidden, the entire card/row becomes clickable and shows a checkmark icon when selected.
+Control whether the inputs are visible or hidden.
 
 ```php
-// Hide inputs (entire card/row becomes clickable)
 CheckboxCards::make('features')
     ->hiddenInputs()
+```
 
-// Show traditional inputs (default)
+```php
 CheckboxCards::make('features')
     ->visibleInputs()
-
-// Conditional hiding
-CheckboxCards::make('features')
-    ->hiddenInputs(fn() => auth()->user()->prefersHiddenInputs())
 ```
 
 ### Colors
@@ -319,81 +291,5 @@ All components support custom colors using Filament's color system. The default 
 use Filament\Support\Colors\Color;
 
 CheckboxCards::make('features')
-    ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-    ])
-    ->color(Color::Amber)    // Use amber color
-    ->color(Color::Blue)     // Use blue color
-    ->color(Color::Cyan)     // Use cyan color
-    ->color(Color::Danger)   // Use danger color
-    ->color(Color::Emerald)  // Use emerald color
-    ->color(Color::Fuchsia)  // Use fuchsia color
-    ->color(Color::Gray)     // Use gray color
-    ->color(Color::Green)    // Use green color
-    ->color(Color::Indigo)   // Use indigo color
-    ->color(Color::Info)     // Use info color
-    ->color(Color::Lime)     // Use lime color
-    ->color(Color::Neutral)  // Use neutral color
-    ->color(Color::Orange)   // Use orange color
-    ->color(Color::Pink)     // Use pink color
-    ->color(Color::Primary)  // Use primary color
-    ->color(Color::Purple)   // Use purple color
-    ->color(Color::Red)      // Use red color
-    ->color(Color::Rose)     // Use rose color
-    ->color(Color::Sky)      // Use sky color
-    ->color(Color::Slate)    // Use slate color
-    ->color(Color::Stone)    // Use stone color
-    ->color(Color::Success)  // Use success color
-    ->color(Color::Teal)     // Use teal color
-    ->color(Color::Violet)   // Use violet color
-    ->color(Color::Warning)  // Use warning color
-    ->color(Color::Yellow)   // Use yellow color
-    ->color(Color::Zinc)     // Use zinc color
+    ->color(Color::Amber)
 ```
-
-#### Using String Values
-
-```php
-CheckboxCards::make('features')
-    ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-    ])
-    ->color('success') // Use success color
-    ->color('warning') // Use warning color
-    ->color('danger')  // Use danger color
-    ->color('info')    // Use info color
-    ->color('gray')    // Use gray color
-    ->color('slate')   // Use slate color
-    ->color('zinc')    // Use zinc color
-    ->color('neutral') // Use neutral color
-    ->color('stone')   // Use stone color
-    ->color('red')     // Use red color
-    ->color('orange')  // Use orange color
-    ->color('amber')   // Use amber color
-    ->color('yellow')  // Use yellow color
-    ->color('lime')    // Use lime color
-    ->color('green')   // Use green color
-    ->color('emerald') // Use emerald color
-    ->color('teal')    // Use teal color
-    ->color('cyan')    // Use cyan color
-    ->color('sky')     // Use sky color
-    ->color('blue')    // Use blue color
-    ->color('indigo')  // Use indigo color
-    ->color('violet')  // Use violet color
-    ->color('purple')  // Use purple color
-    ->color('fuchsia') // Use fuchsia color
-    ->color('pink')    // Use pink color
-    ->color('rose')    // Use rose color
-```
-
-The color will be applied to:
-- Selected state borders and backgrounds
-- Focus outlines
-- Check/radio button indicators
-- Icons and visual elements
-
-## License
-
-MIT License 
