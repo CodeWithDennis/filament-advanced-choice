@@ -8,7 +8,7 @@
     $colors = \Illuminate\Support\Arr::toCssStyles([
         get_color_css_variables($getColor(), shades: [50, 100, 200, 400, 500, 600, 700, 800]),
     ]);
-    
+
     $fieldWrapperView = $getFieldWrapperView();
     $extraInputAttributeBag = $getExtraInputAttributeBag();
     $isHtmlAllowed = $isHtmlAllowed();
@@ -112,7 +112,7 @@
                             for="{{ $id }}"
                             class="fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
                                    first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
-                                   focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-600
+                                   focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
                                    has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
                                    has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
                                    has-disabled:opacity-60
