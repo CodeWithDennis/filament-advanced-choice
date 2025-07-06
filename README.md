@@ -8,6 +8,16 @@ Beautifully styled radio and checkbox group components for FilamentPHP with desc
 composer require codewithdennis/filament-advanced-choice
 ```
 
+### Custom Theme
+
+You will need to [create a custom theme](https://filamentphp.com/docs/3.x/panels/themes#creating-a-custom-theme) for the styles to be applied correctly.
+
+Make sure you add the following to your `theme.css` file.
+
+```bash
+@source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
+```
+
 ## Components
 
 ### CheckboxList
@@ -328,3 +338,6 @@ CheckboxCards::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
     ->color(Color::Amber)
 ```
+
+### Code Distribution
+Licenses strictly prohibit the public distribution of its source code. This means you are not permitted to use Filament Advanced Choice to build an application and then distribute that application publicly through open-source repositories, hosting platforms, or any other code-sharing platforms.
