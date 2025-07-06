@@ -2,6 +2,8 @@
     use function Filament\Support\get_color_css_variables;
 
     $descriptions = $getDescriptions();
+    $extras = $getExtras();
+    $hiddenInputs = $getHiddenInputs();
     $colors = \Illuminate\Support\Arr::toCssStyles([
         get_color_css_variables($getColor(), shades: [50, 100, 200, 400, 500, 600, 700, 800]),
     ]);
@@ -16,6 +18,7 @@
             @php
                 $id = $getId() . '-' . str($value)->slug();
                 $description = $descriptions[$value] ?? '';
+                $extra = $extras[$value] ?? null;
             @endphp
 
             <label
@@ -26,10 +29,10 @@
                        has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
                        has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
                        has-disabled:opacity-60
-                       md:grid md:grid-cols-2 md:pr-6 md:pl-4"
+                       md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4"
                 style="{{ $colors }}"
             >
-                <span class="flex items-center gap-3 text-sm">
+                <div class="flex items-center gap-3 text-sm">
                     <input
                         id="{{ $id }}"
                         name="{{ $getName() }}"
@@ -48,11 +51,15 @@
                     <span class="font-medium text-gray-900 dark:text-gray-100">
                         {{ $label }}
                     </span>
-                </span>
+                </div>
 
-                <span class="ml-6 pl-1 text-sm text-gray-500 dark:text-gray-400 md:ml-0 md:pl-0 md:text-right">
+                <div class="text-sm text-gray-500 dark:text-gray-400 md:text-left">
                     {{ $description }}
-                </span>
+                </div>
+
+                <div class="text-sm text-gray-500 dark:text-gray-400 md:text-right">
+                    {{ $extra }}
+                </div>
             </label>
         @endforeach
     </fieldset>
