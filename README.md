@@ -17,36 +17,36 @@ Vertical list layout with descriptions for multiple selections.
 ![basic_checkbox_list.png](art/basic_checkbox_list.png)
 
 ```php
-CheckboxList::make('features')
+CheckboxList::make('delivery_type')
     ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-        'chat' => 'Live Chat',
-        'priority' => 'Priority Support',
-        'ticket' => 'Ticket System',
-        'knowledge_base' => 'Knowledge Base',
-        'video_tutorials' => 'Video Tutorials',
-        'webinar' => 'Webinar Access',
+        'standard' => 'Standard Delivery',
+        'express' => 'Express Delivery',
+        'overnight' => 'Overnight Delivery',
+        'same_day' => 'Same Day Delivery',
+        'economy' => 'Economy Delivery',
+        'premium' => 'Premium Delivery',
+        'international' => 'International Delivery',
+        'local' => 'Local Delivery',
     ])
     ->descriptions([
-        'email' => 'Response within 24 hours',
-        'phone' => 'Available during business hours',
-        'chat' => 'Instant support via chat',
-        'priority' => 'Response within 2 hours',
-        'ticket' => 'Track support requests',
-        'knowledge_base' => 'Self-service documentation',
-        'video_tutorials' => 'Step-by-step guides',
-        'webinar' => 'Monthly training sessions',
+        'standard' => 'Delivery within 5-7 business days',
+        'express' => 'Delivery within 2-3 business days',
+        'overnight' => 'Next day delivery available',
+        'same_day' => 'Delivery on the same day',
+        'economy' => 'Budget-friendly delivery option',
+        'premium' => 'Premium service with tracking',
+        'international' => 'Worldwide shipping available',
+        'local' => 'Same city delivery service',
     ])
     ->extras([
-        'email' => 'Free',
-        'phone' => '+$10/mo',
-        'chat' => '+$5/mo',
-        'priority' => '+$25/mo',
-        'ticket' => '+$15/mo',
-        'knowledge_base' => 'Free',
-        'video_tutorials' => '+$8/mo',
-        'webinar' => '+$20/mo',
+        'standard' => '$5.00 flat rate',
+        'express' => '$10.00 flat rate',
+        'overnight' => '$20.00 flat rate',
+        'same_day' => '$25.00 flat rate',
+        'economy' => '$3.00 flat rate',
+        'premium' => '$15.00 flat rate',
+        'international' => '$50.00 flat rate',
+        'local' => '$8.00 flat rate',
     ])
     ->color(Color::Success)
     ->hiddenInputs()
@@ -60,30 +60,36 @@ Card-based layout with descriptions and extras support for multiple selections.
 ![basic_checkbox_cards.png](art/basic_checkbox_cards.png)
 
 ```php
-CheckboxCards::make('mailing_list')
+CheckboxCards::make('delivery_type')
     ->options([
-        'newsletter' => 'Newsletter',
-        'existing_customers' => 'Existing customers',
-        'trial_users' => 'Trial users',
-        'vip_customers' => 'VIP customers',
-        'inactive_users' => 'Inactive users',
-        'new_signups' => 'New signups',
+        'standard' => 'Standard Delivery',
+        'express' => 'Express Delivery',
+        'overnight' => 'Overnight Delivery',
+        'same_day' => 'Same Day Delivery',
+        'economy' => 'Economy Delivery',
+        'premium' => 'Premium Delivery',
+        'international' => 'International Delivery',
+        'local' => 'Local Delivery',
     ])
     ->descriptions([
-        'newsletter' => 'Last message sent an hour ago',
-        'existing_customers' => 'Last message sent 2 weeks ago',
-        'trial_users' => 'Last message sent 4 days ago',
-        'vip_customers' => 'Last message sent 1 week ago',
-        'inactive_users' => 'Last message sent 3 months ago',
-        'new_signups' => 'Last message sent yesterday',
+        'standard' => 'Delivery within 5-7 business days',
+        'express' => 'Delivery within 2-3 business days',
+        'overnight' => 'Next day delivery available',
+        'same_day' => 'Delivery on the same day',
+        'economy' => 'Budget-friendly delivery option',
+        'premium' => 'Premium service with tracking',
+        'international' => 'Worldwide shipping available',
+        'local' => 'Same city delivery service',
     ])
     ->extras([
-        'newsletter' => '621 users',
-        'existing_customers' => '1200 users',
-        'trial_users' => '2740 users',
-        'vip_customers' => '89 users',
-        'inactive_users' => '450 users',
-        'new_signups' => '156 users',
+        'standard' => '$5.00 flat rate',
+        'express' => '$10.00 flat rate',
+        'overnight' => '$20.00 flat rate',
+        'same_day' => '$25.00 flat rate',
+        'economy' => '$3.00 flat rate',
+        'premium' => '$15.00 flat rate',
+        'international' => '$50.00 flat rate',
+        'local' => '$8.00 flat rate',
     ])
     ->color(Color::Blue)
     ->visibleInputs()
@@ -97,25 +103,8 @@ Stacked card layout with descriptions and extras support for multiple selections
 ![basic_checkbox_stacked_cards.png](art/basic_checkbox_stacked_cards.png)
 
 ```php
-CheckboxStackedCards::make('server_plan')
-    ->options([
-        'hobby' => 'Hobby',
-        'startup' => 'Startup',
-        'business' => 'Business',
-        'enterprise' => 'Enterprise',
-    ])
-    ->descriptions([
-        'hobby' => '8GB / 4 CPUs • 160 GB SSD disk',
-        'startup' => '12GB / 6 CPUs • 256 GB SSD disk',
-        'business' => '16GB / 8 CPUs • 512 GB SSD disk',
-        'enterprise' => '32GB / 12 CPUs • 1024 GB SSD disk',
-    ])
-    ->extras([
-        'hobby' => '$40/mo',
-        'startup' => '$80/mo',
-        'business' => '$160/mo',
-        'enterprise' => '$240/mo',
-    ])
+CheckboxStackedCards::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->bulkToggleable(),
 ```
 
@@ -126,28 +115,8 @@ Responsive table layout with descriptions for multiple selections.
 ![basic_checkbox_table.png](art/basic_checkbox_table.png)
 
 ```php
-CheckboxTable::make('hosting')
-    ->options([
-        'shared' => 'Shared Hosting',
-        'vps' => 'VPS Hosting',
-        'dedicated' => 'Dedicated Server',
-        'cloud' => 'Cloud Hosting',
-        'managed' => 'Managed Hosting',
-    ])
-    ->descriptions([
-        'shared' => 'Perfect for small websites',
-        'vps' => 'Scalable virtual server',
-        'dedicated' => 'Full server control',
-        'cloud' => 'Auto-scaling infrastructure',
-        'managed' => 'Fully managed service',
-    ])
-    ->extras([
-        'shared' => '$5/mo',
-        'vps' => '$20/mo',
-        'dedicated' => '$100/mo',
-        'cloud' => '$50/mo',
-        'managed' => '$75/mo',
-    ])
+CheckboxTable::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->bulkToggleable(),
 ```
 
@@ -273,30 +242,11 @@ RadioStackedCards::make('server_plan')
 All components support searchable functionality to help users find options quickly in large lists.
 
 ```php
-CheckboxList::make('features')
-    ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-        'chat' => 'Live Chat',
-        'priority' => 'Priority Support',
-        'ticket' => 'Ticket System',
-        'knowledge_base' => 'Knowledge Base',
-        'video_tutorials' => 'Video Tutorials',
-        'webinar' => 'Webinar Access',
-    ])
-    ->descriptions([
-        'email' => 'Response within 24 hours',
-        'phone' => 'Available during business hours',
-        'chat' => 'Instant support via chat',
-        'priority' => 'Response within 2 hours',
-        'ticket' => 'Track support requests',
-        'knowledge_base' => 'Self-service documentation',
-        'video_tutorials' => 'Step-by-step guides',
-        'webinar' => 'Monthly training sessions',
-    ])
+CheckboxList::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->searchable()
-    ->searchPrompt('Search support features...')
-    ->noSearchResultsMessage('No support features found.')
+    ->searchPrompt('Search delivery types...')
+    ->noSearchResultsMessage('No delivery types found.')
 ```
 
 ### Disabling Specific Options
@@ -304,20 +254,9 @@ CheckboxList::make('features')
 You can disable specific options based on conditions using the `disableOptionWhen()` method.
 
 ```php
-CheckboxList::make('features')
-    ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-        'chat' => 'Live Chat',
-        'priority' => 'Priority Support',
-    ])
-    ->descriptions([
-        'email' => 'Response within 24 hours',
-        'phone' => 'Available during business hours',
-        'chat' => 'Instant support via chat',
-        'priority' => 'Response within 2 hours',
-    ])
-    ->disableOptionWhen(fn (string $value): bool => $value === 'priority')
+CheckboxList::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->disableOptionWhen(fn (string $value): bool => $value === 'premium')
 ```
 
 ### Bulk toggling checkboxes
@@ -325,13 +264,8 @@ CheckboxList::make('features')
 Checkbox components support bulk select/deselect actions for better user experience.
 
 ```php
-CheckboxList::make('features')
-    ->options([
-        'email' => 'Email Support',
-        'phone' => 'Phone Support',
-        'chat' => 'Live Chat',
-        'priority' => 'Priority Support',
-    ])
+CheckboxList::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->bulkToggleable()
 ```
 
@@ -441,12 +375,14 @@ public static function configure(Schema $schema): Schema
 Control whether the inputs are visible or hidden.
 
 ```php
-CheckboxCards::make('features')
+CheckboxCards::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->hiddenInputs()
 ```
 
 ```php
-CheckboxCards::make('features')
+CheckboxCards::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->visibleInputs()
 ```
 
@@ -459,6 +395,7 @@ All components support custom colors using Filament's color system. The default 
 ```php
 use Filament\Support\Colors\Color;
 
-CheckboxCards::make('features')
+CheckboxCards::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
     ->color(Color::Amber)
 ```
