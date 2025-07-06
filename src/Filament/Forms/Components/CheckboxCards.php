@@ -11,7 +11,7 @@ use Filament\Schemas\Concerns\HasColumns;
 use Filament\Support\Concerns\HasColor;
 use Filament\Support\Enums\GridDirection;
 
-final class CheckboxCards extends \Filament\Forms\Components\CheckboxList
+class CheckboxCards extends \Filament\Forms\Components\CheckboxList
 {
     use HasColor;
     use HasColumns;

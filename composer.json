@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "laravel/pint": "^1.0",
-        "nunomaduro/collision": "^7.9||^8.0"
+        "nunomaduro/collision": "^7.9||^8.0",
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {

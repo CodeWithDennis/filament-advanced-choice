@@ -8,7 +8,7 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\Has
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasHiddenInputs;
 use Filament\Support\Concerns\HasColor;
 
-final class CheckboxList extends \Filament\Forms\Components\CheckboxList
+class CheckboxList extends \Filament\Forms\Components\CheckboxList
 {
     use HasColor;
     use HasExtras;

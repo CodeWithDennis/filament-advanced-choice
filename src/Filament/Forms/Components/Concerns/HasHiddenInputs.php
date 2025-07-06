@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns;
 
 use Closure;

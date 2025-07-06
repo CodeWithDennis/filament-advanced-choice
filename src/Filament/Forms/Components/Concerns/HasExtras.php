@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns;
 
 use Closure;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasExtras as ExtraInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use UnitEnum;
 
@@ -36,16 +37,12 @@ trait HasExtras
             is_string($extras) &&
             enum_exists($enum = $extras)
         ) {
-            if (is_a($enum, LabelInterface::class, allow_string: true)) {
-                return array_reduce($enum::cases(), function (array $carry, ExtraInterface & UnitEnum $case): array {
-                    $carry[$case->value ?? $case->name] = $case->getExtra() ?? null;
-
-                    return $carry;
-                }, []);
-            }
-
             return array_reduce($enum::cases(), function (array $carry, UnitEnum $case): array {
-                $carry[$case->value ?? $case->name] = $case->getExtra();
+                if (method_exists($case, 'getExtra')) {
+                    $carry[$case->value ?? $case->name] = $case->getExtra();
+                } else {
+                    $carry[$case->value ?? $case->name] = null;
+                }
 
                 return $carry;
             }, []);

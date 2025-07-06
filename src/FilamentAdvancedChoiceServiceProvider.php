@@ -7,7 +7,7 @@ namespace CodeWithDennis\FilamentAdvancedChoice;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-final class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
+class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-advanced-choice';
 
@@ -20,10 +20,5 @@ final class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(self::$viewNamespace);
         }
-    }
-
-    protected function getAssetPackageName(): ?string
-    {
-        return 'codewithdennis/filament-advanced-choice';
     }
 }

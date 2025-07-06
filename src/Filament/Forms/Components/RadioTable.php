@@ -9,7 +9,7 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\Has
 use Filament\Forms\Components\Radio;
 use Filament\Support\Concerns\HasColor;
 
-final class RadioTable extends Radio
+class RadioTable extends Radio
 {
     use HasColor;
     use HasExtras;

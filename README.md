@@ -224,9 +224,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Enums\Concerns\HasExtra;
-use Filament\Support\Contracts\HasDescription;
-use Filament\Support\Contracts\HasLabel;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra;use Filament\Support\Contracts\HasDescription;use Filament\Support\Contracts\HasLabel;
 
 enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
 {

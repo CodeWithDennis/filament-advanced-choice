@@ -12,7 +12,7 @@ use Filament\Schemas\Concerns\HasColumns;
 use Filament\Support\Concerns\HasColor;
 use Filament\Support\Enums\GridDirection;
 
-final class RadioStackedCards extends Radio
+class RadioStackedCards extends Radio
 {
     use HasColor;
     use HasColumns;
