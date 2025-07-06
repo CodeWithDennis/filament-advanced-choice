@@ -168,7 +168,7 @@ RadioStackedCards::make('delivery_type')
 
 ### Searchable Options
 
-All components support searchable functionality to help users find options quickly in large lists.
+All checkbox components support searchable functionality to help users find options quickly in large lists.
 
 ```php
 CheckboxList::make('delivery_type')
