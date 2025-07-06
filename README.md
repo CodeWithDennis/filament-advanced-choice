@@ -128,8 +128,7 @@ Vertical list layout with descriptions.
 
 ```php
 RadioList::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable(),
+    ->options(DeliveryTypeEnum::class),
 ```
 
 ### RadioTable
@@ -140,8 +139,7 @@ Responsive table layout with descriptions.
 
 ```php
 RadioTable::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable(),
+    ->options(DeliveryTypeEnum::class),
 ```
 
 ### RadioCards
@@ -152,8 +150,7 @@ Card-based layout with descriptions and extras support.
 
 ```php
 RadioCards::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable(),
+    ->options(DeliveryTypeEnum::class),
 ```
 
 ### RadioStackedCards
@@ -164,8 +161,7 @@ Stacked card layout with descriptions and extras support.
 
 ```php
 RadioStackedCards::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable(),
+    ->options(DeliveryTypeEnum::class),
 ```
 
 ## Additional Features
