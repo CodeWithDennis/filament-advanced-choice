@@ -18,6 +18,8 @@ Vertical list layout with descriptions for multiple selections.
 
 ```php
 CheckboxList::make('delivery_type')
+    ->searchable()
+    ->bulkToggleable()
     ->options([
         'standard' => 'Standard Delivery',
         'express' => 'Express Delivery',
@@ -47,10 +49,7 @@ CheckboxList::make('delivery_type')
         'premium' => '$15.00 flat rate',
         'international' => '$50.00 flat rate',
         'local' => '$8.00 flat rate',
-    ])
-    ->color(Color::Success)
-    ->hiddenInputs()
-    ->bulkToggleable()
+    ]),
 ```
 
 ### CheckboxCards
@@ -61,6 +60,8 @@ Card-based layout with descriptions and extras support for multiple selections.
 
 ```php
 CheckboxCards::make('delivery_type')
+    ->searchable()
+    ->bulkToggleable()
     ->options([
         'standard' => 'Standard Delivery',
         'express' => 'Express Delivery',
@@ -90,10 +91,7 @@ CheckboxCards::make('delivery_type')
         'premium' => '$15.00 flat rate',
         'international' => '$50.00 flat rate',
         'local' => '$8.00 flat rate',
-    ])
-    ->color(Color::Blue)
-    ->visibleInputs()
-    ->bulkToggleable()
+    ]),
 ```
 
 ### CheckboxStackedCards
@@ -105,6 +103,7 @@ Stacked card layout with descriptions and extras support for multiple selections
 ```php
 CheckboxStackedCards::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
+    ->searchable()
     ->bulkToggleable(),
 ```
 
@@ -117,6 +116,7 @@ Responsive table layout with descriptions for multiple selections.
 ```php
 CheckboxTable::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
+    ->searchable()
     ->bulkToggleable(),
 ```
 
@@ -127,25 +127,9 @@ Vertical list layout with descriptions.
 ![basic_radio_list.png](art/basic_radio_list.png)
 
 ```php
-RadioList::make('plan')
-    ->options([
-        'basic' => 'Basic Plan',
-        'pro' => 'Pro Plan',
-        'enterprise' => 'Enterprise Plan',
-        'starter' => 'Starter Plan',
-    ])
-    ->descriptions([
-        'basic' => 'Perfect for small teams',
-        'pro' => 'Ideal for growing businesses',
-        'enterprise' => 'For large organizations',
-        'starter' => 'For individuals and freelancers',
-    ])
-    ->extras([
-        'basic' => '$29/mo',
-        'pro' => '$99/mo',
-        'enterprise' => '$299/mo',
-        'starter' => '$9/mo',
-    ]),
+RadioList::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->searchable(),
 ```
 
 ### RadioTable
@@ -155,25 +139,9 @@ Responsive table layout with descriptions.
 ![basic_radio_table.png](art/basic_radio_table.png)
 
 ```php
-RadioTable::make('hosting')
-    ->options([
-        'shared' => 'Shared Hosting',
-        'vps' => 'VPS Hosting',
-        'dedicated' => 'Dedicated Server',
-        'cloud' => 'Cloud Hosting',
-    ])
-    ->descriptions([
-        'shared' => 'Perfect for small websites',
-        'vps' => 'Scalable virtual server',
-        'dedicated' => 'Full server control',
-        'cloud' => 'Auto-scaling infrastructure',
-    ])
-    ->extras([
-        'shared' => '$5/mo',
-        'vps' => '$20/mo',
-        'dedicated' => '$100/mo',
-        'cloud' => '$50/mo',
-    ]),
+RadioTable::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->searchable(),
 ```
 
 ### RadioCards
@@ -183,28 +151,9 @@ Card-based layout with descriptions and extras support.
 ![basic_radio_table.png](art/basic_radio_table.png)
 
 ```php
-RadioCards::make('mailing_list')
-    ->options([
-        'newsletter' => 'Newsletter',
-        'existing_customers' => 'Existing customers',
-        'trial_users' => 'Trial users',
-        'vip_customers' => 'VIP customers',
-        'inactive_users' => 'Inactive users',
-    ])
-    ->descriptions([
-        'newsletter' => 'Last message sent an hour ago',
-        'existing_customers' => 'Last message sent 2 weeks ago',
-        'trial_users' => 'Last message sent 4 days ago',
-        'vip_customers' => 'Last message sent 1 week ago',
-        'inactive_users' => 'Last message sent 3 months ago',
-    ])
-    ->extras([
-        'newsletter' => '621 users',
-        'existing_customers' => '1200 users',
-        'trial_users' => '2740 users',
-        'vip_customers' => '89 users',
-        'inactive_users' => '450 users',
-    ]),
+RadioCards::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->searchable(),
 ```
 
 ### RadioStackedCards
