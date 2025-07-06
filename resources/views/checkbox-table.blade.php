@@ -75,7 +75,7 @@
             @endif
         @endif
 
-        <div
+        <fieldset
             {{
                 $getExtraAttributeBag()
                     ->merge([
@@ -87,15 +87,15 @@
                     ])
             }}
         >
-            @forelse ($options as $value => $label)
+            @foreach ($options as $value => $label)
                 @php
                     $id = $getId() . '-' . str($value)->slug();
                     $description = $descriptions[$value] ?? '';
                 @endphp
 
-                <div
-                    wire:key="{{ $livewireKey }}.options.{{ $value }}"
+                <label
                     @if ($isSearchable)
+                        wire:key="{{ $livewireKey }}.options.{{ $value }}"
                         x-show="
                             $el
                                 .querySelector('.fi-fo-checkbox-list-option-label')
@@ -107,9 +107,6 @@
                                     .includes(search.toLowerCase())
                         "
                     @endif
-                    class="fi-fo-checkbox-list-option-ctn"
-                >
-                    <label
                         for="{{ $id }}"
                         class="fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
                                first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
@@ -155,11 +152,8 @@
                             {{ $description }}
                         </span>
                     </label>
-                </div>
-            @empty
-                <div wire:key="{{ $livewireKey }}.empty"></div>
-            @endforelse
-        </div>
+                @endforeach
+        </fieldset>
 
         @if ($isSearchable)
             <div
