@@ -39,7 +39,7 @@
                         type="radio"
                         value="{{ $value }}"
                         wire:model="{{ $getStatePath() }}"
-                        {{ $isDisabled() ? 'disabled' : '' }}
+                        {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
                         class="relative size-4 appearance-none rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800
                                before:absolute before:inset-1 before:rounded-full before:bg-white dark:before:bg-gray-800
                                not-checked:before:hidden checked:border-custom-600 checked:bg-custom-600

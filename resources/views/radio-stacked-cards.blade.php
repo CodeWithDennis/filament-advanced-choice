@@ -46,7 +46,7 @@
                         type="radio"
                         value="{{ $value }}"
                         wire:model="{{ $getStatePath() }}"
-                        {{ $isDisabled() ? 'disabled' : '' }}
+                        {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
                         class="absolute inset-0 appearance-none focus:outline-none"
                     />
                 @endif
@@ -59,7 +59,7 @@
                                 type="radio"
                                 value="{{ $value }}"
                                 wire:model="{{ $getStatePath() }}"
-                                {{ $isDisabled() ? 'disabled' : '' }}
+                                {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
                                 class="relative size-4 shrink-0 appearance-none rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 before:absolute before:inset-1 before:rounded-full before:bg-white dark:before:bg-gray-800 not-checked:before:hidden checked:border-custom-600 checked:bg-custom-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:disabled:border-gray-700 dark:disabled:bg-gray-800 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden"
                             />
                         @endif
