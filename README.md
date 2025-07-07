@@ -2,11 +2,40 @@
 
 Beautifully styled radio and checkbox group components for FilamentPHP with descriptions and modern design.
 
+## Licences
+You can buy a license for the plugin on the [AnyStack](https://checkout.anystack.sh/filament-advanced-choice) website.
+
 ## Installation
+
+Make sure you add the following repository to your `composer.json` file:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://filament-advanced-choice.composer.sh"
+        }
+    ],
+}
+```
+
+Then, run the following command to install the package:
 
 ```bash
 composer require codewithdennis/filament-advanced-choice
 ```
+
+To activate your license, use your email address as the username. For the password, you must enter your license key followed immediately by your activation fingerprint — both are required.
+
+```bash 
+Loading composer repositories with package information
+Authentication required (filament-advanced-choice.composer.sh):
+Username: info@codewithdennis.nl
+Password: 8c210f8f-6173-3932-c4ba-8bcc723ef500:codewithdennis.nl
+```
+
+To clarify, the license key and fingerprint should be separated by a colon (:). If your license policy does not require a fingerprint both the fingerprint and the colon can be omitted.
 
 ### Custom Theme
 
