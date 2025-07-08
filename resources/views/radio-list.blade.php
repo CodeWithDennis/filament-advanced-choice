@@ -51,7 +51,7 @@
                         </span>
                     </div>
                     @if ($extra)
-                        <span class="text-sm text-gray-500 dark:text-gray-400">
+                        <span class="text-sm text-gray-800 dark:text-gray-100">
                             {{ $extra }}
                         </span>
                     @endif
