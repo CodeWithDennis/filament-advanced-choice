@@ -2,6 +2,8 @@
 
 Beautifully styled radio and checkbox group components for FilamentPHP with descriptions and modern design.
 
+![thumbnail.png](art/thumbnail.png)
+
 ## Licences
 You can buy a license for the plugin on the [AnyStack](https://checkout.anystack.sh/filament-advanced-choice) website.
 
