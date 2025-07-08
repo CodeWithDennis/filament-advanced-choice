@@ -187,7 +187,7 @@ RadioTable::make('delivery_type')
 
 Card-based layout with descriptions and extras support.
 
-![basic_radio_table.png](art/basic_radio_table.png)
+![basic_radio_cards.png](art/basic_radio_cards.png)
 
 ```php
 RadioCards::make('delivery_type')
