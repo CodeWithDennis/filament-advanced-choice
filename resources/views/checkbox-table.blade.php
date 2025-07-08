@@ -150,11 +150,11 @@
                                 </span>
                             </div>
 
-                            <div class="fi-fo-checkbox-list-option-description text-sm text-gray-500 dark:text-gray-400 md:text-left">
+                            <div class="fi-fo-checkbox-list-option-description text-sm text-gray-800 dark:text-gray-100 md:text-left">
                                 {{ $description }}
                             </div>
 
-                            <div class="fi-fo-checkbox-list-option-extra text-sm text-gray-500 dark:text-gray-400 md:text-right">
+                            <div class="fi-fo-checkbox-list-option-extra text-sm text-gray-800 dark:text-gray-100 md:text-right">
                                 {{ $extra }}
                             </div>
                         </label>
