@@ -37,7 +37,7 @@ Username: info@codewithdennis.nl
 Password: 8c210f8f-6173-3932-c4ba-8bcc723ef500:codewithdennis.nl
 ```
 
-To clarify, the license key and fingerprint should be separated by a colon (:). If your license policy does not require a fingerprint both the fingerprint and the colon can be omitted.
+To clarify, the license key and fingerprint should be separated by a colon (:).
 
 ### Custom Theme
 
