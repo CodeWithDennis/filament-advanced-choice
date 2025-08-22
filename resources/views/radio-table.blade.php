@@ -7,11 +7,12 @@
     $colors = \Illuminate\Support\Arr::toCssStyles([
         get_color_css_variables($getColor(), shades: [50, 100, 200, 400, 500, 600, 700, 800]),
     ]);
+    $enum = $getEnum();
 @endphp
 
 <x-dynamic-component
-    :component="$getFieldWrapperView()"
-    :field="$field"
+        :component="$getFieldWrapperView()"
+        :field="$field"
 >
     <fieldset class="relative -space-y-px rounded-md bg-white dark:bg-gray-900">
         @foreach($getOptions() as $value => $label)
@@ -19,28 +20,37 @@
                 $id = $getId() . '-' . str($value)->slug();
                 $description = $descriptions[$value] ?? '';
                 $extra = $extras[$value] ?? null;
+                if($enum) {
+                  $case = $getEnum()::tryFrom($value) ?: null;
+
+                  if($case && method_exists($case, 'getColor') && $color = $case->getColor()) {
+                      $colors = \Illuminate\Support\Arr::toCssStyles([
+                          get_color_css_variables($color, shades: [50, 100, 200, 400, 500, 600, 700, 800])
+                          ]);
+                    }
+                }
             @endphp
 
             <label
-                for="{{ $id }}"
-                class="group flex flex-col border border-gray-200 dark:border-gray-700 p-4
+                    for="{{ $id }}"
+                    class="group flex flex-col border border-gray-200 dark:border-gray-700 p-4
                        first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
                        focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
                        has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
                        has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
                        has-disabled:opacity-60
                        md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4"
-                style="{{ $colors }}"
+                    style="{{ $colors }}"
             >
                 <div class="flex items-center gap-3 text-sm">
                     <input
-                        id="{{ $id }}"
-                        name="{{ $getName() }}"
-                        type="radio"
-                        value="{{ $value }}"
-                        wire:model="{{ $getStatePath() }}"
-                        {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
-                        class="relative size-4 appearance-none rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800
+                            id="{{ $id }}"
+                            name="{{ $getName() }}"
+                            type="radio"
+                            value="{{ $value }}"
+                            wire:model="{{ $getStatePath() }}"
+                            {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
+                            class="relative size-4 appearance-none rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800
                                before:absolute before:inset-1 before:rounded-full before:bg-white dark:before:bg-gray-800
                                not-checked:before:hidden checked:border-custom-600 checked:bg-custom-600
                                focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600

@@ -1,6 +1,6 @@
 @php
-    use Filament\Support\Enums\GridDirection;use function Filament\Support\get_color_css_variables;
-    use function Filament\Support\get_grid_columns_class;
+    use Filament\Support\Enums\GridDirection;
+    use function Filament\Support\get_color_css_variables;
 
     $descriptions = $getDescriptions();
     $extras = $getExtras();
@@ -11,6 +11,7 @@
     $columns = $getColumns();
     $gridDirection = $getGridDirection();
     $isInline = false;
+    $enum = $getEnum();
 @endphp
 
 <x-dynamic-component
@@ -32,6 +33,15 @@
                 $id = $getId() . '-' . $value;
                 $description = $descriptions[$value] ?? null;
                 $extra = $extras[$value] ?? null;
+                if($enum) {
+                  $case = $getEnum()::tryFrom($value) ?: null;
+
+                  if($case && method_exists($case, 'getColor') && $color = $case->getColor()) {
+                      $colors = \Illuminate\Support\Arr::toCssStyles([
+                          get_color_css_variables($color, shades: [50, 100, 200, 400, 500, 600, 700, 800])
+                          ]);
+                    }
+                }
             @endphp
 
             <label
@@ -80,7 +90,7 @@
                 </div>
                 @if($hiddenInputs)
                     <svg class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
                     </svg>
                 @endif
             </label>
