@@ -1,5 +1,6 @@
 @php
     use function Filament\Support\get_color_css_variables;
+    use Filament\Support\Facades\FilamentView;
 
     $descriptions = $getDescriptions();
     $extras = $getExtras();
@@ -11,80 +12,132 @@
     $gridDirection = $getGridDirection();
     $isInline = false;
     $enum = $getEnum();
+    $isDisabled = $isDisabled();
+    $isSearchable = $isSearchable();
+    $statePath = $getStatePath();
+    $options = $getOptions();
+    $livewireKey = $getLivewireKey();
 @endphp
 
-<x-dynamic-component
-        :component="$getFieldWrapperView()"
-        :field="$field"
->
-    <fieldset
-            {{
-                $getExtraAttributeBag()
-                    ->when(! $isInline, fn ($attributes) => $attributes->grid($columns, $gridDirection))
-                    ->class([
-                        'fi-fo-radio',
-                        'gap-4',
-                    ])
-            }}
-    >
-        @foreach($getOptions() as $value => $label)
-            @php
-                $id = $getId() . '-' . $value;
-                $description = $descriptions[$value] ?? null;
-                $extra = $extras[$value] ?? null;
-                if($enum) {
-                  $case = $getEnum()::tryFrom($value) ?: null;
+<x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
+    <div @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}x-load="visible || event (x-modal-opened)" {{--
+    format-ignore-end --}} @else x-load @endif
+        x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('checkbox-list', 'filament/forms') }}"
+        x-data="checkboxListFormComponent({
+                    livewireId: @js($this->getId()),
+                })" class="fi-fo-checkbox-list">
+        @if (!$isDisabled)
+            @if ($isSearchable)
+                <x-filament::input.wrapper inline-prefix :prefix-icon="\Filament\Support\Icons\Heroicon::MagnifyingGlass"
+                    prefix-icon-alias="forms:components.checkbox-list.search-field"
+                    class="fi-fo-checkbox-list-search-input-wrp">
+                    <input placeholder="{{ $getSearchPrompt() }}" type="search" x-model="search"
+                        class="fi-input fi-input-has-inline-prefix" />
+                </x-filament::input.wrapper>
+            @endif
+        @endif
 
-                  if($case && method_exists($case, 'getColor') && $color = $case->getColor()) {
-                      $colors = \Illuminate\Support\Arr::toCssStyles([
-                          get_color_css_variables($color, shades: [50, 100, 200, 400, 500, 600, 700, 800])
-                          ]);
+        <fieldset {{
+    $getExtraAttributeBag()
+        ->when(!$isInline, fn($attributes) => $attributes->grid($columns, $gridDirection))
+        ->merge([
+            'x-show' => $isSearchable ? 'visibleCheckboxListOptions.length' : null,
+        ], escape: false)
+        ->class([
+            'fi-fo-checkbox-list-options',
+            'fi-fo-radio',
+            'gap-4',
+        ])
+            }}>
+            @foreach($getOptions() as $value => $label)
+                @php
+                    $id = $getId() . '-' . $value;
+                    $description = $descriptions[$value] ?? null;
+                    $extra = $extras[$value] ?? null;
+                    if ($enum) {
+                        $case = $getEnum()::tryFrom($value) ?: null;
+
+                        if ($case && method_exists($case, 'getColor') && $color = $case->getColor()) {
+                            $colors = \Illuminate\Support\Arr::toCssStyles([
+                                get_color_css_variables($color, shades: [50, 100, 400, 500, 600, 700, 800])
+                            ]);
+                        }
                     }
-                }
-            @endphp
+                @endphp
 
-            <label
-                    for="{{ $id }}"
-                    class="group relative flex rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 has-checked:outline-1 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60"
-                    style="{{ $colors }}"
-            >
-                @if($hiddenInputs)
-                    <input
-                            id="{{ $id }}"
-                            name="{{ $getName() }}"
-                            type="radio"
-                            value="{{ $value }}"
-                            wire:model="{{ $getStatePath() }}"
-                            {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
-                            class="absolute inset-0 appearance-none focus:outline-none"
-                    />
-                @endif
-                <div class="flex-1">
-                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-100">{{ $label }}</span>
-                    @if ($description)
-                        <span class="mt-1 block text-sm text-gray-500 dark:text-gray-400">{{ $description }}</span>
-                    @endif
-                    @if ($extra)
-                        <span class="mt-6 block text-sm font-medium text-gray-900 dark:text-gray-100">{{ $extra }}</span>
-                    @endif
+                <div @if ($isSearchable) wire:key="{{ $livewireKey }}.options.{{ $value }}" x-show="
+                    $el
+                        .querySelector('.fi-fo-checkbox-list-option-label')
+                        ?.innerText.toLowerCase()
+                        .includes(search.toLowerCase()) ||
+                        $el
+                            .querySelector('.fi-fo-checkbox-list-option-description')
+                            ?.innerText.toLowerCase()
+                            .includes(search.toLowerCase())
+                " @endif class="fi-fo-checkbox-list-option-ctn">
+                    <label for="{{ $id }}"
+                        class="fi-fo-checkbox-list-option group relative flex rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 has-checked:outline-1 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60"
+                        style="{{ $colors }}">
+                        @if($hiddenInputs)
+                                    <input id="{{ $id }}" name="{{ $getName() }}" type="radio" value="{{ $value }}" {{
+                            $getExtraInputAttributeBag()
+                                ->merge([
+                                    'disabled' => $isDisabled || $isOptionDisabled($value, $label),
+                                    'wire:loading.attr' => 'disabled',
+                                    'wire:model' => $statePath,
+                                ], escape: false)
+                                ->class([
+                                    'absolute inset-0 appearance-none focus:outline-none',
+                                ])
+                                                                }} />
+                        @endif
+                        <div class="fi-fo-checkbox-list-option-text flex-1">
+                            <span
+                                class="fi-fo-checkbox-list-option-label block text-sm font-medium text-gray-900 dark:text-gray-100">
+                                {{ $label }}
+                            </span>
+                            @if ($description)
+                                <span
+                                    class="fi-fo-checkbox-list-option-description mt-1 block text-sm text-gray-500 dark:text-gray-400">{{ $description }}</span>
+                            @endif
+                            @if ($extra)
+                                <span
+                                    class="fi-fo-checkbox-list-option-extra mt-6 block text-sm font-medium text-gray-900 dark:text-gray-100">{{ $extra }}</span>
+                            @endif
+                        </div>
+                        @if(!$hiddenInputs)
+                                    <input id="{{ $id }}" name="{{ $getName() }}" type="radio" value="{{ $value }}" {{
+                            $getExtraInputAttributeBag()
+                                ->merge([
+                                    'disabled' => $isDisabled || $isOptionDisabled($value, $label),
+                                    'wire:loading.attr' => 'disabled',
+                                    'wire:model' => $statePath,
+                                ], escape: false)
+                                ->class([
+                                    'fi-radio-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                    'fi-valid' => !$errors->has($statePath),
+                                    'fi-invalid' => $errors->has($statePath),
+                                ])
+                                                                }} style="{{ $colors }}" />
+                        @endif
+                        @if($hiddenInputs)
+                            <svg class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        @endif
+                    </label>
                 </div>
-                @if(!$hiddenInputs)
-                    <input
-                            id="{{ $id }}"
-                            name="{{ $getName() }}"
-                            type="radio"
-                            value="{{ $value }}"
-                            wire:model="{{ $getStatePath() }}"
-                            {{ ($isDisabled() || $isOptionDisabled($value, $label)) ? 'disabled' : '' }}
-                            class="relative mt-0.5 size-4 shrink-0 appearance-none rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 before:absolute before:inset-1 before:rounded-full before:bg-white dark:before:bg-gray-800 not-checked:before:hidden checked:border-custom-600 checked:bg-custom-600 focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:disabled:border-gray-700 dark:disabled:bg-gray-800 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden ml-3"
-                    />
-                @endif
-                @if($hiddenInputs)
-                    <svg class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clip-rule="evenodd" />
-                    </svg>
-                @endif
-            </label>
-        @endforeach
-    </fieldset>
+            @endforeach
+        </fieldset>
+
+        @if ($isSearchable)
+            <div x-cloak x-show="search && ! visibleCheckboxListOptions.length"
+                class="fi-fo-checkbox-list-no-search-results-message">
+                {{ $getNoSearchResultsMessage() }}
+            </div>
+        @endif
+    </div>
 </x-dynamic-component>
