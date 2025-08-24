@@ -12,10 +12,10 @@ use Filament\Support\Concerns\HasColor;
 
 final class RadioList extends Radio
 {
+    use CanBeSearchable;
     use HasColor;
     use HasExtras;
     use HasHiddenInputs;
-    use CanBeSearchable;
 
     protected string $view = 'filament-advanced-choice::radio-list';
 
