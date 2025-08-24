@@ -15,12 +15,12 @@ use Filament\Support\Enums\GridDirection;
 
 final class RadioCards extends Radio
 {
+    use CanBeSearchable;
     use HasColor;
     use HasColumns;
     use HasExtras;
     use HasGridDirection;
     use HasHiddenInputs;
-    use CanBeSearchable;
 
     protected string $view = 'filament-advanced-choice::radio-cards';
 
