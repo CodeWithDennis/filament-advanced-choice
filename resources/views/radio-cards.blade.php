@@ -17,8 +17,9 @@
     $statePath = $getStatePath();
     $options = $getOptions();
     $livewireKey = $getLivewireKey();
+    $extraInputAttributeBag = $getExtraInputAttributeBag();
+    $wireModelAttribute = $applyStateBindingModifiers('wire:model');
 @endphp
-
 <x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
     <div @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}x-load="visible || event (x-modal-opened)" {{--
     format-ignore-end --}} @else x-load @endif
@@ -84,12 +85,12 @@
                                 ->merge([
                                     'disabled' => $isDisabled || $isOptionDisabled($value, $label),
                                     'wire:loading.attr' => 'disabled',
-                                    'wire:model' => $statePath,
+                                    $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
                                     'absolute inset-0 appearance-none focus:outline-none',
                                 ])
-                                                                }} />
+                                                                                }} />
                         @endif
                         <div class="fi-fo-checkbox-list-option-text flex-1">
                             <span
@@ -111,14 +112,14 @@
                                 ->merge([
                                     'disabled' => $isDisabled || $isOptionDisabled($value, $label),
                                     'wire:loading.attr' => 'disabled',
-                                    'wire:model' => $statePath,
+                                    $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
                                     'fi-radio-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
                                     'fi-valid' => !$errors->has($statePath),
                                     'fi-invalid' => $errors->has($statePath),
                                 ])
-                                                                }} style="{{ $colors }}" />
+                                                                                }} style="{{ $colors }}" />
                         @endif
                         @if($hiddenInputs)
                             <svg class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2"
