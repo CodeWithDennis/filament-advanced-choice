@@ -92,7 +92,7 @@
                                 ->class([
                                     'absolute inset-0 appearance-none focus:outline-none',
                                 ])
-                                                                                                }} />
+                                                                                                                }} />
                         @endif
                         <div class="fi-fo-checkbox-list-option-text flex-1">
                             <span
@@ -121,16 +121,11 @@
                                     'fi-valid' => !$errors->has($statePath),
                                     'fi-invalid' => $errors->has($statePath),
                                 ])
-                                                                                                }} style="{{ $colors }}" />
+                                                                                                                }} style="{{ $colors }}" />
                         @endif
                         @if($hiddenInputs)
-                            @if($getHiddenInputIcon())
-                                <x-filament::icon :icon="$getHiddenInputIcon()"
-                                    class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2" />
-                            @else
-                                <x-filament::icon icon="heroicon-m-check-circle"
-                                    class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2" />
-                            @endif
+                            <x-filament::icon :icon="$getHiddenInputIcon()"
+                                class="invisible size-5 text-custom-600 dark:text-custom-500 group-has-checked:visible absolute top-2 right-2" />
                         @endif
                     </label>
                 </div>
