@@ -10,6 +10,8 @@ trait HasHiddenInputs
 {
     protected bool | Closure $hiddenInputs = false;
 
+    protected string | \BackedEnum | \Closure | null $hiddenInputIcon = null;
+
     public function hiddenInputs(bool | Closure $condition = true): static
     {
         $this->hiddenInputs = $condition;
@@ -27,5 +29,17 @@ trait HasHiddenInputs
     public function getHiddenInputs(): bool
     {
         return $this->evaluate($this->hiddenInputs);
+    }
+
+    public function hiddenInputIcon(string | \BackedEnum | \Closure | null $icon): static
+    {
+        $this->hiddenInputIcon = $icon;
+
+        return $this;
+    }
+
+    public function getHiddenInputIcon(): string | \BackedEnum | null
+    {
+        return $this->evaluate($this->hiddenInputIcon);
     }
 }
