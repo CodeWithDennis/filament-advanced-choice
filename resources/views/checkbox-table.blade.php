@@ -90,7 +90,7 @@
         >
             @foreach ($options as $value => $label)
                 @php
-                    $id = $getId() . '-' . str($value)->slug();
+                    $id = str_replace('.', '-', $statePath) . '-' . str($value)->slug();
                     $description = $descriptions[$value] ?? '';
                     $extra = $extras[$value] ?? null;
                 @endphp
@@ -122,7 +122,7 @@
                             <div class="flex items-center gap-3 text-sm">
                                 <input
                                     id="{{ $id }}"
-                                    name="{{ $getName() }}"
+                                    name="{{ $statePath }}"
                                     type="checkbox"
                                     value="{{ $value }}"
                                     {{

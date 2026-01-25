@@ -91,7 +91,7 @@
         >
             @foreach ($options as $value => $label)
                 @php
-                    $id = $getId() . '-' . $value;
+                    $id = str_replace('.', '-', $statePath) . '-' . $value;
                     $description = $descriptions[$value] ?? null;
                     $extra = $extras[$value] ?? null;
                 @endphp
@@ -119,7 +119,7 @@
                                 @if(!$hiddenInputs)
                                     <input
                                         id="{{ $id }}"
-                                        name="{{ $getName() }}"
+                                        name="{{ $statePath }}"
                                         type="checkbox"
                                         value="{{ $value }}"
                                         {{
@@ -163,7 +163,7 @@
                         @if($hiddenInputs)
                             <input
                                 id="{{ $id }}"
-                                name="{{ $getName() }}"
+                                name="{{ $statePath }}"
                                 type="checkbox"
                                 value="{{ $value }}"
                                 {{

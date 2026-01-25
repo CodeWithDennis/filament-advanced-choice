@@ -47,7 +47,7 @@
             }}>
             @foreach($getOptions() as $value => $label)
                 @php
-                    $id = $getId() . '-' . $value;
+                    $id = str_replace('.', '-', $statePath) . '-' . $value;
                     $description = $descriptions[$value] ?? null;
                     $extra = $extras[$value] ?? null;
                     if ($enum) {
@@ -76,7 +76,7 @@
                     <div class="flex items-center justify-between w-full">
                         <div class="flex items-center gap-3">
                             @if(!$hiddenInputs)
-                                            <input id="{{ $id }}" name="{{ $getName() }}" type="radio" value="{{ $value }}" {{
+                                            <input id="{{ $id }}" name="{{ $statePath }}" type="radio" value="{{ $value }}" {{
                                 $extraInputAttributeBag
                                     ->merge([
                                         'disabled' => $isDisabled || $isOptionDisabled($value, $label),
@@ -107,7 +107,7 @@
                         @endif
                     </div>
                     @if($hiddenInputs)
-                            <input id="{{ $id }}" name="{{ $getName() }}" type="radio" value="{{ $value }}" {{
+                            <input id="{{ $id }}" name="{{ $statePath }}" type="radio" value="{{ $value }}" {{
                         $extraInputAttributeBag
                             ->merge([
                                 'disabled' => $isDisabled || $isOptionDisabled($value, $label),
