@@ -48,7 +48,7 @@
             }}>
             @foreach($getOptions() as $value => $label)
                     @php
-                        $id = $getId() . '-' . str($value)->slug();
+                        $id = str_replace('.', '-', $statePath) . '-' . str($value)->slug();
                         $description = $descriptions[$value] ?? '';
                         $extra = $extras[$value] ?? null;
                         if ($enum) {
@@ -79,7 +79,7 @@
                                has-disabled:opacity-60
                                md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4" style="{{ $colors }}">
                         <div class="flex items-center gap-3 text-sm">
-                            <input id="{{ $id }}" name="{{ $getName() }}" type="radio" value="{{ $value }}" {{
+                            <input id="{{ $id }}" name="{{ $statePath }}" type="radio" value="{{ $value }}" {{
                 $extraInputAttributeBag
                     ->merge([
                         'disabled' => $isDisabled || $isOptionDisabled($value, $label),
