@@ -68,35 +68,6 @@ RadioCards::make('plan')
     ]);
 ```
 
-## Field classes
-
-Everything lives in `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`. Names that start with `Radio` behave like FilamentPHP `Radio` (one value). Names that start with `Checkbox` behave like `CheckboxList` (many values). The rest of the name (`List`, `Cards`, `StackedCards`, `Table`) is the layout. You keep the same `make()` and `options()` style; only the class name changes.
-
-```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxList;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxTable;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
-
-// One value (`Radio` family)
-RadioList::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
-RadioCards::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
-RadioStackedCards::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
-RadioTable::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
-
-// Many values (`CheckboxList` family)
-CheckboxList::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
-CheckboxCards::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
-CheckboxStackedCards::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
-CheckboxTable::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
-```
-
-The sections below show each layout with a screenshot and a fuller PHP sample.
-
 ## Components
 
 ### CheckboxList
