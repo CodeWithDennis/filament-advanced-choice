@@ -14,17 +14,15 @@ Classes: `RadioList`, `RadioCards`, `RadioStackedCards`, `RadioTable`, `Checkbox
 
 They use the same FilamentPHP APIs you already know (`options()`, `descriptions()`, validation, `disableOptionWhen()`, relationships; checkbox-style fields also get `bulkToggleable()`). Card layouts add `columns()`, `gridDirection()`, `color()`, `searchable()`, `extras()`, `hiddenInputs()`, `visibleInputs()`, and `hiddenInputIcon()`. Enums with `extras()` are covered under [Enum support](#enum-support).
 
-## Compatibility
-
-| Version | FilamentPHP | PHP |
-|--------|-------------|-----|
-| 1.x | `filament/forms` `^4.0` or `^5.0` | `^8.1` |
-
 ## Requirements
 
-- Laravel app with FilamentPHP forms **v4** or **v5**
-- **PHP 8.1+**
-- FilamentPHP panel with a theme entry file that Tailwind scans (see [Tailwind CSS](#tailwind-css) after install)
+| | |
+|---|---|
+| This package | **1.x** (`codewithdennis/filament-advanced-choice`) |
+| Stack | **Laravel** with **FilamentPHP** forms (`filament/forms` **^4.0** or **^5.0**) |
+| PHP | **8.1** or newer |
+
+After `composer require`, finish [Tailwind CSS](#tailwind-css) so your panel build scans this package’s Blade views.
 
 ## Installation
 
