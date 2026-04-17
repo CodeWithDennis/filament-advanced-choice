@@ -8,12 +8,6 @@ This package adds eight form fields for FilamentPHP. Four extend `Radio`, four e
 
 ![Filament Advanced Choice preview](art/thumbnail.png)
 
-## Features
-
-Classes: `RadioList`, `RadioCards`, `RadioStackedCards`, `RadioTable`, `CheckboxList`, `CheckboxCards`, `CheckboxStackedCards`, `CheckboxTable`.
-
-They use the same FilamentPHP APIs you already know (`options()`, `descriptions()`, validation, `disableOptionWhen()`, relationships; checkbox-style fields also get `bulkToggleable()`). Card layouts add `columns()`, `gridDirection()`, `color()`, `searchable()`, `extras()`, `hiddenInputs()`, `visibleInputs()`, and `hiddenInputIcon()`. Enums with `extras()` are covered under [Enum support](#enum-support).
-
 ## Requirements
 
 | | |
