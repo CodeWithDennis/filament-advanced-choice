@@ -384,4 +384,4 @@ Report suspected vulnerabilities per [.github/SECURITY.md](.github/SECURITY.md).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+This package is released under the MIT License. The complete terms are in [LICENSE](LICENSE).
