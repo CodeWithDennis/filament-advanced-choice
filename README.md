@@ -29,29 +29,9 @@ composer require codewithdennis/filament-advanced-choice
 
 **3.** Run `npm run build` or `npm run dev` so the theme rebuilds.
 
-## Quick start
-
-Field snippets use short class names (`RadioCards`, `CheckboxList`, …). Import from `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components` in your own files.
-
-`RadioCards` with labels, `descriptions()`, and `extras()`:
-
-```php
-RadioCards::make('plan')
-    ->options([
-        'hobby' => 'Hobby',
-        'pro' => 'Pro',
-    ])
-    ->descriptions([
-        'hobby' => 'For side projects',
-        'pro' => 'For teams',
-    ])
-    ->extras([
-        'hobby' => '$9/mo',
-        'pro' => '$29/mo',
-    ]);
-```
-
 ## Components
+
+Snippets use short class names (`RadioCards`, `CheckboxList`, …). Import from `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components` in your own files.
 
 ### CheckboxList
 
@@ -188,6 +168,26 @@ RadioTable::make('delivery_type')
 ### RadioCards
 
 Card-based layout with descriptions and extras support.
+
+Smallest useful example with `options()`, `descriptions()`, and `extras()`:
+
+```php
+RadioCards::make('plan')
+    ->options([
+        'hobby' => 'Hobby',
+        'pro' => 'Pro',
+    ])
+    ->descriptions([
+        'hobby' => 'For side projects',
+        'pro' => 'For teams',
+    ])
+    ->extras([
+        'hobby' => '$9/mo',
+        'pro' => '$29/mo',
+    ]);
+```
+
+Same layout with a backed enum:
 
 ![RadioCards](art/basic_radio_cards.png)
 
