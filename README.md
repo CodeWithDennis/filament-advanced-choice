@@ -37,9 +37,7 @@ composer require codewithdennis/filament-advanced-choice
 `RadioCards` with labels, `descriptions()`, and `extras()`:
 
 ```php
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
-
-RadioCards::make('plan')
+\CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards::make('plan')
     ->options([
         'hobby' => 'Hobby',
         'pro' => 'Pro',
@@ -258,11 +256,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra;
-use Filament\Support\Contracts\HasDescription;
-use Filament\Support\Contracts\HasLabel;
-
-enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
+enum DeliveryTypeEnum: string implements \Filament\Support\Contracts\HasDescription, \CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra, \Filament\Support\Contracts\HasLabel
 {
     case Standard = 'standard';
     case Express = 'express';
@@ -323,17 +317,13 @@ enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
 <summary><strong>Example schema snippet</strong></summary>
 
 ```php
-use App\Enums\DeliveryTypeEnum;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
-use Filament\Schemas\Schema;
-
-public static function configure(Schema $schema): Schema
+public static function configure(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
 {
     return $schema
         ->columns(1)
         ->components([
-            RadioStackedCards::make('delivery_type')
-                ->options(DeliveryTypeEnum::class),
+            \CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards::make('delivery_type')
+                ->options(\App\Enums\DeliveryTypeEnum::class),
         ]);
 }
 ```
@@ -349,11 +339,9 @@ Either pass `extras([...])` keyed by the enum value, or rely on `getExtra()` on 
 ### Field color
 
 ```php
-use Filament\Support\Colors\Color;
-
-CheckboxCards::make('plan')
+\CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards::make('plan')
     ->options(Plan::class)
-    ->color(Color::Rose);
+    ->color(\Filament\Support\Colors\Color::Rose);
 ```
 
 ### Hide native inputs on cards
