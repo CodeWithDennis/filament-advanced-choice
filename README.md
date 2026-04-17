@@ -68,20 +68,9 @@ RadioCards::make('plan')
     ]);
 ```
 
-## Components at a glance
+## Field classes
 
-| Component | Base FilamentPHP field | Layout |
-|-----------|---------------------|--------|
-| `RadioList` | `Radio` | Vertical list |
-| `RadioCards` | `Radio` | Responsive card grid (`columns()`, `gridDirection()`) |
-| `RadioStackedCards` | `Radio` | Full-width stacked cards |
-| `RadioTable` | `Radio` | Table-style rows |
-| `CheckboxList` | `CheckboxList` | Vertical list |
-| `CheckboxCards` | `CheckboxList` | Card grid |
-| `CheckboxStackedCards` | `CheckboxList` | Stacked cards |
-| `CheckboxTable` | `CheckboxList` | Table-style rows |
-
-Namespace: `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`.
+Everything lives in `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`. Names that start with `Radio` behave like FilamentPHP `Radio` (one value). Names that start with `Checkbox` behave like `CheckboxList` (many values). The rest of the name (`List`, `Cards`, `StackedCards`, `Table`) is the layout. You keep the same `make()` and `options()` style; only the class name changes.
 
 ```php
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
@@ -92,9 +81,21 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioList;
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
+
+// One value (`Radio` family)
+RadioList::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
+RadioCards::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
+RadioStackedCards::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
+RadioTable::make('country')->options(['nl' => 'NL', 'be' => 'BE']);
+
+// Many values (`CheckboxList` family)
+CheckboxList::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
+CheckboxCards::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
+CheckboxStackedCards::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
+CheckboxTable::make('tags')->options(['php' => 'PHP', 'js' => 'JS'])->bulkToggleable();
 ```
 
-Each component section includes a screenshot and PHP. Longer samples list full `options`, `descriptions`, and `extras`; shorter ones pass a backed enum only.
+The sections below show each layout with a screenshot and a fuller PHP sample.
 
 ## Components
 
