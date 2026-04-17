@@ -31,10 +31,12 @@ composer require codewithdennis/filament-advanced-choice
 
 ## Quick start
 
+Field snippets use short class names (`RadioCards`, `CheckboxList`, …). Import from `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components` in your own files.
+
 `RadioCards` with labels, `descriptions()`, and `extras()`:
 
 ```php
-\CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards::make('plan')
+RadioCards::make('plan')
     ->options([
         'hobby' => 'Hobby',
         'pro' => 'Pro',
@@ -253,7 +255,11 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum DeliveryTypeEnum: string implements \Filament\Support\Contracts\HasDescription, \CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra, \Filament\Support\Contracts\HasLabel
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra;
+use Filament\Support\Contracts\HasDescription;
+use Filament\Support\Contracts\HasLabel;
+
+enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
 {
     case Standard = 'standard';
     case Express = 'express';
@@ -314,13 +320,17 @@ enum DeliveryTypeEnum: string implements \Filament\Support\Contracts\HasDescript
 <summary><strong>Example schema snippet</strong></summary>
 
 ```php
-public static function configure(\Filament\Schemas\Schema $schema): \Filament\Schemas\Schema
+use App\Enums\DeliveryTypeEnum;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
+use Filament\Schemas\Schema;
+
+public static function configure(Schema $schema): Schema
 {
     return $schema
         ->columns(1)
         ->components([
-            \CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards::make('delivery_type')
-                ->options(\App\Enums\DeliveryTypeEnum::class),
+            RadioStackedCards::make('delivery_type')
+                ->options(DeliveryTypeEnum::class),
         ]);
 }
 ```
@@ -336,9 +346,11 @@ Either pass `extras([...])` keyed by the enum value, or rely on `getExtra()` on 
 ### Field color
 
 ```php
-\CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards::make('plan')
+use Filament\Support\Colors\Color;
+
+CheckboxCards::make('plan')
     ->options(Plan::class)
-    ->color(\Filament\Support\Colors\Color::Rose);
+    ->color(Color::Rose);
 ```
 
 ### Hide native inputs on cards
