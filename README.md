@@ -16,32 +16,21 @@ This package adds eight form fields for FilamentPHP. Four extend `Radio`, four e
 | Stack | **Laravel** with **FilamentPHP** forms (`filament/forms` **^4.0** or **^5.0**) |
 | PHP | **8.1** or newer |
 
-After `composer require`, finish [Tailwind CSS](#tailwind-css) so your panel build scans this package’s Blade views.
-
 ## Installation
+
+**1.** Install with Composer:
 
 ```bash
 composer require codewithdennis/filament-advanced-choice
 ```
 
-## Tailwind CSS
-
-These fields render with Tailwind utility classes from Blade files inside the package. FilamentPHP builds panel CSS from your theme entry file. Tailwind only emits utilities for paths you register with `@source`, so add this package every time you install or update it.
-
-**1. Open your theme CSS**  
-Use the same file FilamentPHP already uses for the panel (for example `resources/css/filament/{panel}/theme.css`). If you do not have a panel theme yet, create one with the FilamentPHP “Creating a theme” flow, then come back here.
-
-**2. Register the package Blade views**  
-Paste the line below into that file. Fix the number of `../` segments so the path resolves from your theme file to `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php` in your project.
+**2.** In your FilamentPHP panel theme CSS (for example `resources/css/filament/{panel}/theme.css`), add an `@source` line so Tailwind scans this package’s Blade files. Adjust the `../` depth so it resolves from that CSS file to `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php`.
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
 ```
 
-**3. Rebuild frontend assets**  
-Run `npm run build` or `npm run dev` (whatever your panel uses) so Tailwind picks up the new `@source`.
-
-If this step is skipped or the path is wrong, the controls can render without spacing, borders, or focus styles because the matching classes were never generated.
+**3.** Run `npm run build` or `npm run dev` so the theme rebuilds.
 
 ## Quick start
 
