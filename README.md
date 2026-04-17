@@ -380,7 +380,7 @@ See [GitHub Releases](https://github.com/codewithdennis/filament-advanced-choice
 
 ## Contributing
 
-Pull requests welcome. For larger changes, open a GitHub issue first. Run `composer analyse` and `composer format` before opening a PR.
+Contributions and pull requests are always welcome and appreciated. If you want to discuss a bigger idea first, feel free to open a GitHub issue, but you do not have to. When you open a PR, running `composer analyse` and `composer format` first helps keep CI green.
 
 ## Security
 
