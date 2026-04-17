@@ -4,21 +4,23 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 [![License](https://img.shields.io/packagist/l/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://github.com/codewithdennis/filament-advanced-choice/blob/main/LICENSE)
 
-**Filament Advanced Choice** adds eight opinionated form field variants—four for single choice (radio) and four for multiple choice (checkbox)—built on top of FilamentPHP’s native `Radio` and `CheckboxList` APIs. Each layout is styled for clarity, supports rich option metadata (descriptions, extras, optional per-option colors), and stays familiar to anyone who already uses FilamentPHP forms.
+This package ships **eight** form field classes for **FilamentPHP**: four behave like a **`Radio`** (one value), four like a **`CheckboxList`** (many values). Under the hood they extend FilamentPHP’s own field types, but each one uses its own **Blade** view so the UI is easier to read and tap.
 
 ![Filament Advanced Choice preview](art/thumbnail.png)
 
 ## Features
 
-- **Eight drop-in components** — `RadioList`, `RadioCards`, `RadioStackedCards`, `RadioTable`, `CheckboxList`, `CheckboxCards`, `CheckboxStackedCards`, `CheckboxTable`, each with a dedicated Blade layout tuned for readability and touch targets.
-- **Everything you expect from FilamentPHP** — `options()`, `descriptions()`, validation, disabled states, `disableOptionWhen()`, relationships, and (for checkbox variants) `bulkToggleable()` and the rest of FilamentPHP’s `CheckboxList` behavior.
-- **`extras()` for secondary text** — Show pricing, badges, meta, or any short string beside each option; map keys to values or drive everything from a backed enum (see below).
-- **Searchable options** — `searchable()` on every variant, with the same search prompts / empty states as FilamentPHP’s searchable checkbox list.
-- **Grid-aware card layouts** — `RadioCards`, `RadioStackedCards`, `CheckboxCards`, and `CheckboxStackedCards` support `columns()` and `gridDirection()` via FilamentPHP’s schema utilities.
-- **FilamentPHP color system** — Global `color()` on the field (default `primary`); optional **per-enum-case** accent when the case implements `getColor()` (same pattern as core FilamentPHP enum colors).
-- **Polished selection chrome** — `hiddenInputs()` / `visibleInputs()` and `hiddenInputIcon()` for card-style fields when you want icon-only or minimal radio/checkbox visuals.
+- **Eight field classes** — `RadioList`, `RadioCards`, `RadioStackedCards`, `RadioTable`, `CheckboxList`, `CheckboxCards`, `CheckboxStackedCards`, `CheckboxTable`. Each maps to a Blade template in this package.
+- **Same API you already use** — `options()`, `descriptions()`, validation, `disableOptionWhen()`, relationships, and on checkbox types `bulkToggleable()` and the rest of FilamentPHP’s `CheckboxList` API.
+- **`extras()`** — Extra text next to an option (price, badge, short note). Pass an array, or read it from a **backed enum** (see [Enum support](#enum-support)).
+- **`searchable()`** — Works on every variant; search prompt and “no results” text behave like FilamentPHP’s searchable checkbox list.
+- **Grid on card layouts** — `RadioCards`, `RadioStackedCards`, `CheckboxCards`, and `CheckboxStackedCards` support `columns()` and `gridDirection()` through FilamentPHP’s schema helpers.
+- **Colors** — Field-level `color()` (default `primary`). Optional: if an enum case exposes `getColor()`, some layouts use it for that row/card (FilamentPHP’s usual enum pattern).
+- **`hiddenInputs()` / `visibleInputs()`** — For card-style fields, hide the native radio/checkbox control and show a custom icon instead (`hiddenInputIcon()`).
 
 ## Compatibility
+
+Use this table to match **this package’s version** with **FilamentPHP** and **PHP** in your app:
 
 | Package | FilamentPHP (`filament/forms`) | PHP |
 |--------|-------------------------|-----|
@@ -26,29 +28,37 @@
 
 ## Requirements
 
-- Laravel application with FilamentPHP forms **v4 or v5**
-- **PHP 8.1+**
-- For compiled panel themes, Tailwind must see this package’s views (see [Theme / Tailwind](#theme--tailwind))
+Your project should already have:
+
+1. **Laravel** with **FilamentPHP** forms **v4 or v5** — the same app where you build FilamentPHP panels, resources, or standalone forms.
+2. **PHP 8.1 or newer** — required by this package’s code and dependencies.
+3. **Tailwind “content” path** — only if you compile a **custom FilamentPHP panel theme**. Tailwind must scan this package’s Blade views, or some utility classes will never exist in your built CSS. How to do that is in [Theme / Tailwind](#theme--tailwind) below.
 
 ## Installation
 
-Install via Composer (Packagist):
+Run **Composer** against **Packagist** (no private repository):
 
 ```bash
 composer require codewithdennis/filament-advanced-choice
 ```
 
-Laravel will auto-discover the service provider. There is no config file to publish.
+Laravel **auto-discovers** the **service provider**. There is **no** `config` file to publish.
 
 ## Theme / Tailwind
 
-Layouts use FilamentPHP’s design tokens and utility classes. If you use a **custom FilamentPHP theme**, add the package views to Tailwind’s content sources so classes are not purged—for example in your theme CSS (adjust `../` segments to match your file layout):
+These fields use **Tailwind CSS** classes that live in this package’s **Blade** files.
+
+When you use a **custom FilamentPHP panel theme**, Tailwind only emits CSS for files it is told to scan. If this package is not in that list, the UI can look broken in production because classes such as `has-checked:outline-custom-600` were never generated.
+
+Add the following to your theme entry CSS (often `theme.css`). Change the number of `../` segments so the path resolves from **your** CSS file to **`vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php`** inside **your** project:
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
 ```
 
 ## Quick start
+
+Minimal **`RadioCards`** example: labels, **`descriptions()`** under each label, and **`extras()`** for a short side line (for example a price):
 
 ```php
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCards;
@@ -81,7 +91,7 @@ RadioCards::make('plan')
 | `CheckboxStackedCards` | `CheckboxList` | Stacked cards |
 | `CheckboxTable` | `CheckboxList` | Table-style rows |
 
-All classes live under `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`:
+Every component class sits under **`CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`**. Typical **`use`** imports:
 
 ```php
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxCards;
@@ -94,7 +104,7 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStacked
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioTable;
 ```
 
-The sections below mirror real usage: full `options` / `descriptions` / `extras` where it helps, and enums where the layout is easier to show in fewer lines.
+Below, each **Component** section shows a screenshot and copy-paste **PHP**. Long examples use full `options` / `descriptions` / `extras`; shorter ones use a **backed enum** so the snippet stays small.
 
 ## Components
 
@@ -254,7 +264,9 @@ RadioStackedCards::make('delivery_type')
 
 ## Search, bulk actions, and disabling options
 
-**Search** (all components):
+FilamentPHP already implements these behaviors on **`Radio`** / **`CheckboxList`**; our field classes inherit them.
+
+**Search** (works on every component here):
 
 ```php
 CheckboxList::make('delivery_type')
@@ -264,7 +276,7 @@ CheckboxList::make('delivery_type')
     ->noSearchResultsMessage('No delivery types found.');
 ```
 
-**Bulk select / deselect** (checkbox components only):
+**Bulk select / deselect** (checkbox-style components only):
 
 ```php
 CheckboxList::make('delivery_type')
@@ -282,7 +294,13 @@ CheckboxList::make('delivery_type')
 
 ## Enum support
 
-You can pass a **backed enum** to `options()`. For labels and descriptions, implement `Filament\Support\Contracts\HasLabel` and `Filament\Support\Contracts\HasDescription`. For the extra column (pricing, badges, etc.), implement this package’s `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra`.
+You can pass a **backed enum** class name to `options()` instead of an array.
+
+Then wire up three small interfaces:
+
+- `Filament\Support\Contracts\HasLabel` — text for the main line.
+- `Filament\Support\Contracts\HasDescription` — text under the label.
+- `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra` — text for the **`extras()`** column (price, badge, etc.).
 
 <details>
 <summary><strong>Full enum example</strong></summary>
@@ -376,9 +394,9 @@ public static function configure(Schema $schema): Schema
 
 </details>
 
-If the enum case defines **`getColor()`** (same as core FilamentPHP enum patterns), card/table/list views can pick up **per-option** color accents.
+Optional: if a case implements **`getColor()`** (FilamentPHP’s normal enum pattern), some layouts use that color for that option only.
 
-When you pass the enum class string to `options()`, you can still use `extras()` with an array keyed by enum value; passing only the enum defers extras to `getExtra()` on each case.
+You can still call **`extras([...])`** with an array keyed by the enum **value**. If you do not, extras are read from each case’s **`getExtra()`** method.
 
 ## Customization
 
@@ -411,7 +429,7 @@ RadioCards::make('delivery_type')
     ->hiddenInputs();
 ```
 
-Use `visibleInputs()` for the inverse of `hiddenInputs()`.
+`visibleInputs()` does the opposite of **`hiddenInputs()`** (show the native control again).
 
 ## Changelog
 
@@ -419,12 +437,12 @@ See [CHANGELOG.md](CHANGELOG.md) and [GitHub Releases](https://github.com/codewi
 
 ## Contributing
 
-Contributions are welcome. Please open an issue first for larger changes, and ensure `composer analyse` and `composer format` pass before sending a pull request.
+Pull requests are welcome. For large changes, open a **GitHub issue** first so we can align on the design. Before you open a PR, run **`composer analyse`** and **`composer format`** so checks stay green.
 
 ## Security
 
-Please review [SECURITY.md](.github/SECURITY.md) for how to report security issues responsibly.
+If you believe you found a **security vulnerability**, follow [.github/SECURITY.md](.github/SECURITY.md). Do **not** post exploit details in a public issue.
 
 ## License
 
-Open source under the MIT License. See the [LICENSE](LICENSE) file in this repository.
+Licensed under the **MIT License**. Full text: [LICENSE](LICENSE).
