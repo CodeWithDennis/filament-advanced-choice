@@ -6,16 +6,6 @@
 
 **Filament Advanced Choice** adds eight opinionated form field variants—four for single choice (radio) and four for multiple choice (checkbox)—built on top of FilamentPHP’s native `Radio` and `CheckboxList` APIs. Each layout is styled for clarity, supports rich option metadata (descriptions, extras, optional per-option colors), and stays familiar to anyone who already uses FilamentPHP forms.
 
-<p align="center">
-  <a href="https://github.com/CodeWithDennis/filament-advanced-choice-docs">
-    <img src="https://raw.githubusercontent.com/CodeWithDennis/filament-advanced-choice-docs/main/art/thumbnail.png" alt="Filament Advanced Choice preview" width="720" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/CodeWithDennis/filament-advanced-choice-docs"><strong>Docs &amp; screenshots</strong></a>
-</p>
-
 ## Features
 
 - **Eight drop-in components** — `RadioList`, `RadioCards`, `RadioStackedCards`, `RadioTable`, `CheckboxList`, `CheckboxCards`, `CheckboxStackedCards`, `CheckboxTable`, each with a dedicated Blade layout tuned for readability and touch targets.
@@ -209,10 +199,6 @@ RadioCards::make('plan')
 ```
 
 Use `visibleInputs()` for the inverse of `hiddenInputs()`.
-
-## Documentation
-
-- **[filament-advanced-choice-docs](https://github.com/CodeWithDennis/filament-advanced-choice-docs)** — Gallery, per-component screenshots, and extended copy-paste examples.
 
 ## Changelog
 
