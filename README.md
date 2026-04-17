@@ -21,7 +21,7 @@ This package adds eight form fields for FilamentPHP. Four extend `Radio`, four e
 composer require codewithdennis/filament-advanced-choice
 ```
 
-**2.** In your FilamentPHP panel theme CSS (for example `resources/css/filament/{panel}/theme.css`), add an `@source` line so Tailwind scans this package’s Blade files. Adjust the `../` depth so it resolves from that CSS file to `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php`.
+**2.** To make sure styling works, add this to your custom FilamentPHP theme:
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
