@@ -1,9 +1,19 @@
 {
     "name": "codewithdennis/filament-advanced-choice",
-    "description": "A beautifully styled, fully customizable set of radio group components for FilamentPHP",
+    "description": "Beautiful, customizable radio and checkbox form layouts for FilamentPHP.",
     "keywords": [
-        "CodeWithDennis",
+        "filament",
+        "filamentphp",
+        "filament-forms",
+        "filament-plugin",
         "laravel",
+        "livewire",
+        "forms",
+        "radio",
+        "checkbox",
+        "checkbox-list",
+        "ui",
+        "codewithdennis",
         "filament-advanced-choice"
     ],
     "homepage": "https://github.com/codewithdennis/filament-advanced-choice",
