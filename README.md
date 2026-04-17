@@ -24,8 +24,6 @@ After `composer require`, finish [Tailwind CSS](#tailwind-css) so your panel bui
 composer require codewithdennis/filament-advanced-choice
 ```
 
-No config to publish. Laravel registers the service provider automatically.
-
 ## Tailwind CSS
 
 These fields render with Tailwind utility classes from Blade files inside the package. FilamentPHP builds panel CSS from your theme entry file. Tailwind only emits utilities for paths you register with `@source`, so add this package every time you install or update it.
