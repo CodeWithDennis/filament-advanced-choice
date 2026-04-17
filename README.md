@@ -16,15 +16,15 @@ They use the same FilamentPHP APIs you already know (`options()`, `descriptions(
 
 ## Compatibility
 
-| Package | FilamentPHP (`filament/forms`) | PHP |
-|--------|-------------------------|-----|
-| **1.x** | `^4.0` / `^5.0` | `^8.1` |
+| Version | FilamentPHP | PHP |
+|--------|-------------|-----|
+| 1.x | `filament/forms` `^4.0` or `^5.0` | `^8.1` |
 
 ## Requirements
 
-1. Laravel with FilamentPHP forms v4 or v5.
-2. PHP 8.1 or newer.
-3. If you compile a custom FilamentPHP panel theme, point Tailwind at this package’s Blade views so utilities are generated. See [Theme / Tailwind](#theme--tailwind).
+- Laravel app with FilamentPHP forms **v4** or **v5**
+- **PHP 8.1+**
+- Custom FilamentPHP panel theme only: register this package in Tailwind content so Blade classes compile (see [Theme / Tailwind](#theme--tailwind))
 
 ## Installation
 
@@ -32,11 +32,15 @@ They use the same FilamentPHP APIs you already know (`options()`, `descriptions(
 composer require codewithdennis/filament-advanced-choice
 ```
 
-Laravel auto-discovers the service provider. There is no config file to publish.
+No config to publish. Laravel registers the service provider automatically.
 
 ## Theme / Tailwind
 
-Styling comes from Tailwind classes in this package’s Blade files. Custom FilamentPHP themes only emit CSS for paths you list: add the vendor Blade glob below to your theme CSS (often `theme.css`) and fix the `../` depth so it resolves from your file to `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php`.
+Only needed when you build a **custom FilamentPHP panel theme** (compiled Tailwind CSS).
+
+1. Open your theme entry CSS (for example `theme.css`).
+2. Add an `@source` line that points at `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php` from that file (fix the `../` count for your folder layout).
+3. Rebuild assets so Tailwind picks up the new path.
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
