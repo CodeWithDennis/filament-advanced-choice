@@ -31,8 +31,6 @@ composer require codewithdennis/filament-advanced-choice
 
 ## Components
 
-Snippets use short class names (`RadioCards`, `CheckboxList`, …). Import from `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components` in your own files.
-
 ### CheckboxList
 
 Vertical list layout with descriptions for multiple selections.
