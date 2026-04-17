@@ -9,8 +9,7 @@ This package introduces eight new form fields for FilamentPHP. Four of them are 
 
 ## Requirements
 
-- Laravel with FilamentPHP forms: `filament/forms` `^4.0` or `^5.0`
-- PHP 8.1 or newer
+- Filament 4/5
 
 ## Installation
 
