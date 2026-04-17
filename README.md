@@ -24,7 +24,7 @@ They use the same FilamentPHP APIs you already know (`options()`, `descriptions(
 
 - Laravel app with FilamentPHP forms **v4** or **v5**
 - **PHP 8.1+**
-- Custom FilamentPHP panel theme only: register this package in Tailwind content so Blade classes compile (see [Theme / Tailwind](#theme--tailwind))
+- FilamentPHP panel with a theme entry file that Tailwind scans (see [Tailwind CSS](#tailwind-css) after install)
 
 ## Installation
 
@@ -34,17 +34,24 @@ composer require codewithdennis/filament-advanced-choice
 
 No config to publish. Laravel registers the service provider automatically.
 
-## Theme / Tailwind
+## Tailwind CSS
 
-Only needed when you build a **custom FilamentPHP panel theme** (compiled Tailwind CSS).
+These fields render with Tailwind utility classes from Blade files inside the package. FilamentPHP builds panel CSS from your theme entry file. Tailwind only emits utilities for paths you register with `@source`, so add this package every time you install or update it.
 
-1. Open your theme entry CSS (for example `theme.css`).
-2. Add an `@source` line that points at `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php` from that file (fix the `../` count for your folder layout).
-3. Rebuild assets so Tailwind picks up the new path.
+**1. Open your theme CSS**  
+Use the same file FilamentPHP already uses for the panel (for example `resources/css/filament/{panel}/theme.css`). If you do not have a panel theme yet, create one with the FilamentPHP “Creating a theme” flow, then come back here.
+
+**2. Register the package Blade views**  
+Paste the line below into that file. Fix the number of `../` segments so the path resolves from your theme file to `vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php` in your project.
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
 ```
+
+**3. Rebuild frontend assets**  
+Run `npm run build` or `npm run dev` (whatever your panel uses) so Tailwind picks up the new `@source`.
+
+If this step is skipped or the path is wrong, the controls can render without spacing, borders, or focus styles because the matching classes were never generated.
 
 ## Quick start
 
