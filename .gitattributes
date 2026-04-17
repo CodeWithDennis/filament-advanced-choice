@@ -12,6 +12,7 @@
 /.php_cs.dist.php       export-ignore
 /.vscode                export-ignore
 /docs                   export-ignore
+/scripts                export-ignore
 /images                 export-ignore
 /tests                  export-ignore
 /package.json           export-ignore
