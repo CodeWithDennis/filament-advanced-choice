@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 
-This package adds eight form fields for FilamentPHP. Four extend `Radio`, four extend `CheckboxList`. Each uses its own Blade view; the PHP API matches the FilamentPHP types they extend.
+This package introduces eight new form fields for FilamentPHP. Four of them are based on `Radio`, and four are based on `CheckboxList`.
 
 ![Filament Advanced Choice preview](art/thumbnail.png)
 
