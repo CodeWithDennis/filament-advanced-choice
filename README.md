@@ -10,11 +10,8 @@ This package adds eight form fields for FilamentPHP. Four extend `Radio`, four e
 
 ## Requirements
 
-| | |
-|---|---|
-| This package | **1.x** (`codewithdennis/filament-advanced-choice`) |
-| Stack | **Laravel** with **FilamentPHP** forms (`filament/forms` **^4.0** or **^5.0**) |
-| PHP | **8.1** or newer |
+- Laravel with FilamentPHP forms: `filament/forms` `^4.0` or `^5.0`
+- PHP 8.1 or newer
 
 ## Installation
 
