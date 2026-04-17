@@ -6,9 +6,10 @@ namespace CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components;
 
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasExtras;
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasHiddenInputs;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Support\Concerns\HasColor;
 
-class CheckboxTable extends \Filament\Forms\Components\CheckboxList
+class CheckboxTable extends CheckboxList
 {
     use HasColor;
     use HasExtras;

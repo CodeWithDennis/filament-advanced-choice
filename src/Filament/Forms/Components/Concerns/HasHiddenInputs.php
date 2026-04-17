@@ -31,7 +31,7 @@ trait HasHiddenInputs
         return $this->evaluate($this->hiddenInputs);
     }
 
-    public function hiddenInputIcon(string | \BackedEnum | \Closure | null $icon): static
+    public function hiddenInputIcon(string | \BackedEnum | Closure | null $icon): static
     {
         $this->hiddenInputIcon = $icon;
 

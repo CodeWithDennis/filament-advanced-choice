@@ -6,12 +6,13 @@ namespace CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components;
 
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasExtras;
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasHiddenInputs;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Concerns\HasGridDirection;
 use Filament\Schemas\Concerns\HasColumns;
 use Filament\Support\Concerns\HasColor;
 use Filament\Support\Enums\GridDirection;
 
-class CheckboxCards extends \Filament\Forms\Components\CheckboxList
+class CheckboxCards extends CheckboxList
 {
     use HasColor;
     use HasColumns;
