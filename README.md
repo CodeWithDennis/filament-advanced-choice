@@ -367,7 +367,7 @@ RadioCards::make('delivery_type')
 
 ## Changelog
 
-See [CHANGELOG.md](CHANGELOG.md) and [GitHub Releases](https://github.com/codewithdennis/filament-advanced-choice/releases).
+See [GitHub Releases](https://github.com/codewithdennis/filament-advanced-choice/releases).
 
 ## Contributing
 
