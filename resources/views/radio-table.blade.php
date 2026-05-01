@@ -10,6 +10,7 @@
     ]);
     $enum = $getEnum();
     $isDisabled = $isDisabled();
+    $hasCursorPointer = $hasCursorPointer();
     $isSearchable = $isSearchable();
     $statePath = $getStatePath();
     $options = $getOptions();
@@ -71,13 +72,16 @@
                                 .querySelector('.fi-fo-checkbox-list-option-description')
                                 ?.innerText.toLowerCase()
                                 .includes(search.toLowerCase())
-                    " @endif for="{{ $id }}" class="fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
-                               first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
-                               focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
-                               has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
-                               has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
-                               has-disabled:opacity-60 has-disabled:cursor-not-allowed
-                               md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4" style="{{ $colors }}">
+                    " @endif for="{{ $id }}" @class([
+                        'fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
+                         first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
+                         focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
+                         has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
+                         has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
+                         has-disabled:opacity-60 has-disabled:cursor-not-allowed
+                         md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4',
+                        'not-has-disabled:cursor-pointer' => $hasCursorPointer,
+                    ]) style="{{ $colors }}">
                         <div class="flex items-center gap-3 text-sm">
                             <input id="{{ $id }}" name="{{ $statePath }}" type="radio" value="{{ $value }}" {{
                 $extraInputAttributeBag
