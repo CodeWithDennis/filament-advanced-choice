@@ -115,7 +115,7 @@
                                    focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
                                    has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
                                    has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
-                                   has-disabled:opacity-60
+                                   has-disabled:opacity-60 has-disabled:cursor-not-allowed
                                    md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4"
                             style="{{ $colors }}"
                         >
