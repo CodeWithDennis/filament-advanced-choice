@@ -207,7 +207,9 @@ RadioStackedCard::make('delivery_type')
 
 ### CheckboxImage
 
-Card grid with an image area above the label (multiple selections). Pass URLs keyed like `options()`, or use a backed enum that implements `HasImage`.
+![CheckboxImage](art/basic_checkbox_image.png)
+
+Card grid with an image area above the label (multiple selections). Pass URLs keyed like `options()`, or pass a backed enum to `images()` whose cases define `getImage(): ?string`.
 
 ```php
 CheckboxImage::make('plans')
@@ -224,6 +226,8 @@ CheckboxImage::make('plans')
 ```
 
 ### RadioImage
+
+![RadioImage](art/basic_radio_image.png)
 
 Same idea for a single choice: image on top of each option card.
 
@@ -271,12 +275,10 @@ CheckboxList::make('delivery_type')
 
 ## Enum support
 
-Pass a backed enum class name to `options()` instead of an array. Implement:
+Pass a backed enum class name to `options()` instead of an array. Filament contracts such as `HasLabel` and `HasDescription` work as usual. For this package, optional case methods are detected by name:
 
-- `Filament\Support\Contracts\HasLabel` (main label)
-- `Filament\Support\Contracts\HasDescription` (subtitle)
-- `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra` (`extras()` column)
-- `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasImage` (`images()` on `RadioImage` / `CheckboxImage`, or pass `->images(SomeEnum::class)`)
+- `getExtra()` — used when you pass an enum to `extras()` (or for layouts that read extras from the enum)
+- `getImage()` — used when you pass an enum to `images()` on `RadioImage` / `CheckboxImage`
 
 <details>
 <summary><strong>Full enum example</strong></summary>
@@ -288,11 +290,10 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra;
 use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasLabel;
 
-enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
+enum DeliveryTypeEnum: string implements HasDescription, HasLabel
 {
     case Standard = 'standard';
     case Express = 'express';
