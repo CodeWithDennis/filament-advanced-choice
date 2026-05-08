@@ -11,7 +11,7 @@ use Filament\Forms\Components\Concerns\CanBeSearchable;
 use Filament\Forms\Components\Radio;
 use Filament\Support\Concerns\HasColor;
 
-final class RadioList extends Radio
+class RadioList extends Radio
 {
     use CanBeSearchable;
     use HasColor;

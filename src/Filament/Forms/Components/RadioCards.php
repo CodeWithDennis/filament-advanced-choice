@@ -14,7 +14,7 @@ use Filament\Schemas\Concerns\HasColumns;
 use Filament\Support\Concerns\HasColor;
 use Filament\Support\Enums\GridDirection;
 
-final class RadioCards extends Radio
+class RadioCards extends Radio
 {
     use CanBeSearchable;
     use HasColor;
