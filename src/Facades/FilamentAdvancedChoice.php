@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CodeWithDennis\FilamentAdvancedChoice\Facades;
 
 use Illuminate\Support\Facades\Facade;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
  */
 class FilamentAdvancedChoice extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return \CodeWithDennis\FilamentAdvancedChoice\FilamentAdvancedChoice::class;
     }

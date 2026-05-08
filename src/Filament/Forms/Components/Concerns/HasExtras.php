@@ -6,14 +6,24 @@ namespace CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concer
 
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Htmlable;
 use UnitEnum;
 
 trait HasExtras
 {
+    /**
+     * @var (
+     *     array<int|string, string|list<string>|Htmlable|null>|
+     *     Arrayable<int|string, string|list<string>|Htmlable|null>|
+     *     string|
+     *     (Closure(): array<int|string, string|list<string>|Htmlable|null>|Arrayable<int|string, string|list<string>|Htmlable|null>|string|null)|
+     *     null
+     * )
+     */
     protected array | Arrayable | string | Closure | null $extras = null;
 
     /**
-     * @param  array<string | array<string>> | Arrayable | string | Closure | null  $extras
+     * @param  array<int|string, string|list<string>|Htmlable|null>|Arrayable<int|string, string|list<string>|Htmlable|null>|string|Closure|null  $extras
      */
     public function extras(array | Arrayable | string | Closure | null $extras): static
     {
@@ -27,7 +37,7 @@ trait HasExtras
     }
 
     /**
-     * @return array<string | array<string>>
+     * @return array<int|string, string|list<string>|Htmlable|null>
      */
     public function getExtras(): array
     {
@@ -38,10 +48,12 @@ trait HasExtras
             enum_exists($enum = $extras)
         ) {
             return array_reduce($enum::cases(), function (array $carry, UnitEnum $case): array {
+                $key = $case instanceof \BackedEnum ? $case->value : $case->name;
+
                 if (method_exists($case, 'getExtra')) {
-                    $carry[$case->value ?? $case->name] = $case->getExtra();
+                    $carry[$key] = $case->getExtra();
                 } else {
-                    $carry[$case->value ?? $case->name] = null;
+                    $carry[$key] = null;
                 }
 
                 return $carry;
