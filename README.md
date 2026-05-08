@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 
-This package introduces eight new form fields for FilamentPHP. Four of them are based on `Radio`, and four are based on `CheckboxList`.
+This package introduces ten layout-focused form fields for FilamentPHP. Five are based on `Radio`, and five are based on `CheckboxList`.
 
 ![Filament Advanced Choice preview](art/thumbnail.png)
 
@@ -205,6 +205,40 @@ RadioStackedCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class);
 ```
 
+### CheckboxImage
+
+Card grid with an image area above the label (multiple selections). Pass URLs keyed like `options()`, or use a backed enum that implements `HasImage`.
+
+```php
+CheckboxImage::make('plans')
+    ->columns(2)
+    ->options([
+        'standard' => 'Standard',
+        'pro' => 'Pro',
+    ])
+    ->images([
+        'standard' => 'https://example.com/standard.jpg',
+        'pro' => 'https://example.com/pro.jpg',
+    ])
+    ->bulkToggleable();
+```
+
+### RadioImage
+
+Same idea for a single choice: image on top of each option card.
+
+```php
+RadioImage::make('plan')
+    ->options([
+        'hobby' => 'Hobby',
+        'pro' => 'Pro',
+    ])
+    ->images([
+        'hobby' => 'https://example.com/hobby.jpg',
+        'pro' => 'https://example.com/pro.jpg',
+    ]);
+```
+
 ## Search, bulk actions, and disabling options
 
 These come from FilamentPHP’s `Radio` and `CheckboxList` APIs (inherited unchanged).
@@ -242,6 +276,7 @@ Pass a backed enum class name to `options()` instead of an array. Implement:
 - `Filament\Support\Contracts\HasLabel` (main label)
 - `Filament\Support\Contracts\HasDescription` (subtitle)
 - `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra` (`extras()` column)
+- `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasImage` (`images()` on `RadioImage` / `CheckboxImage`, or pass `->images(SomeEnum::class)`)
 
 <details>
 <summary><strong>Full enum example</strong></summary>
