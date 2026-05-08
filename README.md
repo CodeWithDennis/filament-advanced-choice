@@ -29,6 +29,8 @@ composer require codewithdennis/filament-advanced-choice
 
 ## Components
 
+Prefer the singular field classes (`RadioCard`, `RadioStackedCard`, `CheckboxCard`, `CheckboxStackedCard`). The plural names (`RadioCards`, `RadioStackedCards`, `CheckboxCards`, `CheckboxStackedCards`) remain as deprecated aliases for backward compatibility.
+
 ### CheckboxList
 
 Vertical list layout with descriptions for multiple selections.
@@ -71,14 +73,14 @@ CheckboxList::make('delivery_type')
     ]);
 ```
 
-### CheckboxCards
+### CheckboxCard
 
 Card-based layout with descriptions and extras support for multiple selections.
 
-![CheckboxCards](art/basic_checkbox_cards.png)
+![CheckboxCard](art/basic_checkbox_cards.png)
 
 ```php
-CheckboxCards::make('delivery_type')
+CheckboxCard::make('delivery_type')
     ->searchable()
     ->bulkToggleable()
     ->options([
@@ -113,14 +115,14 @@ CheckboxCards::make('delivery_type')
     ]);
 ```
 
-### CheckboxStackedCards
+### CheckboxStackedCard
 
 Stacked card layout with descriptions and extras support for multiple selections.
 
-![CheckboxStackedCards](art/basic_checkbox_stacked_cards.png)
+![CheckboxStackedCard](art/basic_checkbox_stacked_cards.png)
 
 ```php
-CheckboxStackedCards::make('delivery_type')
+CheckboxStackedCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
     ->searchable()
     ->bulkToggleable();
@@ -161,14 +163,14 @@ RadioTable::make('delivery_type')
     ->options(DeliveryTypeEnum::class);
 ```
 
-### RadioCards
+### RadioCard
 
 Card-based layout with descriptions and extras support.
 
 Smallest useful example with `options()`, `descriptions()`, and `extras()`:
 
 ```php
-RadioCards::make('plan')
+RadioCard::make('plan')
     ->options([
         'hobby' => 'Hobby',
         'pro' => 'Pro',
@@ -185,21 +187,21 @@ RadioCards::make('plan')
 
 Same layout with a backed enum:
 
-![RadioCards](art/basic_radio_cards.png)
+![RadioCard](art/basic_radio_cards.png)
 
 ```php
-RadioCards::make('delivery_type')
+RadioCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class);
 ```
 
-### RadioStackedCards
+### RadioStackedCard
 
 Stacked card layout with descriptions and extras support.
 
-![RadioStackedCards](art/basic_radio_stacked_cards.png)
+![RadioStackedCard](art/basic_radio_stacked_cards.png)
 
 ```php
-RadioStackedCards::make('delivery_type')
+RadioStackedCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class);
 ```
 
@@ -317,7 +319,7 @@ enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
 
 ```php
 use App\Enums\DeliveryTypeEnum;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCards;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCard;
 use Filament\Schemas\Schema;
 
 public static function configure(Schema $schema): Schema
@@ -325,7 +327,7 @@ public static function configure(Schema $schema): Schema
     return $schema
         ->columns(1)
         ->components([
-            RadioStackedCards::make('delivery_type')
+            RadioStackedCard::make('delivery_type')
                 ->options(DeliveryTypeEnum::class),
         ]);
 }
@@ -344,7 +346,7 @@ Either pass `extras([...])` keyed by the enum value, or rely on `getExtra()` on 
 ```php
 use Filament\Support\Colors\Color;
 
-CheckboxCards::make('plan')
+CheckboxCard::make('plan')
     ->options(Plan::class)
     ->color(Color::Rose);
 ```
@@ -352,7 +354,7 @@ CheckboxCards::make('plan')
 ### Hide native inputs on cards
 
 ```php
-CheckboxCards::make('delivery_type')
+CheckboxCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
     ->hiddenInputs();
 ```
@@ -362,7 +364,7 @@ CheckboxCards::make('delivery_type')
 By default, the hidden input icon for card components is `heroicon-s-check-circle`. You can override it:
 
 ```php
-RadioCards::make('delivery_type')
+RadioCard::make('delivery_type')
     ->options(DeliveryTypeEnum::class)
     ->hiddenInputIcon('heroicon-o-chevron-double-down')
     ->hiddenInputs();

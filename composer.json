@@ -44,7 +44,7 @@
         }
     },
     "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
+        "analyse": "vendor/bin/phpstan analyse --configuration=phpstan.neon.dist",
         "format": "vendor/bin/pint"
     },
     "config": {
