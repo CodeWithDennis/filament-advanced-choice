@@ -372,6 +372,129 @@ RadioCard::make('delivery_type')
 
 `visibleInputs()` reverses `hiddenInputs()` (shows the native control again).
 
+## Blade Components
+
+If you're working outside the Filament Form Builder — in a Livewire component, a Filament custom page, or plain Blade — use the standalone Blade components.
+
+| Form field          | Blade component                              |
+|---------------------|----------------------------------------------|
+| RadioList           | `<x-advanced-choice::radio-list>`            |
+| RadioCard           | `<x-advanced-choice::radio-card>`            |
+| RadioStackedCard    | `<x-advanced-choice::radio-stacked-card>`    |
+| RadioTable          | `<x-advanced-choice::radio-table>`           |
+| CheckboxList        | `<x-advanced-choice::checkbox-list>`         |
+| CheckboxCard        | `<x-advanced-choice::checkbox-card>`         |
+| CheckboxStackedCard | `<x-advanced-choice::checkbox-stacked-card>` |
+| CheckboxTable       | `<x-advanced-choice::checkbox-table>`        |
+
+### Basic usage
+
+**Radio components (single selection):**
+
+```blade
+<x-advanced-choice::radio-list
+    name="delivery"
+    :options="['standard' => 'Standard', 'express' => 'Express']"
+    :descriptions="['standard' => '5-7 days', 'express' => '1-2 days']"
+    :selected="$delivery"
+    wire:model.live="delivery"
+/>
+
+<x-advanced-choice::radio-card
+    name="plan"
+    :options="['hobby' => 'Hobby', 'pro' => 'Pro']"
+    :descriptions="['hobby' => 'For side projects', 'pro' => 'For teams']"
+    :extras="['hobby' => '$9/mo', 'pro' => '$29/mo']"
+    :columns="2"
+    :selected="$plan"
+    :hidden-inputs="true"
+    wire:model.live="plan"
+/>
+```
+
+**Checkbox components (multiple selection):**
+
+```blade
+<x-advanced-choice::checkbox-list
+    name="permissions"
+    :options="['create' => 'Create', 'read' => 'Read', 'update' => 'Update', 'delete' => 'Delete']"
+    :selected="$selectedPermissions"
+    :bulk-toggleable="true"
+    :searchable="true"
+    search-prompt="Filter permissions..."
+    wire:model.live="selectedPermissions"
+/>
+
+<x-advanced-choice::checkbox-card
+    name="features"
+    :options="['analytics' => 'Analytics', 'reports' => 'Reports', 'api' => 'API Access']"
+    :selected="$features"
+    :columns="3"
+    :hidden-inputs="true"
+    wire:model.live="features"
+/>
+```
+
+### Using enum classes
+
+```blade
+<x-advanced-choice::radio-stacked-card
+    name="delivery_type"
+    :options="\App\Enums\DeliveryTypeEnum::class"
+    :selected="$deliveryType"
+    wire:model="deliveryType"
+/>
+```
+
+Enums implementing `HasLabel`, `HasDescription`, and `HasExtra` are resolved automatically.
+
+### Common props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | — | HTML input name attribute |
+| `options` | `string\|array` | `[]` | Array or enum FQCN |
+| `descriptions` | `array` | `[]` | Keyed descriptions |
+| `extras` | `array` | `[]` | Keyed extra text |
+| `color` | `string\|null` | `primary` | Color preset |
+| `hiddenInputs` | `bool` | `false` | Hide native input |
+| `hiddenInputIcon` | `string` | `heroicon-s-check-circle` | Icon for hidden state |
+| `cursorPointer` | `bool` | `true` | Show pointer cursor |
+| `searchable` | `bool` | `false` | Show search field |
+| `searchPrompt` | `string` | `Search...` | Search placeholder |
+| `noSearchResultsMessage` | `string` | `No results found.` | Empty results message |
+| `selected` | `string\|array\|null` | `null` / `[]` | Selected value(s) |
+
+**Radio-only:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selected` | `string\|null` | `null` | Selected value |
+
+**Checkbox-only:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `selected` | `array\|string\|null` | `[]` | Selected values |
+| `bulkToggleable` | `bool` | `false` | Select all / deselect all |
+
+**Grid layouts (Card / StackedCard):**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `columns` | `int` | `3` / `1` | Number of grid columns |
+| `gridDirection` | `string` | `row` | Grid direction |
+
+### Tailwind theme
+
+Make sure your custom Filament theme includes the package's Blade views so Tailwind classes are not purged:
+
+```css
+@source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
+```
+
+Run `npm run build` or `npm run dev` after adding the directive.
+
 ## Contributing
 
 Contributions and pull requests are always welcome and appreciated. If you want to discuss a bigger idea first, feel free to open a GitHub issue, but you do not have to. When you open a PR, running `composer format` first helps keep CI green.
