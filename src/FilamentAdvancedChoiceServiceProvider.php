@@ -16,11 +16,9 @@ class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name(self::$name);
-
-        if (file_exists($package->basePath('/../resources/views'))) {
-            $package->hasViews(self::$viewNamespace);
-        }
+        $package->name(self::$name)
+            ->hasViews(self::$viewNamespace)
+            ->hasTranslations();
     }
 
     public function packageBooted(): void

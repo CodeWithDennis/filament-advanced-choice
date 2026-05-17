@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CodeWithDennis\FilamentAdvancedChoice\View\Components;
 
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\View\Component;
 
 class RadioList extends Component
@@ -21,8 +22,8 @@ class RadioList extends Component
         /** Array of ['value' => 'extra text for the right column']. */
         public array $extras = [],
 
-        /** Color preset (primary, danger, warning, success, info). */
-        public ?string $color = 'primary',
+        /** Color preset (string name, array of RGB shades, or null). */
+        public string|array|null $color = 'primary',
 
         /** Hide the native radio input and make the whole option clickable. */
         public bool $hiddenInputs = false,
@@ -36,11 +37,11 @@ class RadioList extends Component
         /** Show an Alpine.js search field that filters options. */
         public bool $searchable = false,
 
-        /** Placeholder text for the search input. */
-        public string $searchPrompt = 'Search...',
+        /** Placeholder text for the search input. Uses translation when null. */
+        public ?string $searchPrompt = null,
 
-        /** Message shown when the search yields no results. */
-        public string $noSearchResultsMessage = 'No results found.',
+        /** Message shown when the search yields no results. Uses translation when null. */
+        public ?string $noSearchResultsMessage = null,
 
         /** The currently selected value (use with wire:model for reactivity). */
         public ?string $selected = null,
@@ -51,6 +52,39 @@ class RadioList extends Component
     public function render(): \Illuminate\Contracts\View\View
     {
         return view('filament-advanced-choice::components.radio-list');
+    }
+
+    /**
+     * Resolve the color name to its Filament RGB shades array.
+     * Returns null if the color cannot be resolved.
+     *
+     * @return array<int, int[]>|null
+     */
+    public function resolvedColor(): ?array
+    {
+        if (is_array($this->color)) {
+            return $this->color;
+        }
+
+        try {
+            $colors = FilamentColor::getColors();
+
+            return $colors[$this->color] ?? null;
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    public function getSearchPrompt(): string
+    {
+        return $this->searchPrompt
+            ?? __('filament-advanced-choice::components.search_prompt');
+    }
+
+    public function getNoSearchResultsMessage(): string
+    {
+        return $this->noSearchResultsMessage
+            ?? __('filament-advanced-choice::components.no_search_results_message');
     }
 
     private function resolveOptions(): void
