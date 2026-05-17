@@ -113,7 +113,7 @@
                             @checked($selected === $value)
                             {{ $inputAttrs }}
                             style="{{ $colors }}"
-                            class="mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500"
+                            class="fi-radio-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500"
                         />
                     @endif
 
