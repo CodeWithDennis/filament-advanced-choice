@@ -21,6 +21,8 @@
     ];
 
     $inputAttrs = $attributes->except($componentProps);
+
+    $wireModel = $attributes->whereStartsWith('wire:model')->first();
 @endphp
 
 <div
@@ -28,15 +30,29 @@
         search: '',
         allChecked: false,
         visibleOptionsCount: {{ count($options) }},
+        wireModel: @js($wireModel),
+        allValues: @js(array_keys($options)),
+
         toggleAll() {
             this.allChecked = !this.allChecked;
-            const checkboxes = $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]');
-            checkboxes.forEach(cb => {
-                cb.checked = this.allChecked;
-                cb.dispatchEvent(new Event('change', { bubbles: true }));
-                cb.dispatchEvent(new Event('input',  { bubbles: true }));
+
+            if (this.wireModel && typeof $wire !== 'undefined') {
+                if (this.allChecked) {
+                    $wire.set(this.wireModel, this.allValues);
+                } else {
+                    $wire.set(this.wireModel, []);
+                }
+            } else {
+                $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]')
+                    .forEach(cb => { cb.checked = this.allChecked; });
+            }
+
+            $nextTick(() => {
+                const all = $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]');
+                this.allChecked = all.length > 0 && [...all].every(cb => cb.checked);
             });
         },
+
         checkIfAllChecked() {
             const all = $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]');
             this.allChecked = all.length > 0 && [...all].every(cb => cb.checked);
