@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CodeWithDennis\FilamentAdvancedChoice;
 
+use Illuminate\Support\Facades\Blade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -20,5 +21,13 @@ class FilamentAdvancedChoiceServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(self::$viewNamespace);
         }
+    }
+
+    public function packageBooted(): void
+    {
+        Blade::componentNamespace(
+            'CodeWithDennis\\FilamentAdvancedChoice\\View\\Components',
+            'advanced-choice'
+        );
     }
 }
