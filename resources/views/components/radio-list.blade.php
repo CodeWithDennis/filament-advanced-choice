@@ -27,14 +27,19 @@
     class="fi-fo-checkbox-list"
 >
     @if ($searchable)
-        <div class="fi-fo-checkbox-list-search-input-wrp mb-3">
-            <input
-                placeholder="{{ __('filament-tables::table.fields.search.placeholder') }}"
+        <x-filament::input.wrapper
+            inline-prefix
+            :prefix-icon="\Filament\Support\Icons\Heroicon::MagnifyingGlass"
+            prefix-icon-alias="forms:components.checkbox-list.search-field"
+            class="fi-fo-checkbox-list-search-input-wrp"
+        >
+            <x-filament::input
                 type="search"
+                :placeholder="__('filament-tables::table.fields.search.placeholder')"
                 x-model="search"
-                class="fi-input w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm shadow-sm"
+                class="fi-input-has-inline-prefix"
             />
-        </div>
+        </x-filament::input.wrapper>
     @endif
 
     <fieldset
