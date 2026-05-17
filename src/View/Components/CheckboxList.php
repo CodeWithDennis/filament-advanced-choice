@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CodeWithDennis\FilamentAdvancedChoice\View\Components;
 
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\View\Component;
 
 class CheckboxList extends Component
@@ -13,14 +14,14 @@ class CheckboxList extends Component
         public string|array $options = [],
         public array $descriptions = [],
         public array $extras = [],
-        public ?string $color = 'primary',
+        public string|array|null $color = 'primary',
         public bool $hiddenInputs = false,
         public string $hiddenInputIcon = 'heroicon-s-check-circle',
         public bool $cursorPointer = true,
         public bool $bulkToggleable = false,
         public bool $searchable = false,
-        public string $searchPrompt = 'Search...',
-        public string $noSearchResultsMessage = 'No results found.',
+        public ?string $searchPrompt = null,
+        public ?string $noSearchResultsMessage = null,
         public array|string|null $selected = [],
     ) {
         if (is_string($this->selected)) {
@@ -35,6 +36,39 @@ class CheckboxList extends Component
     public function render(): \Illuminate\Contracts\View\View
     {
         return view('filament-advanced-choice::components.checkbox-list');
+    }
+
+    /**
+     * Resolve the color name to its Filament RGB shades array.
+     * Returns null if the color cannot be resolved.
+     *
+     * @return array<int, int[]>|null
+     */
+    public function resolvedColor(): ?array
+    {
+        if (is_array($this->color)) {
+            return $this->color;
+        }
+
+        try {
+            $colors = FilamentColor::getColors();
+
+            return $colors[$this->color] ?? null;
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    public function getSearchPrompt(): string
+    {
+        return $this->searchPrompt
+            ?? __('filament-advanced-choice::components.search_prompt');
+    }
+
+    public function getNoSearchResultsMessage(): string
+    {
+        return $this->noSearchResultsMessage
+            ?? __('filament-advanced-choice::components.no_search_results_message');
     }
 
     private function resolveOptions(): void
