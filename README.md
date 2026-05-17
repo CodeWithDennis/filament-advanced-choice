@@ -407,7 +407,7 @@ If you're working outside the Filament Form Builder — in a Livewire component,
     :extras="['hobby' => '$9/mo', 'pro' => '$29/mo']"
     :columns="2"
     :selected="$plan"
-    :hidden-inputs="true"
+    hidden-inputs
     wire:model.live="plan"
 />
 ```
@@ -421,16 +421,21 @@ If you're working outside the Filament Form Builder — in a Livewire component,
     :selected="$selectedPermissions"
     :bulk-toggleable="true"
     :searchable="true"
-    search-prompt="Filter permissions..."
     wire:model.live="selectedPermissions"
 />
 
+> **Note:** `bulkToggleable` uses `$wire.set()` internally to update
+> all selected values in a single Livewire request. It requires
+> `wire:model` to be present on the component. Without `wire:model`,
+> bulk toggle manipulates the DOM directly (plain Blade forms).
+
+```blade
 <x-advanced-choice::checkbox-card
     name="features"
     :options="['analytics' => 'Analytics', 'reports' => 'Reports', 'api' => 'API Access']"
     :selected="$features"
     :columns="3"
-    :hidden-inputs="true"
+    hidden-inputs
     wire:model.live="features"
 />
 ```
@@ -456,13 +461,13 @@ Enums implementing `HasLabel`, `HasDescription`, and `HasExtra` are resolved aut
 | `options` | `string\|array` | `[]` | Array or enum FQCN |
 | `descriptions` | `array` | `[]` | Keyed descriptions |
 | `extras` | `array` | `[]` | Keyed extra text |
-| `color` | `string\|null` | `primary` | Color preset |
+| `color` | `string\|array\|null` | `primary` | Filament color name or RGB shades array |
 | `hiddenInputs` | `bool` | `false` | Hide native input |
 | `hiddenInputIcon` | `string` | `heroicon-s-check-circle` | Icon for hidden state |
 | `cursorPointer` | `bool` | `true` | Show pointer cursor |
 | `searchable` | `bool` | `false` | Show search field |
-| `searchPrompt` | `string` | `Search...` | Search placeholder |
-| `noSearchResultsMessage` | `string` | `No results found.` | Empty results message |
+| `searchPrompt` | `string\|null` | `null` | Search placeholder (defaults to Filament translation) |
+| `noSearchResultsMessage` | `string\|null` | `null` | Empty results message (defaults to package translation) |
 | `selected` | `string\|array\|null` | `null` / `[]` | Selected value(s) |
 
 **Radio-only:**
@@ -485,12 +490,79 @@ Enums implementing `HasLabel`, `HasDescription`, and `HasExtra` are resolved aut
 | `columns` | `int` | `3` / `1` | Number of grid columns |
 | `gridDirection` | `string` | `row` | Grid direction |
 
+### Translations
+
+`searchPrompt` and `noSearchResultsMessage` default to the project locale automatically.
+To override them for a specific instance, pass the prop explicitly:
+
+```blade
+<x-advanced-choice::checkbox-list
+    name="features"
+    :options="$options"
+    search-prompt="Filter features..."
+    no-search-results-message="No features match your search."
+    wire:model.live="features"
+/>
+```
+
+The search input placeholder uses `filament-tables::table.fields.search.placeholder`.
+The "Select all" / "Deselect all" labels use `filament-forms::components.checkbox_list.actions.*`.
+To publish the package's own translation strings:
+
+```bash
+php artisan vendor:publish --tag="filament-advanced-choice-translations"
+```
+
+### Customization
+
+**Custom color:**
+
+```blade
+<x-advanced-choice::radio-card
+    name="plan"
+    :options="$plans"
+    color="danger"
+    wire:model.live="plan"
+/>
+```
+
+**Hidden inputs with custom icon:**
+
+```blade
+<x-advanced-choice::checkbox-card
+    name="features[]"
+    :options="$features"
+    hidden-inputs
+    hidden-input-icon="heroicon-o-check"
+    wire:model.live="features"
+/>
+```
+
+**Disable cursor pointer:**
+
+```blade
+<x-advanced-choice::radio-list
+    name="delivery"
+    :options="$options"
+    :cursor-pointer="false"
+    wire:model.live="delivery"
+/>
+```
+
 ### Tailwind theme
 
-Make sure your custom Filament theme includes the package's Blade views so Tailwind classes are not purged:
+Make sure your custom Filament theme includes the package's Blade views
+so Tailwind classes are not purged:
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
+```
+
+If you are developing the package locally with a path repository and symlinks,
+also add the absolute path to your theme file:
+
+```css
+@source '/absolute/path/to/filament-advanced-choice/resources/**/*.blade.php';
 ```
 
 Run `npm run build` or `npm run dev` after adding the directive.
