@@ -29,13 +29,15 @@
         visibleOptionsCount: {{ count($options) }},
         toggleAll() {
             this.allChecked = !this.allChecked;
-            $el.querySelectorAll('input[type=checkbox][name=\'{{ $name }}[]\']').forEach(cb => {
+            const checkboxes = $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]');
+            checkboxes.forEach(cb => {
                 cb.checked = this.allChecked;
                 cb.dispatchEvent(new Event('change', { bubbles: true }));
+                cb.dispatchEvent(new Event('input',  { bubbles: true }));
             });
         },
         checkIfAllChecked() {
-            const all = $el.querySelectorAll('input[type=checkbox][name=\'{{ $name }}[]\']');
+            const all = $el.querySelectorAll('input[type=checkbox][data-bulk-toggle]');
             this.allChecked = all.length > 0 && [...all].every(cb => cb.checked);
         }
     }"
@@ -45,6 +47,7 @@
         <div
             x-cloak
             class="fi-fo-checkbox-list-actions mb-2"
+            style="{{ $colors }}"
         >
             <button
                 type="button"
@@ -66,14 +69,19 @@
     @endif
 
     @if ($searchable)
-        <div class="fi-fo-checkbox-list-search-input-wrp mb-3">
-            <input
-                placeholder="{{ __('filament-tables::table.fields.search.placeholder') }}"
+        <x-filament::input.wrapper
+            inline-prefix
+            :prefix-icon="\Filament\Support\Icons\Heroicon::MagnifyingGlass"
+            prefix-icon-alias="forms:components.checkbox-list.search-field"
+            class="fi-fo-checkbox-list-search-input-wrp"
+        >
+            <x-filament::input
                 type="search"
+                :placeholder="__('filament-tables::table.fields.search.placeholder')"
                 x-model="search"
-                class="fi-input w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-3 py-2 text-sm shadow-sm"
+                class="fi-input-has-inline-prefix"
             />
-        </div>
+        </x-filament::input.wrapper>
     @endif
 
     <fieldset
@@ -115,13 +123,14 @@
             >
                 <div class="flex items-center justify-between w-full">
                     <div class="flex items-center gap-3">
-                        @if (!$hiddenInputs)
+                                @if (!$hiddenInputs)
                             <input
                                 id="{{ $id }}"
                                 name="{{ $name }}[]"
                                 type="checkbox"
                                 value="{{ $value }}"
                                 @checked($isChecked)
+                                data-bulk-toggle
                                 @if ($bulkToggleable)
                                     x-on:change="checkIfAllChecked()"
                                 @endif
@@ -154,6 +163,7 @@
                         type="checkbox"
                         value="{{ $value }}"
                         @checked($isChecked)
+                        data-bulk-toggle
                         @if ($bulkToggleable)
                             x-on:change="checkIfAllChecked()"
                         @endif
