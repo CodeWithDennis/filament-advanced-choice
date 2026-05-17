@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace CodeWithDennis\FilamentAdvancedChoice\View\Components;
 
 use Filament\Support\Facades\FilamentColor;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class RadioTable extends Component
 {
     public function __construct(
         public string $name,
-        public string|array $options = [],
+        public string | array $options = [],
         public array $descriptions = [],
         public array $extras = [],
-        public string|array|null $color = 'primary',
+        public string | array | null $color = 'primary',
         public bool $hiddenInputs = false,
         public string $hiddenInputIcon = 'heroicon-s-check-circle',
         public bool $cursorPointer = true,
@@ -26,7 +27,7 @@ class RadioTable extends Component
         $this->resolveOptions();
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('filament-advanced-choice::components.radio-table');
     }

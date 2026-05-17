@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CodeWithDennis\FilamentAdvancedChoice\View\Components;
 
 use Filament\Support\Facades\FilamentColor;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class RadioList extends Component
@@ -14,7 +15,7 @@ class RadioList extends Component
         public string $name,
 
         /** Array of ['value' => 'Label'] or fully qualified enum class name. */
-        public string|array $options = [],
+        public string | array $options = [],
 
         /** Array of ['value' => 'description text']. */
         public array $descriptions = [],
@@ -23,7 +24,7 @@ class RadioList extends Component
         public array $extras = [],
 
         /** Color preset (string name, array of RGB shades, or null). */
-        public string|array|null $color = 'primary',
+        public string | array | null $color = 'primary',
 
         /** Hide the native radio input and make the whole option clickable. */
         public bool $hiddenInputs = false,
@@ -49,7 +50,7 @@ class RadioList extends Component
         $this->resolveOptions();
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('filament-advanced-choice::components.radio-list');
     }

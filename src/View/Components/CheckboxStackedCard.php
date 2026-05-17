@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace CodeWithDennis\FilamentAdvancedChoice\View\Components;
 
 use Filament\Support\Facades\FilamentColor;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class CheckboxStackedCard extends Component
 {
     public function __construct(
         public string $name,
-        public string|array $options = [],
+        public string | array $options = [],
         public array $descriptions = [],
         public array $extras = [],
-        public string|array|null $color = 'primary',
+        public string | array | null $color = 'primary',
         public int $columns = 1,
         public string $gridDirection = 'row',
         public bool $hiddenInputs = false,
@@ -24,7 +25,7 @@ class CheckboxStackedCard extends Component
         public bool $searchable = false,
         public ?string $searchPrompt = null,
         public ?string $noSearchResultsMessage = null,
-        public array|string|null $selected = [],
+        public array | string | null $selected = [],
     ) {
         if (is_string($this->selected)) {
             $this->selected = [];
@@ -35,7 +36,7 @@ class CheckboxStackedCard extends Component
         $this->resolveOptions();
     }
 
-    public function render(): \Illuminate\Contracts\View\View
+    public function render(): View
     {
         return view('filament-advanced-choice::components.checkbox-stacked-card');
     }
