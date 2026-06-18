@@ -351,6 +351,25 @@ CheckboxCard::make('plan')
     ->color(Color::Rose);
 ```
 
+### Option icons
+
+Add an icon next to each option's label, keyed by the option value. Use
+`iconPosition()` to place the icon before (default) or after the label.
+
+```php
+use Filament\Support\Enums\IconPosition;
+
+CheckboxList::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->icons([
+        'standard' => 'heroicon-o-sparkles',
+        'express' => 'heroicon-o-bolt',
+        'overnight' => 'heroicon-o-moon',
+        'same_day' => 'heroicon-o-clock',
+    ])
+    ->iconPosition(IconPosition::After);
+```
+
 ### Hide native inputs on cards
 
 ```php

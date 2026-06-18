@@ -21,57 +21,38 @@
     $livewireKey = $getLivewireKey();
     $wireModelAttribute = $applyStateBindingModifiers('wire:model');
     $hiddenInputs = $getHiddenInputs();
+    $iconPosition = $getIconPosition();
+    $iconSize = $getIconSize();
 @endphp
 
 <x-dynamic-component :component="$fieldWrapperView" :field="$field">
-    <div
-        @if (FilamentView::hasSpaMode())
-            {{-- format-ignore-start --}}x-load="visible || event (x-modal-opened)"{{-- format-ignore-end --}}
+    <div @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}x-load="visible || event (x-modal-opened)"{{-- format-ignore-end --}}
         @else
-            x-load
-        @endif
+            x-load @endif
         x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('checkbox-list', 'filament/forms') }}"
         x-data="checkboxListFormComponent({
-                    livewireId: @js($this->getId()),
-                })"
-        {{ $getExtraAlpineAttributeBag()->class(['fi-fo-checkbox-list']) }}
-    >
-        @if (! $isDisabled)
+            livewireId: @js($this->getId()),
+        })" {{ $getExtraAlpineAttributeBag()->class(['fi-fo-checkbox-list']) }}>
+        @if (!$isDisabled)
             @if ($isSearchable)
-                <x-filament::input.wrapper
-                    inline-prefix
-                    :prefix-icon="\Filament\Support\Icons\Heroicon::MagnifyingGlass"
+                <x-filament::input.wrapper inline-prefix :prefix-icon="\Filament\Support\Icons\Heroicon::MagnifyingGlass"
                     prefix-icon-alias="forms:components.checkbox-list.search-field"
-                    class="fi-fo-checkbox-list-search-input-wrp"
-                >
-                    <input
-                        placeholder="{{ $getSearchPrompt() }}"
-                        type="search"
+                    class="fi-fo-checkbox-list-search-input-wrp">
+                    <input placeholder="{{ $getSearchPrompt() }}" type="search"
                         x-model.debounce.{{ $getSearchDebounce() }}="search"
-                        class="fi-input fi-input-has-inline-prefix"
-                    />
+                        class="fi-input fi-input-has-inline-prefix" />
                 </x-filament::input.wrapper>
             @endif
 
             @if ($isBulkToggleable && count($options))
-                <div
-                    x-cloak
-                    class="fi-fo-checkbox-list-actions"
-                    wire:key="{{ $livewireKey }}.actions"
-                >
-                    <span
-                        x-show="! areAllCheckboxesChecked"
-                        x-on:click="toggleAllCheckboxes()"
-                        wire:key="{{ $livewireKey }}.actions.select-all"
-                    >
+                <div x-cloak class="fi-fo-checkbox-list-actions" wire:key="{{ $livewireKey }}.actions">
+                    <span x-show="! areAllCheckboxesChecked" x-on:click="toggleAllCheckboxes()"
+                        wire:key="{{ $livewireKey }}.actions.select-all">
                         {{ $getAction('selectAll') }}
                     </span>
 
-                    <span
-                        x-show="areAllCheckboxesChecked"
-                        x-on:click="toggleAllCheckboxes()"
-                        wire:key="{{ $livewireKey }}.actions.deselect-all"
-                    >
+                    <span x-show="areAllCheckboxesChecked" x-on:click="toggleAllCheckboxes()"
+                        wire:key="{{ $livewireKey }}.actions.deselect-all">
                         {{ $getAction('deselectAll') }}
                     </span>
                 </div>
@@ -79,27 +60,22 @@
         @endif
 
         <fieldset
-            {{
-                $getExtraAttributeBag()
-                    ->merge([
+            {{ $getExtraAttributeBag()->merge(
+                    [
                         'x-show' => $isSearchable ? 'visibleCheckboxListOptions.length' : null,
-                    ], escape: false)
-                    ->class([
-                        'fi-fo-checkbox-list-options',
-                        '-space-y-px rounded-md bg-white dark:bg-gray-900',
-                    ])
-            }}
-        >
+                    ],
+                    escape: false,
+                )->class(['fi-fo-checkbox-list-options', '-space-y-px rounded-md bg-white dark:bg-gray-900']) }}>
             @foreach ($options as $value => $label)
                 @php
                     $id = str_replace('.', '-', $statePath) . '-' . $value;
                     $description = $descriptions[$value] ?? null;
                     $extra = $extras[$value] ?? null;
+                    $icon = $getIcon($value);
                 @endphp
 
                 <label
-                    @if ($isSearchable)
-                        wire:key="{{ $livewireKey }}.options.{{ $value }}"
+                    @if ($isSearchable) wire:key="{{ $livewireKey }}.options.{{ $value }}"
                         x-show="
                             $el
                                 .querySelector('.fi-fo-checkbox-list-option-label')
@@ -109,91 +85,80 @@
                                     .querySelector('.fi-fo-checkbox-list-option-description')
                                     ?.innerText.toLowerCase()
                                     .includes(search.toLowerCase())
-                        "
-                    @endif
-                        for="{{ $id }}"
-                        @class([
-                            'fi-fo-checkbox-list-option group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500 has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
-                            'not-has-disabled:cursor-pointer' => $hasCursorPointer,
-                        ])
-                        style="{{ $colors }}"
-                    >
-                        <div class="flex items-center justify-between w-full">
-                            <div class="flex items-center gap-3">
-                                @if(!$hiddenInputs)
-                                    <input
-                                        id="{{ $id }}"
-                                        name="{{ $statePath }}"
-                                        type="checkbox"
-                                        value="{{ $value }}"
-                                        {{
-                                            $extraInputAttributeBag
-                                                ->merge([
-                                                    'disabled' => $isDisabled || $isOptionDisabled($value, $label),
-                                                    'wire:loading.attr' => 'disabled',
-                                                    $wireModelAttribute => $statePath,
-                                                    'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
-                                                ], escape: false)
-                                                ->class([
-                                                    'fi-checkbox-input shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
-                                                    'fi-valid' => ! $errors->has($statePath),
-                                                    'fi-invalid' => $errors->has($statePath),
-                                                ])
-                                        }}
-                                        style="{{ $colors }}"
-                                    />
-                                @endif
-                                <span class="fi-fo-checkbox-list-option-label flex flex-col">
-                                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        @if ($isHtmlAllowed)
-                                            {!! $label !!}
-                                        @else
-                                            {{ $label }}
-                                        @endif
-                                    </span>
-                                    @if ($description)
-                                        <span class="fi-fo-checkbox-list-option-description block text-sm text-gray-500 dark:text-gray-400">
-                                            {{ $description }}
-                                        </span>
+                        " @endif
+                    for="{{ $id }}" @class([
+                        'fi-fo-checkbox-list-option group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500 has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
+                        'not-has-disabled:cursor-pointer' => $hasCursorPointer,
+                    ]) style="{{ $colors }}">
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex items-center gap-3">
+                            @if (!$hiddenInputs)
+                                <input id="{{ $id }}" name="{{ $statePath }}" type="checkbox"
+                                    value="{{ $value }}"
+                                    {{ $extraInputAttributeBag->merge(
+                                            [
+                                                'disabled' => $isDisabled || $isOptionDisabled($value, $label),
+                                                'wire:loading.attr' => 'disabled',
+                                                $wireModelAttribute => $statePath,
+                                                'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
+                                            ],
+                                            escape: false,
+                                        )->class([
+                                            'fi-checkbox-input shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                            'fi-valid' => !$errors->has($statePath),
+                                            'fi-invalid' => $errors->has($statePath),
+                                        ]) }}
+                                    style="{{ $colors }}" />
+                            @endif
+                            <span class="fi-fo-checkbox-list-option-label flex flex-col">
+                                <span
+                                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-gray-100 mt-1">
+                                    @if ($icon && $iconPosition->value === 'before')
+                                        <x-filament::icon :icon="$icon" :size="$iconSize" />
+                                    @endif
+                                    @if ($isHtmlAllowed)
+                                        {!! $label !!}
+                                    @else
+                                        {{ $label }}
+                                    @endif
+                                    @if ($icon && $iconPosition->value === 'after')
+                                        <x-filament::icon :icon="$icon" :size="$iconSize" />
                                     @endif
                                 </span>
-                            </div>
-                            @if ($extra)
-                                <span class="fi-fo-checkbox-list-option-extra text-sm text-gray-800 dark:text-gray-100">
-                                    {{ $extra }}
-                                </span>
-                            @endif
+                                @if ($description)
+                                    <span
+                                        class="fi-fo-checkbox-list-option-description block text-sm text-gray-500 dark:text-gray-400">
+                                        {{ $description }}
+                                    </span>
+                                @endif
+                            </span>
                         </div>
-                        @if($hiddenInputs)
-                            <input
-                                id="{{ $id }}"
-                                name="{{ $statePath }}"
-                                type="checkbox"
-                                value="{{ $value }}"
-                                {{
-                                    $extraInputAttributeBag
-                                        ->merge([
-                                            'disabled' => $isDisabled || $isOptionDisabled($value, $label),
-                                            'wire:loading.attr' => 'disabled',
-                                            $wireModelAttribute => $statePath,
-                                            'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
-                                        ], escape: false)
-                                        ->class([
-                                            'absolute inset-0 appearance-none focus:outline-none',
-                                        ])
-                                }}
-                            />
+                        @if ($extra)
+                            <span class="fi-fo-checkbox-list-option-extra text-sm text-gray-800 dark:text-gray-100">
+                                {{ $extra }}
+                            </span>
                         @endif
-                    </label>
-                @endforeach
+                    </div>
+                    @if ($hiddenInputs)
+                        <input id="{{ $id }}" name="{{ $statePath }}" type="checkbox"
+                            value="{{ $value }}"
+                            {{ $extraInputAttributeBag->merge(
+                                    [
+                                        'disabled' => $isDisabled || $isOptionDisabled($value, $label),
+                                        'wire:loading.attr' => 'disabled',
+                                        $wireModelAttribute => $statePath,
+                                        'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
+                                    ],
+                                    escape: false,
+                                )->class(['absolute inset-0 appearance-none focus:outline-none']) }} />
+                    @endif
+                </label>
+            @endforeach
         </fieldset>
 
         @if ($isSearchable)
-            <div
-                x-cloak
-                x-show="search && ! visibleCheckboxListOptions.length"
-                class="fi-fo-checkbox-list-no-search-results-message"
-            >
+            <div x-cloak x-show="search && ! visibleCheckboxListOptions.length"
+                class="fi-fo-checkbox-list-no-search-results-message">
                 {{ $getNoSearchResultsMessage() }}
             </div>
         @endif

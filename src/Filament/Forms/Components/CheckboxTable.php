@@ -9,6 +9,9 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\Has
 use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\Concerns\HasHiddenInputs;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Support\Concerns\HasColor;
+use Filament\Support\Concerns\HasIconPosition;
+use Filament\Forms\Components\Concerns\HasIcons;
+use Filament\Support\Concerns\HasIconSize;
 
 class CheckboxTable extends CheckboxList
 {
@@ -16,6 +19,9 @@ class CheckboxTable extends CheckboxList
     use HasCursorPointer;
     use HasExtras;
     use HasHiddenInputs;
+    use HasIconPosition;
+    use HasIcons;
+    use HasIconSize;
 
     protected string $view = 'filament-advanced-choice::checkbox-table';
 
