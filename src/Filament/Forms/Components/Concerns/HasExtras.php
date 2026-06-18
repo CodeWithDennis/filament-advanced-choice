@@ -13,18 +13,18 @@ trait HasExtras
 {
     /**
      * @var (
-     *     array<int|string, string|list<string>|Htmlable|null>|
-     *     Arrayable<int|string, string|list<string>|Htmlable|null>|
+     *     array<int|string, string|Htmlable|Closure|null>|
+     *     Arrayable<int|string, string|Htmlable|Closure|null>|
      *     string|
-     *     (Closure(): array<int|string, string|list<string>|Htmlable|null>|Arrayable<int|string, string|list<string>|Htmlable|null>|string|null)|
+     *     (Closure(): array<int|string, string|Htmlable|Closure|null>|Arrayable<int|string, string|Htmlable|Closure|null>|string|null)|
      *     null
      * )
      */
     protected array | Arrayable | string | Closure | null $extras = null;
 
     /**
-     * @param  array<int|string, string|list<string>|Htmlable|null>|Arrayable<int|string, string|list<string>|Htmlable|null>|string|Closure|null  $extras
-     */
+    * @param  array<int|string, string|Htmlable|Closure|null>|Arrayable<int|string, string|Htmlable|Closure|null>|string|Closure|null  $extras     
+    */
     public function extras(array | Arrayable | string | Closure | null $extras): static
     {
         $this->extras = $extras;
@@ -37,7 +37,7 @@ trait HasExtras
     }
 
     /**
-     * @return array<int|string, string|list<string>|Htmlable|null>
+     * @return array<int|string, string|Htmlable|null>
      */
     public function getExtras(): array
     {
@@ -64,6 +64,9 @@ trait HasExtras
             $extras = $extras->toArray();
         }
 
-        return $extras;
+        return array_map(
+            fn (string | Htmlable | Closure | null $extra): string | Htmlable | null => $this->evaluate($extra),
+            $extras,
+        );
     }
 }

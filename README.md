@@ -372,6 +372,37 @@ RadioCard::make('delivery_type')
 
 `visibleInputs()` reverses `hiddenInputs()` (shows the native control again).
 
+### Rich extras (HTML)
+
+Each `extras()` value accepts `string | Htmlable | Closure | null`. Plain strings
+are HTML-escaped, so they are safe by default. To render rich markup, pass an
+`Htmlable` (for example via `str()->toHtmlString()` or `new HtmlString(...)`);
+values may also be closures, which are resolved per option at render time.
+
+```php
+use Illuminate\Support\HtmlString;
+
+CheckboxCard::make('plan')
+    ->options([
+        'basic' => 'Basic',
+        'pro' => 'Pro',
+        'team' => 'Team',
+    ])
+    ->extras([
+        // Escaped automatically.
+        'basic' => 'Free',
+        // Rendered as raw HTML because it is Htmlable.
+        'pro' => str('<span class="font-bold text-primary-600">$29/mo</span>')->toHtmlString(),
+        // Closures are evaluated per option.
+        'team' => fn (): HtmlString => new HtmlString('<b>$99/mo</b>'),
+    ]);
+```
+
+> **Security:** only wrap trusted, developer-authored markup in `Htmlable`.
+> Rendering user- or database-supplied content as raw HTML exposes the form to
+> XSS. Escape any dynamic value with `e()` (or run it through `->sanitizeHtml()`)
+> before adding it to an `Htmlable` extra.
+
 ## Contributing
 
 Contributions and pull requests are always welcome and appreciated. If you want to discuss a bigger idea first, feel free to open a GitHub issue, but you do not have to. When you open a PR, running `composer format` first helps keep CI green.
