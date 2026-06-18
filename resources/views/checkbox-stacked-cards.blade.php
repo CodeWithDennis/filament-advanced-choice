@@ -104,7 +104,10 @@
                                             'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
                                         ],
                                         escape: false,
-                                    )->class(['absolute inset-0 appearance-none focus:outline-none']) }} />
+                                    )->class([
+                                        'absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed',
+                                        'cursor-pointer' => $hasCursorPointer,
+                                    ]) }} />
                         @endif
                         <div class="flex items-center justify-between w-full">
                             <div class="flex items-center gap-3">

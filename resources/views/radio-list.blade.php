@@ -128,7 +128,10 @@
                                         $wireModelAttribute => $statePath,
                                     ],
                                     escape: false,
-                                )->class(['absolute inset-0 appearance-none focus:outline-none']) }} />
+                                )->class([
+                                    'absolute inset-0 appearance-none focus:outline-none disabled:cursor-not-allowed',
+                                    'cursor-pointer' => $hasCursorPointer,
+                                ]) }} />
                     @endif
                 </label>
             @endforeach
