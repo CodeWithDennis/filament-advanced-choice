@@ -5,7 +5,8 @@
 
 This package introduces eight new form fields for FilamentPHP. Four of them are based on `Radio`, and four are based on `CheckboxList`.
 
-![Filament Advanced Choice preview](art/thumbnail.png)
+<img width="3840" height="2160" alt="filament-advanced-choice-light-mint-3840x2160" src="https://github.com/user-attachments/assets/d499f42f-9a2d-4d8c-87ce-e5d4f1dba613" />
+
 
 ## Requirements
 
