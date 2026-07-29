@@ -86,7 +86,7 @@
                     ], escape: false)
                     ->class([
                         'fi-fo-checkbox-list-options',
-                        '-space-y-px rounded-md bg-white dark:bg-gray-900',
+                        'm-0 flex min-w-0 flex-col gap-0 divide-y divide-gray-200 overflow-hidden rounded-md border border-gray-200 bg-white p-0 dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900',
                     ])
             }}
         >
@@ -113,7 +113,7 @@
                     @endif
                         for="{{ $id }}"
                         @class([
-                            'fi-fo-checkbox-list-option group flex border border-gray-200 dark:border-gray-700 p-4 first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md focus:outline-hidden has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500 has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
+                            'fi-fo-checkbox-list-option group flex p-4 focus:outline-hidden has-checked:relative has-checked:z-10 has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
                             'not-has-disabled:cursor-pointer' => $hasCursorPointer,
                         ])
                         style="{{ $colors }}"
