@@ -44,7 +44,7 @@
         ], escape: false)
         ->class([
             'fi-fo-checkbox-list-options',
-            'relative -space-y-px rounded-md bg-white dark:bg-gray-900',
+            'relative m-0 flex min-w-0 flex-col gap-0 divide-y divide-gray-200 overflow-hidden rounded-md border border-gray-200 bg-white p-0 dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-900',
         ])
             }}>
             @foreach($getOptions() as $value => $label)
@@ -73,10 +73,9 @@
                                 ?.innerText.toLowerCase()
                                 .includes(search.toLowerCase())
                     " @endif for="{{ $id }}" @class([
-                        'fi-fo-checkbox-list-option group flex flex-col border border-gray-200 dark:border-gray-700 p-4
-                         first:rounded-tl-md first:rounded-tr-md last:rounded-br-md last:rounded-bl-md
+                        'fi-fo-checkbox-list-option group flex flex-col p-4
                          focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-custom-600
-                         has-checked:relative has-checked:border-custom-200 dark:has-checked:border-custom-500
+                         has-checked:relative has-checked:z-10
                          has-checked:bg-custom-50 dark:has-checked:bg-custom-800/10
                          has-disabled:opacity-60 has-disabled:cursor-not-allowed
                          md:grid md:grid-cols-3 md:items-center md:pr-6 md:pl-4',
