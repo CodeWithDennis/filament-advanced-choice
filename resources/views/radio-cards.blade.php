@@ -92,7 +92,7 @@
                                     $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
-                                    'absolute inset-0 appearance-none focus:outline-none',
+                                    'absolute inset-0 cursor-[inherit] appearance-none focus:outline-none',
                                 ])
                                                                                                                                 }} />
                         @endif
@@ -119,7 +119,7 @@
                                     $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
-                                    'fi-radio-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                    'fi-radio-input cursor-[inherit] mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
                                     'fi-valid' => !$errors->has($statePath),
                                     'fi-invalid' => $errors->has($statePath),
                                 ])
