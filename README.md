@@ -3,249 +3,131 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 [![Total Downloads](https://img.shields.io/packagist/dt/codewithdennis/filament-advanced-choice.svg?style=flat-square)](https://packagist.org/packages/codewithdennis/filament-advanced-choice)
 
-This package introduces eight new form fields for FilamentPHP. Four of them are based on `Radio`, and four are based on `CheckboxList`.
+Eight form fields that turn a plain radio or checkbox list into something worth clicking: cards, stacked cards, tables and richer lists, each able to carry a description and an extra column of information.
 
-<img width="3840" height="2160" alt="filament-advanced-choice-light-mint-3840x2160" src="https://github.com/user-attachments/assets/d499f42f-9a2d-4d8c-87ce-e5d4f1dba613" />
+<img width="3840" height="2160" alt="Filament Advanced Choice" src="https://github.com/user-attachments/assets/d499f42f-9a2d-4d8c-87ce-e5d4f1dba613" />
 
+Four fields extend Filament's `Radio` for single choice, four extend `CheckboxList` for multiple choice. They inherit the full API of the field they extend, so `searchable()`, `bulkToggleable()`, `disableOptionWhen()`, validation and state handling all work exactly as you already know them.
+
+```php
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCard;
+
+RadioCard::make('plan')
+    ->options([
+        'hobby' => 'Hobby',
+        'pro' => 'Pro',
+        'team' => 'Team',
+    ])
+    ->descriptions([
+        'hobby' => 'For side projects and experiments.',
+        'pro' => 'For freelancers shipping client work.',
+        'team' => 'For teams that need shared billing.',
+    ])
+    ->extras([
+        'hobby' => 'Free',
+        'pro' => '$29 / month',
+        'team' => '$99 / month',
+    ]);
+```
+
+Screenshots of every layout are at the [bottom of this page](#screenshots).
 
 ## Requirements
 
-- Filament 4/5
+- Filament 4.x or 5.x
 
 ## Installation
 
-**1.** Install with Composer:
+**1.** Install the package:
 
 ```bash
 composer require codewithdennis/filament-advanced-choice
 ```
 
-**2.** To make sure styling works, add this to your custom FilamentPHP theme:
+**2.** Register the views as a Tailwind source in your [custom Filament theme](https://filamentphp.com/docs/styling/overview), so the utility classes these fields use end up in your CSS:
 
 ```css
 @source '../../../../vendor/codewithdennis/filament-advanced-choice/resources/**/*.blade.php';
 ```
 
-**3.** Run `npm run build` or `npm run dev` so the theme rebuilds.
+**3.** Rebuild the theme:
 
-## Components
+```bash
+npm run build
+```
 
-Prefer the singular field classes (`RadioCard`, `RadioStackedCard`, `CheckboxCard`, `CheckboxStackedCard`). The plural names (`RadioCards`, `RadioStackedCards`, `CheckboxCards`, `CheckboxStackedCards`) remain as deprecated aliases for backward compatibility.
+> [!IMPORTANT]
+> Skipping step 2 is the most common reason fields render unstyled. If a field looks like a plain list of checkboxes, the theme has not picked up these views yet. The same applies after upgrading: run `npm run build` again so new utility classes are compiled.
 
-### CheckboxList
+## The fields
 
-Vertical list layout with descriptions for multiple selections.
+All eight live in `CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components`.
 
-![CheckboxList](art/basic_checkbox_list.png)
+| Field                 | Selection | Layout                                            |
+|-----------------------|-----------|---------------------------------------------------|
+| `RadioList`           | Single    | Vertical list                                     |
+| `RadioTable`          | Single    | Table, one option per row                         |
+| `RadioCard`           | Single    | Grid of cards, 3 columns by default               |
+| `RadioStackedCard`    | Single    | Cards stacked full width                          |
+| `CheckboxList`        | Multiple  | Vertical list                                     |
+| `CheckboxTable`       | Multiple  | Table, one option per row                         |
+| `CheckboxCard`        | Multiple  | Grid of cards, 3 columns by default               |
+| `CheckboxStackedCard` | Multiple  | Cards stacked full width                          |
+
+> [!NOTE]
+> The plural class names (`RadioCards`, `RadioStackedCards`, `CheckboxCards`, `CheckboxStackedCards`) still exist as deprecated aliases. Use the singular names in new code.
+
+## Describing your options
+
+Every field takes the same three pieces of content, all keyed by option value.
+
+| Method           | Shows as                                            |
+|------------------|-----------------------------------------------------|
+| `options()`      | The label                                           |
+| `descriptions()` | A subtitle under the label                          |
+| `extras()`       | A trailing column, ideal for a price, count or hint |
+
+`descriptions()` and `extras()` are optional and can be used independently.
 
 ```php
-CheckboxList::make('delivery_type')
-    ->searchable()
-    ->bulkToggleable()
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\CheckboxStackedCard;
+
+CheckboxStackedCard::make('delivery_type')
     ->options([
-        'standard' => 'Standard Delivery',
-        'express' => 'Express Delivery',
-        'overnight' => 'Overnight Delivery',
-        'same_day' => 'Same Day Delivery',
-        'economy' => 'Economy Delivery',
-        'premium' => 'Premium Delivery',
-        'international' => 'International Delivery',
-        'local' => 'Local Delivery',
+        'standard' => 'Standard delivery',
+        'express' => 'Express delivery',
+        'overnight' => 'Overnight delivery',
     ])
     ->descriptions([
-        'standard' => 'Delivery within 5-7 business days',
-        'express' => 'Delivery within 2-3 business days',
-        'overnight' => 'Next day delivery available',
-        'same_day' => 'Delivery on the same day',
-        'economy' => 'Budget-friendly delivery option',
-        'premium' => 'Premium service with tracking',
-        'international' => 'Worldwide shipping available',
-        'local' => 'Same city delivery service',
+        'standard' => 'Arrives within 5 to 7 business days.',
+        'express' => 'Arrives within 2 to 3 business days.',
+        'overnight' => 'Arrives the next business day.',
     ])
     ->extras([
-        'standard' => '$5.00 flat rate',
-        'express' => '$10.00 flat rate',
-        'overnight' => '$20.00 flat rate',
-        'same_day' => '$25.00 flat rate',
-        'economy' => '$3.00 flat rate',
-        'premium' => '$15.00 flat rate',
-        'international' => '$50.00 flat rate',
-        'local' => '$8.00 flat rate',
+        'standard' => '$5.00',
+        'express' => '$10.00',
+        'overnight' => '$20.00',
     ]);
 ```
 
-### CheckboxCard
+### Using an enum instead
 
-Card-based layout with descriptions and extras support for multiple selections.
+Pass a backed enum to `options()` and every field reads its content from the enum itself. Implement the contract for each piece you need:
 
-![CheckboxCard](art/basic_checkbox_cards.png)
-
-```php
-CheckboxCard::make('delivery_type')
-    ->searchable()
-    ->bulkToggleable()
-    ->options([
-        'standard' => 'Standard Delivery',
-        'express' => 'Express Delivery',
-        'overnight' => 'Overnight Delivery',
-        'same_day' => 'Same Day Delivery',
-        'economy' => 'Economy Delivery',
-        'premium' => 'Premium Delivery',
-        'international' => 'International Delivery',
-        'local' => 'Local Delivery',
-    ])
-    ->descriptions([
-        'standard' => 'Delivery within 5-7 business days',
-        'express' => 'Delivery within 2-3 business days',
-        'overnight' => 'Next day delivery available',
-        'same_day' => 'Delivery on the same day',
-        'economy' => 'Budget-friendly delivery option',
-        'premium' => 'Premium service with tracking',
-        'international' => 'Worldwide shipping available',
-        'local' => 'Same city delivery service',
-    ])
-    ->extras([
-        'standard' => '$5.00 flat rate',
-        'express' => '$10.00 flat rate',
-        'overnight' => '$20.00 flat rate',
-        'same_day' => '$25.00 flat rate',
-        'economy' => '$3.00 flat rate',
-        'premium' => '$15.00 flat rate',
-        'international' => '$50.00 flat rate',
-        'local' => '$8.00 flat rate',
-    ]);
-```
-
-### CheckboxStackedCard
-
-Stacked card layout with descriptions and extras support for multiple selections.
-
-![CheckboxStackedCard](art/basic_checkbox_stacked_cards.png)
+| Contract                                                             | Provides            |
+|----------------------------------------------------------------------|---------------------|
+| `Filament\Support\Contracts\HasLabel`                                | The label           |
+| `Filament\Support\Contracts\HasDescription`                          | The description     |
+| `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra` | The extras column   |
+| `Filament\Support\Contracts\HasColor`                                | A colour for that single option, overriding the field colour. Honoured by the four `Radio` based fields only. |
 
 ```php
 CheckboxStackedCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable()
-    ->bulkToggleable();
+    ->options(DeliveryType::class);
 ```
-
-### CheckboxTable
-
-Responsive table layout with descriptions for multiple selections.
-
-![CheckboxTable](art/basic_checkbox_table.png)
-
-```php
-CheckboxTable::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable()
-    ->bulkToggleable();
-```
-
-### RadioList
-
-Vertical list layout with descriptions.
-
-![RadioList](art/basic_radio_list.png)
-
-```php
-RadioList::make('delivery_type')
-    ->options(DeliveryTypeEnum::class);
-```
-
-### RadioTable
-
-Responsive table layout with descriptions.
-
-![RadioTable](art/basic_radio_table.png)
-
-```php
-RadioTable::make('delivery_type')
-    ->options(DeliveryTypeEnum::class);
-```
-
-### RadioCard
-
-Card-based layout with descriptions and extras support.
-
-Smallest useful example with `options()`, `descriptions()`, and `extras()`:
-
-```php
-RadioCard::make('plan')
-    ->options([
-        'hobby' => 'Hobby',
-        'pro' => 'Pro',
-    ])
-    ->descriptions([
-        'hobby' => 'For side projects',
-        'pro' => 'For teams',
-    ])
-    ->extras([
-        'hobby' => '$9/mo',
-        'pro' => '$29/mo',
-    ]);
-```
-
-Same layout with a backed enum:
-
-![RadioCard](art/basic_radio_cards.png)
-
-```php
-RadioCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class);
-```
-
-### RadioStackedCard
-
-Stacked card layout with descriptions and extras support.
-
-![RadioStackedCard](art/basic_radio_stacked_cards.png)
-
-```php
-RadioStackedCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class);
-```
-
-## Search, bulk actions, and disabling options
-
-These come from FilamentPHP’s `Radio` and `CheckboxList` APIs (inherited unchanged).
-
-Search:
-
-```php
-CheckboxList::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->searchable()
-    ->searchPrompt('Search delivery types...')
-    ->noSearchResultsMessage('No delivery types found.');
-```
-
-Bulk select (checkbox-style fields only):
-
-```php
-CheckboxList::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->bulkToggleable();
-```
-
-Disable one option:
-
-```php
-CheckboxList::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->disableOptionWhen(fn (string $value): bool => $value === 'premium');
-```
-
-## Enum support
-
-Pass a backed enum class name to `options()` instead of an array. Implement:
-
-- `Filament\Support\Contracts\HasLabel` (main label)
-- `Filament\Support\Contracts\HasDescription` (subtitle)
-- `CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra` (`extras()` column)
 
 <details>
-<summary><strong>Full enum example</strong></summary>
+<summary><strong>The enum behind that example</strong></summary>
 
 ```php
 <?php
@@ -258,56 +140,36 @@ use CodeWithDennis\FilamentAdvancedChoice\Filament\Interfaces\HasExtra;
 use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasLabel;
 
-enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
+enum DeliveryType: string implements HasDescription, HasExtra, HasLabel
 {
     case Standard = 'standard';
     case Express = 'express';
     case Overnight = 'overnight';
-    case SameDay = 'same_day';
-    case Economy = 'economy';
-    case Premium = 'premium';
-    case International = 'international';
-    case Local = 'local';
 
     public function getLabel(): string
     {
         return match ($this) {
-            self::Standard => __('Standard Delivery'),
-            self::Express => __('Express Delivery'),
-            self::Overnight => __('Overnight Delivery'),
-            self::SameDay => __('Same Day Delivery'),
-            self::Economy => __('Economy Delivery'),
-            self::Premium => __('Premium Delivery'),
-            self::International => __('International Delivery'),
-            self::Local => __('Local Delivery'),
+            self::Standard => __('Standard delivery'),
+            self::Express => __('Express delivery'),
+            self::Overnight => __('Overnight delivery'),
         };
     }
 
     public function getDescription(): string
     {
         return match ($this) {
-            self::Standard => __('Delivery within 5-7 business days'),
-            self::Express => __('Delivery within 2-3 business days'),
-            self::Overnight => __('Next day delivery available'),
-            self::SameDay => __('Delivery on the same day'),
-            self::Economy => __('Budget-friendly delivery option'),
-            self::Premium => __('Premium service with tracking'),
-            self::International => __('Worldwide shipping available'),
-            self::Local => __('Same city delivery service'),
+            self::Standard => __('Arrives within 5 to 7 business days.'),
+            self::Express => __('Arrives within 2 to 3 business days.'),
+            self::Overnight => __('Arrives the next business day.'),
         };
     }
 
     public function getExtra(): ?string
     {
         return match ($this) {
-            self::Standard => __('$5.00 flat rate'),
-            self::Express => __('$10.00 flat rate'),
-            self::Overnight => __('$20.00 flat rate'),
-            self::SameDay => __('$25.00 flat rate'),
-            self::Economy => __('$3.00 flat rate'),
-            self::Premium => __('$15.00 flat rate'),
-            self::International => __('$50.00 flat rate'),
-            self::Local => __('$8.00 flat rate'),
+            self::Standard => __('$5.00'),
+            self::Express => __('$10.00'),
+            self::Overnight => __('$20.00'),
         };
     }
 }
@@ -315,73 +177,122 @@ enum DeliveryTypeEnum: string implements HasDescription, HasExtra, HasLabel
 
 </details>
 
-<details>
-<summary><strong>Example schema snippet</strong></summary>
+You can still override individual pieces: `extras()` passed explicitly wins over `getExtra()` on the cases.
+
+## Inherited behaviour
+
+These come straight from Filament's `Radio` and `CheckboxList`, unchanged.
+
+### Searching
+
+Available on all eight fields. The search box filters on labels and descriptions.
 
 ```php
-use App\Enums\DeliveryTypeEnum;
-use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioStackedCard;
-use Filament\Schemas\Schema;
-
-public static function configure(Schema $schema): Schema
-{
-    return $schema
-        ->columns(1)
-        ->components([
-            RadioStackedCard::make('delivery_type')
-                ->options(DeliveryTypeEnum::class),
-        ]);
-}
+CheckboxTable::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->searchable()
+    ->searchPrompt('Search delivery types...')
+    ->noSearchResultsMessage('No delivery type matches your search.');
 ```
 
-</details>
+### Selecting everything at once
 
-If a case implements `getColor()`, some layouts tint that option (same idea as core FilamentPHP enums).
+Multiple choice fields only.
 
-Either pass `extras([...])` keyed by the enum value, or rely on `getExtra()` on each case.
+```php
+CheckboxCard::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->bulkToggleable();
+```
+
+### Disabling individual options
+
+Disabled options are dimmed, unclickable and keep the `not-allowed` cursor.
+
+```php
+CheckboxList::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->disableOptionWhen(fn (string $value): bool => $value === 'overnight');
+```
+
+### Limiting how many can be picked
+
+Multiple choice fields only.
+
+```php
+CheckboxCard::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->minItems(1)
+    ->maxItems(3);
+```
 
 ## Customization
 
-### Field color
+### Columns
+
+The card layouts arrange their options in a grid. `RadioCard` and `CheckboxCard` default to three columns, `CheckboxStackedCard` to one. Pass a number, or an array keyed by breakpoint.
+
+```php
+RadioCard::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->columns(4);
+
+RadioCard::make('delivery_type')
+    ->options(DeliveryType::class)
+    ->columns([
+        'default' => 1,
+        'md' => 2,
+        'xl' => 4,
+    ]);
+```
+
+Use `gridDirection(GridDirection::Column)` to fill the grid top to bottom instead of left to right.
+
+### Colour
+
+Every field is `primary` by default. Any Filament colour works.
 
 ```php
 use Filament\Support\Colors\Color;
 
-CheckboxCard::make('plan')
-    ->options(Plan::class)
+CheckboxCard::make('delivery_type')
+    ->options(DeliveryType::class)
     ->color(Color::Rose);
 ```
 
-### Hide native inputs on cards
+### Hiding the native inputs
+
+The whole option is clickable, so the checkbox or radio dot is often redundant. `hiddenInputs()` removes it while keeping the option selectable and accessible: a transparent input is stretched across the option instead.
 
 ```php
 CheckboxCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
+    ->options(DeliveryType::class)
     ->hiddenInputs();
 ```
 
-### Hidden input icon
+Supported by the card and list layouts. `RadioTable` and `CheckboxTable` always show their native inputs and ignore this method.
 
-By default, the hidden input icon for card components is `heroicon-s-check-circle`. You can override it:
+On the four card layouts you can pair it with `hiddenInputIcon()`, which marks the selected card with an icon in its top right corner:
 
 ```php
 RadioCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->hiddenInputIcon('heroicon-o-chevron-double-down')
-    ->hiddenInputs();
+    ->options(DeliveryType::class)
+    ->hiddenInputs()
+    ->hiddenInputIcon('heroicon-s-check-circle');
 ```
 
-`visibleInputs()` reverses `hiddenInputs()` (shows the native control again).
+> [!NOTE]
+> There is no default icon. Without `hiddenInputIcon()`, a selected card is marked by its outline alone.
+
+`visibleInputs()` reverses `hiddenInputs()`.
 
 ### Cursor
 
-Every field renders its options with a pointer cursor, because the whole option is clickable. Disabled options keep the `not-allowed` cursor.
-
-Opt out per field with `defaultCursor()`:
+Because the entire option is clickable, all eight fields show a pointer cursor by default. Opt out per field with `defaultCursor()`:
 
 ```php
 CheckboxCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
+    ->options(DeliveryType::class)
     ->defaultCursor();
 ```
 
@@ -389,13 +300,73 @@ CheckboxCard::make('delivery_type')
 
 ```php
 RadioCard::make('delivery_type')
-    ->options(DeliveryTypeEnum::class)
-    ->defaultCursor(fn (): bool => ! auth()->user()->canPickDelivery());
+    ->options(DeliveryType::class)
+    ->defaultCursor(fn (): bool => ! auth()->user()->canChooseDelivery());
 ```
+
+Disabled options keep the `not-allowed` cursor either way.
+
+## Putting it together
+
+A single choice field driven by an enum, laid out as cards without native inputs:
+
+```php
+use App\Enums\DeliveryType;
+use CodeWithDennis\FilamentAdvancedChoice\Filament\Forms\Components\RadioCard;
+use Filament\Schemas\Schema;
+use Filament\Support\Colors\Color;
+
+public static function configure(Schema $schema): Schema
+{
+    return $schema
+        ->components([
+            RadioCard::make('delivery_type')
+                ->label('How should we ship this?')
+                ->options(DeliveryType::class)
+                ->default(DeliveryType::Standard->value)
+                ->required()
+                ->columns(3)
+                ->color(Color::Indigo)
+                ->hiddenInputs()
+                ->hiddenInputIcon('heroicon-s-check-circle')
+                ->columnSpanFull(),
+        ]);
+}
+```
+
+## Screenshots
+
+Each example below uses the same options, descriptions and extras, so the layouts can be compared directly.
+
+### Single choice
+
+<table>
+<tr>
+<td width="50%"><strong>RadioList</strong><br><img src="art/basic_radio_list.png" alt="RadioList"></td>
+<td width="50%"><strong>RadioTable</strong><br><img src="art/basic_radio_table.png" alt="RadioTable"></td>
+</tr>
+<tr>
+<td width="50%"><strong>RadioCard</strong><br><img src="art/basic_radio_cards.png" alt="RadioCard"></td>
+<td width="50%"><strong>RadioStackedCard</strong><br><img src="art/basic_radio_stacked_cards.png" alt="RadioStackedCard"></td>
+</tr>
+</table>
+
+### Multiple choice
+
+<table>
+<tr>
+<td width="50%"><strong>CheckboxList</strong><br><img src="art/basic_checkbox_list.png" alt="CheckboxList"></td>
+<td width="50%"><strong>CheckboxTable</strong><br><img src="art/basic_checkbox_table.png" alt="CheckboxTable"></td>
+</tr>
+<tr>
+<td width="50%"><strong>CheckboxCard</strong><br><img src="art/basic_checkbox_cards.png" alt="CheckboxCard"></td>
+<td width="50%"><strong>CheckboxStackedCard</strong><br><img src="art/basic_checkbox_stacked_cards.png" alt="CheckboxStackedCard"></td>
+</tr>
+</table>
 
 ## Contributing
 
-Contributions and pull requests are always welcome and appreciated. If you want to discuss a bigger idea first, feel free to open a GitHub issue, but you do not have to. When you open a PR, running `composer format` first helps keep CI green.
+Contributions and pull requests are always welcome. If you want to discuss a bigger idea first, open an issue, but you do not have to. Running `composer format` before you open a PR helps keep CI green.
 
 ## Security
 
