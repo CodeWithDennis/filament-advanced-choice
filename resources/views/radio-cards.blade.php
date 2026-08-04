@@ -79,7 +79,7 @@
                 " @endif class="fi-fo-checkbox-list-option-ctn">
                     <label for="{{ $id }}"
                         @class([
-                            'fi-fo-checkbox-list-option group relative flex rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 has-checked:outline-2 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
+                            'fi-fo-checkbox-list-option group relative flex rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 p-4 has-checked:outline-1 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-disabled:opacity-60 has-disabled:cursor-not-allowed',
                             'not-has-disabled:cursor-pointer' => $hasCursorPointer,
                         ])
                         style="{{ $colors }}">
@@ -92,7 +92,7 @@
                                     $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
-                                    'absolute inset-0 appearance-none focus:outline-none',
+                                    'absolute inset-0 cursor-[inherit] appearance-none focus:outline-none',
                                 ])
                                                                                                                                 }} />
                         @endif
@@ -119,7 +119,7 @@
                                     $wireModelAttribute => $statePath,
                                 ], escape: false)
                                 ->class([
-                                    'fi-radio-input mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                    'fi-radio-input cursor-[inherit] mt-0.5 shrink-0 ml-3 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
                                     'fi-valid' => !$errors->has($statePath),
                                     'fi-invalid' => $errors->has($statePath),
                                 ])

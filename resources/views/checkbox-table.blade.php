@@ -137,7 +137,7 @@
                                                 'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
                                             ], escape: false)
                                             ->class([
-                                                'fi-checkbox-input mt-0.5 shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                                'fi-checkbox-input cursor-[inherit] mt-0.5 shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
                                                 'fi-valid' => ! $errors->has($statePath),
                                                 'fi-invalid' => $errors->has($statePath),
                                             ])

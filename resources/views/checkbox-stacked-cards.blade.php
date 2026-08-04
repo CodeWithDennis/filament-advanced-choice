@@ -120,7 +120,7 @@
                     <label
                         for="{{ $id }}"
                         @class([
-                            'fi-fo-checkbox-list-option group relative block rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 has-disabled:opacity-60 has-disabled:cursor-not-allowed sm:flex sm:justify-between',
+                            'fi-fo-checkbox-list-option group relative block rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-4 has-checked:outline-1 has-checked:-outline-offset-1 has-checked:outline-custom-600 dark:has-checked:outline-custom-500 has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-disabled:opacity-60 has-disabled:cursor-not-allowed sm:flex sm:justify-between',
                             'not-has-disabled:cursor-pointer' => $hasCursorPointer,
                         ])
                         style="{{ $colors }}"
@@ -140,7 +140,7 @@
                                             'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
                                         ], escape: false)
                                         ->class([
-                                            'absolute inset-0 appearance-none focus:outline-none',
+                                            'absolute inset-0 cursor-[inherit] appearance-none focus:outline-none',
                                         ])
                                 }}
                             />
@@ -162,7 +162,7 @@
                                                     'x-on:change' => $isBulkToggleable ? 'checkIfAllCheckboxesAreChecked()' : null,
                                                 ], escape: false)
                                                 ->class([
-                                                    'fi-checkbox-input shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
+                                                    'fi-checkbox-input cursor-[inherit] shrink-0 checked:bg-custom-500 checked:border-custom-500 hover:checked:bg-custom-600 hover:checked:border-custom-600 focus:border-custom-500 focus:ring-custom-500',
                                                     'fi-valid' => ! $errors->has($statePath),
                                                     'fi-invalid' => $errors->has($statePath),
                                                 ])

@@ -373,6 +373,26 @@ RadioCard::make('delivery_type')
 
 `visibleInputs()` reverses `hiddenInputs()` (shows the native control again).
 
+### Cursor
+
+Every field renders its options with a pointer cursor, because the whole option is clickable. Disabled options keep the `not-allowed` cursor.
+
+Opt out per field with `defaultCursor()`:
+
+```php
+CheckboxCard::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->defaultCursor();
+```
+
+`cursorPointer()` reverses `defaultCursor()`. Both accept a boolean or a `Closure`, so the cursor can follow other state:
+
+```php
+RadioCard::make('delivery_type')
+    ->options(DeliveryTypeEnum::class)
+    ->defaultCursor(fn (): bool => ! auth()->user()->canPickDelivery());
+```
+
 ## Contributing
 
 Contributions and pull requests are always welcome and appreciated. If you want to discuss a bigger idea first, feel free to open a GitHub issue, but you do not have to. When you open a PR, running `composer format` first helps keep CI green.
